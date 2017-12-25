@@ -1,0 +1,25 @@
+{
+  "name": "yagni",
+  "version": "0.1.0",
+  "description": "Yet another frontend library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ysegorov/yagni.git"
+  },
+  "keywords": [
+    "frontend",
+    "functional",
+    "stateless",
+    "cleanjs"
+  ],
+  "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ysegorov/yagni/issues"
+  },
+  "homepage": "https://github.com/ysegorov/yagni#readme"
+}
