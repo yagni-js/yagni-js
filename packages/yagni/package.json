@@ -1,10 +1,14 @@
 {
   "name": "yagni",
   "version": "0.0.1",
-  "description": "Yet another frontend library",
-  "main": "index.js",
+  "description": "Yet another functional library",
+  "main": "dist/yagni.cjs.js",
+  "module": "dist/yagni.esm.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "pretest": "npm run build",
+    "build": "rollup -c",
+    "prebuild": "rm -rf dist/*"
   },
   "repository": {
     "type": "git",
@@ -21,5 +25,18 @@
   "bugs": {
     "url": "https://github.com/ysegorov/yagni/issues"
   },
-  "homepage": "https://github.com/ysegorov/yagni#readme"
+  "homepage": "https://github.com/ysegorov/yagni#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.14.0",
+    "eslint-config-cleanjs": "^4.0.0",
+    "eslint-plugin-better": "^0.1.5",
+    "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-import": "^2.8.0",
+    "mocha": "^4.1.0",
+    "rollup": "^0.53.2",
+    "rollup-plugin-buble": "^0.18.0",
+    "rollup-plugin-eslint": "^4.0.0"
+  }
 }
