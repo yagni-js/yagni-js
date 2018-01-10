@@ -12,7 +12,7 @@
     "pretest": "npm run build",
     "build": "rollup -c",
     "prebuild": "rm -rf dist/*",
-    "prepublish": "npm test"
+    "prepublishOnly": "npm test"
   },
   "repository": {
     "type": "git",
