@@ -1,14 +1,18 @@
 {
   "name": "yagni",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Yet another functional library",
   "main": "dist/yagni.cjs.js",
   "module": "dist/yagni.esm.js",
+  "files": [
+      "dist"
+  ],
   "scripts": {
     "test": "mocha",
     "pretest": "npm run build",
     "build": "rollup -c",
-    "prebuild": "rm -rf dist/*"
+    "prebuild": "rm -rf dist/*",
+    "prepublish": "npm test"
   },
   "repository": {
     "type": "git",
