@@ -16,3 +16,7 @@ export function split(separator) {
     return str.split(separator);
   };
 }
+
+export function camelize(s) {
+  return s.replace(/-([a-z])/g, function (m, x) { return x.toUpperCase(); });
+}

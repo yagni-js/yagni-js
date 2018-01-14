@@ -58,3 +58,18 @@ describe('split()', function () {
   });
 
 });
+
+
+describe('camelize()', function () {
+
+  it('returns camelized version of string', function () {
+
+    expect(_.camelize('foo-baz')).to.equal('fooBaz');
+    expect(_.camelize('foo--baz')).to.equal('foo-Baz');
+    expect(_.camelize('foo-Baz')).to.equal('foo-Baz');
+    expect(_.camelize('foo-baz-bar')).to.equal('fooBazBar');
+    expect(_.camelize('foo:baz_bar.42')).to.equal('foo:baz_bar.42');
+
+  });
+
+});
