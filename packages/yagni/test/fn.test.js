@@ -118,6 +118,23 @@ describe('resultArr()', function () {
 });
 
 
+describe('fn()', function () {
+
+  it('should call a function', function () {
+
+    const o = {
+      foo: 42
+    };
+
+    const theAnswer = _.fn(_.identity, _.pick('foo'));
+
+    expect(theAnswer(o)).to.equal(42);
+
+  });
+
+});
+
+
 describe('method()', function () {
 
   const resolve = _.method(Promise, 'resolve');

@@ -9,15 +9,15 @@ export function length(arr) {
   return arr.length;
 }
 
-export function map(fn) {
+export function map(mapper) {
   return function (arr) {
-    return arr.map(fn);
+    return arr.map(mapper);
   };
 }
 
-export function filter(fn) {
+export function filter(predicate) {
   return function (arr) {
-    return arr.filter(fn);
+    return arr.filter(predicate);
   };
 }
 
@@ -30,23 +30,23 @@ export function filterMap(predicate, mapper) {
   };
 }
 
-export function reduce(fn) {
+export function reduce(reducer) {
   return function (arr) {
     return function (initial) {
-      return arr.reduce(fn, initial);
+      return arr.reduce(reducer, initial);
     };
   };
 }
 
 export function pipe(arr) {
   return function (initial) {
-    return arr.reduce(function (acc, fn) { return fn(acc); }, initial);
+    return arr.reduce(function (acc, piper) { return piper(acc); }, initial);
   };
 }
 
 export function pipeP(arr) {
   return function (initial) {
-    return arr.reduce(function (acc, fn) { return acc.then(fn); }, Promise.resolve(initial));
+    return arr.reduce(function (acc, piper) { return acc.then(piper); }, Promise.resolve(initial));
   };
 }
 

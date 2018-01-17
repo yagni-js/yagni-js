@@ -12,9 +12,9 @@ export function always(smth) {
   };
 }
 
-export function lazy(fn, arg) {
+export function lazy(caller, arg) {
   return function () {
-    return fn(arg);
+    return caller(arg);
   };
 }
 
@@ -26,44 +26,51 @@ export function resultArr(arr, arg) {
   return arr.map(function (smth) { return result(smth, arg); });
 }
 
+export function fn(caller, argGetter) {
+  return function (smth) {
+    const param = argGetter(smth);
+    return caller(param);
+  };
+}
+
 export function method(subj, methodName) {
   return function (smth) {
     return subj[methodName](smth);
   };
 }
 
-export function call(fn, arg) {
+export function call(fnGetter, argOrGetter) {
   return function (smth) {
-    const caller = fn(smth);
-    const param = isFunction(arg) ? arg(smth) : arg;
+    const caller = fnGetter(smth);
+    const param = isFunction(argOrGetter) ? argOrGetter(smth) : argOrGetter;
     return caller(param);
   };
 }
 
-export function call2(fn, arg1, arg2) {
+export function call2(fnGetter, argOrGetter1, argOrGetter2) {
   return function (smth) {
-    const caller = fn(smth);
-    const param1 = isFunction(arg1) ? arg1(smth) : arg1;
-    const param2 = isFunction(arg2) ? arg2(smth) : arg2;
+    const caller = fnGetter(smth);
+    const param1 = isFunction(argOrGetter1) ? argOrGetter1(smth) : argOrGetter1;
+    const param2 = isFunction(argOrGetter2) ? argOrGetter2(smth) : argOrGetter2;
     return caller(param1, param2);
   };
 }
 
-export function callMethod(subj, meth, arg) {
+export function callMethod(subj, meth, argOrGetter) {
   return function (smth) {
     const subject = subj(smth);
     const method = isFunction(meth) ? meth(smth) : meth;
-    const param = isFunction(arg) ? arg(smth) : arg;
+    const param = isFunction(argOrGetter) ? argOrGetter(smth) : argOrGetter;
     return subject[method](param);
   };
 }
 
-export function callMethod2(subj, meth, arg1, arg2) {
+export function callMethod2(subj, meth, argOrGetter1, argOrGetter2) {
   return function (smth) {
     const subject = subj(smth);
     const method = isFunction(meth) ? meth(smth) : meth;
-    const param1 = isFunction(arg1) ? arg1(smth) : arg1;
-    const param2 = isFunction(arg2) ? arg2(smth) : arg2;
+    const param1 = isFunction(argOrGetter1) ? argOrGetter1(smth) : argOrGetter1;
+    const param2 = isFunction(argOrGetter2) ? argOrGetter2(smth) : argOrGetter2;
     return subject[method](param1, param2);
   };
 }

@@ -1,9 +1,9 @@
 
-export function tap(fn) {
+export function tap(sideEffect) {
   return function (smth) {
     // NB. side effect
     // eslint-disable-next-line fp/no-unused-expression
-    const r = fn(smth);
+    const r = sideEffect(smth);
     return smth;
   };
 }

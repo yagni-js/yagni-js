@@ -8,8 +8,8 @@ export function transform(spec) {
   return function (smth) {
     return keys(spec).reduce(
       function (acc, key) {
-        const fn = spec[key];
-        const value = isArray(fn) ? resultArr(fn, smth) : result(fn, smth);
+        const transformer = spec[key];
+        const value = isArray(transformer) ? resultArr(transformer, smth) : result(transformer, smth);
         return Object.assign({}, acc, obj(key, value));
       },
       {}
@@ -19,6 +19,6 @@ export function transform(spec) {
 
 export function transformArr(arr) {
   return function (smth) {
-    return arr.map(function (fn) { return isFunction(fn) ? fn(smth) : fn; });
+    return arr.map(function (transformer) { return isFunction(transformer) ? transformer(smth) : transformer; });
   };
 }
