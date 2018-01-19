@@ -10,13 +10,13 @@ describe('ifElse()', function () {
 
   const test = _.ifElse(_.isNil, fnIf, fnElse);
 
-  it('returns function to be called', function () {
+  it('should return function to be called', function () {
 
     expect(test).to.be.a('function');
 
   });
 
-  it('calls proper branch according to condition', function () {
+  it('should call proper branch according to condition', function () {
 
     var a;
 
@@ -36,18 +36,99 @@ describe('equals()', function () {
 
   const test = _.equals('1');
 
-  it('returns function to be called', function () {
+  it('should return function to be called', function () {
 
     expect(test).to.be.a('function');
 
   });
 
-  it('strictly checks for equality', function () {
+  it('should strictly check for equality', function () {
 
     expect(test('1')).to.be.true;
     expect(test(1)).to.be.false;
     expect(test(true)).to.be.false;
     expect(test(false)).to.be.false;
+
+  });
+
+});
+
+
+describe('and()', function () {
+
+  const hasFoo = _.has('foo');
+  const hasBaz = _.has('baz');
+
+  const test = _.and(hasFoo, hasBaz);
+
+  it('should return function to be called', function () {
+
+    expect(test).to.be.a('function');
+
+  });
+
+  it('should return true if both sides are true', function () {
+
+    const o = {
+      foo: 'foo',
+      baz: 'baz'
+    };
+
+    expect(hasFoo(o)).to.be.true;
+    expect(hasBaz(o)).to.be.true;
+
+    expect(test(o)).to.be.true;
+
+  });
+
+  it('should return false if one of sides is false', function () {
+
+    const o1 = {foo: 'foo'};
+    const o2 = {baz: 'baz'};
+    const o3 = {};
+
+    expect(test(o1)).to.be.false;
+    expect(test(o2)).to.be.false;
+    expect(test(o3)).to.be.false;
+
+  });
+
+});
+
+
+describe('or()', function () {
+
+  const hasFoo = _.has('foo');
+  const hasBaz = _.has('baz');
+
+  const test = _.or(hasFoo, hasBaz);
+
+  it('should return function to be called', function () {
+
+    expect(test).to.be.a('function');
+
+  });
+
+  it('should return false if both sides are false', function () {
+
+    const o = {};
+
+    expect(hasFoo(o)).to.be.false;
+    expect(hasBaz(o)).to.be.false;
+
+    expect(test(o)).to.be.false;
+
+  });
+
+  it('should return true if one or both sides are true', function () {
+
+    const o1 = {foo: 'foo'};
+    const o2 = {baz: 'baz'};
+    const o3 = {foo: 'foo', baz: 'baz'};
+
+    expect(test(o1)).to.be.true;
+    expect(test(o2)).to.be.true;
+    expect(test(o3)).to.be.true;
 
   });
 
