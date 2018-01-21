@@ -33,6 +33,14 @@ export function fn(caller, argGetter) {
   };
 }
 
+export function fn2(caller, arg1Getter, arg2Getter) {
+  return function (smth) {
+    const arg1 = arg1Getter(smth);
+    const arg2 = arg2Getter(smth);
+    return caller(arg1, arg2);
+  };
+}
+
 export function method(subj, methodName) {
   return function (smth) {
     return subj[methodName](smth);

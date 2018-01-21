@@ -4,7 +4,7 @@
 ## 0.2.0 (?)
 
 - [+] add `camelize()` function
-- [+] add `fn()` function
+- [+] add `fn()` and `fn2()` function
 - [+] add `and()` and `or()` functions
 
 
