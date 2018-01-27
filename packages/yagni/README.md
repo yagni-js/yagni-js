@@ -3,8 +3,8 @@
 Yet another **pure functional** frontend library.
 
 **Pure functional** in this context means functional code style - library code is
-linted using [eslint-plugin-fp](eslint-plugin-fp) and
-[eslint-plugin-better](eslint-plugin-better). Javascript code is purely
+linted using [eslint-plugin-fp][eslint-plugin-fp] and
+[eslint-plugin-better][eslint-plugin-better]. Javascript code is purely
 functional with just two exceptions:
 
 - `tap()` function, used for controllable side effects,
@@ -31,8 +31,8 @@ $ yarn add -D yagni
 
 ## Usage
 
-Source code is written using [ES6 modules](es6-modules), built using
-[rollup](rollup) and distributed in two formats - as CommonJS module and as
+Source code is written using [ES6 modules][es6-modules], built using
+[rollup][rollup] and distributed in two formats - as CommonJS module and as
 ES6 module.
 
 CommonJS usage:
@@ -117,6 +117,6 @@ MIT
 
 
 [eslint-plugin-fp]: https://github.com/jfmengels/eslint-plugin-fp
-[eslint-plufin-better]: https://github.com/idmitriev/eslint-plugin-better
+[eslint-plugin-better]: https://github.com/idmitriev/eslint-plugin-better
 [es6-modules]: https://hacks.mozilla.org/2015/08/es6-in-depth-modules/
 [rollup]: https://rollupjs.org/
