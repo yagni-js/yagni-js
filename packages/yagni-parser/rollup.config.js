@@ -10,7 +10,8 @@ export default [
       {file: pkg.module, format: 'es'}
     ],
     external: [
-      'yagni'
+      'yagni',
+      'parse5'
     ],
     plugins: [
       eslint({throwOnError: true})
