@@ -133,3 +133,34 @@ describe('or()', function () {
   });
 
 });
+
+
+describe('not()', function () {
+
+  const hasFoo = _.has('foo');
+
+  const test = _.not(hasFoo);
+
+  it('should return function to be called', function () {
+
+    expect(_.not(hasFoo)).to.be.a('function');
+
+  });
+
+  it('should return false if returned value evaluates to true', function () {
+
+    const o = {foo: 'foo'};
+
+    expect(test(o)).to.be.false;
+
+  });
+
+  it('should return true if returned value evaluates to false', function () {
+
+    const o = {baz: 'baz'};
+
+    expect(test(o)).to.be.true;
+
+  });
+
+});

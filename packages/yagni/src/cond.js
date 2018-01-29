@@ -22,3 +22,9 @@ export function or(left, right) {
     return left(smth) || right(smth);
   };
 }
+
+export function not(left) {
+  return function (smth) {
+    return !left(smth);
+  };
+}
