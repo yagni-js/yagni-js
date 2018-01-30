@@ -2,6 +2,7 @@
 
 // FIXME switch to functional style somehow
 
+// NB. see https://github.com/reshape/parser for reference
 
 import { SAXParser } from 'parse5';
 import Tokenizer from 'parse5/lib/tokenizer/index.js';
