@@ -14,7 +14,7 @@ export default [
     external: [
       'yagni',
       'parse5',
-      'parse5/lib/tokenizer'
+      'parse5/lib/tokenizer/index.js'
     ],
     plugins: [
       eslint({throwOnError: true}),
