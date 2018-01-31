@@ -5,19 +5,19 @@ const _ = require('..');
 
 describe('first()', function () {
 
-  it('returns first element from array', function () {
+  it('should return first element from array', function () {
 
     expect(_.first(['foo', 'baz', 42])).to.equal('foo');
 
   });
 
-  it('returns obj[0] property value', function () {
+  it('should return obj[0] property value', function () {
 
     expect(_.first({0: 'foo', 1: 'baz'})).to.equal('foo');
 
   });
 
-  it('throws if passed value is nil', function () {
+  it('should throw if passed value is nil', function () {
 
     expect(function () { return _.first(); }).to.throw();
     expect(function () { return _.first(null); }).to.throw();
@@ -29,21 +29,21 @@ describe('first()', function () {
 
 describe('length()', function () {
 
-  it('returns array length', function () {
+  it('should return array length', function () {
 
     expect(_.length([])).to.equal(0);
     expect(_.length(['foo', 'bar'])).to.equal(2);
 
   });
 
-  it('returns length property value', function () {
+  it('should return length property value', function () {
 
     expect(_.length({})).to.be.undefined;
     expect(_.length({length: 3})).to.equal(3);
 
   });
 
-  it('throws if passed value is nil', function () {
+  it('should throw if passed value is nil', function () {
 
     expect(function () { return _.length(); }).to.throw();
     expect(function () { return _.length(null); }).to.throw();
@@ -59,13 +59,13 @@ describe('map()', function () {
 
   const mapper = _.map(add2);
 
-  it('returns function to be called', function () {
+  it('should return function to be called', function () {
 
     expect(mapper).to.be.a('function');
 
   });
 
-  it('returns newly constructed array when called', function () {
+  it('should return newly constructed array when called', function () {
 
     var a = [1, 2, 3];
 
@@ -73,7 +73,7 @@ describe('map()', function () {
 
   });
 
-  it('keeps source untouched', function () {
+  it('should keep source untouched', function () {
 
     var a = [1];
 
@@ -90,13 +90,13 @@ describe('filter()', function () {
 
   const negatives = _.filter(belowZero);
 
-  it('returns function to be called', function () {
+  it('should return function to be called', function () {
 
     expect(negatives).to.be.a('function');
 
   });
 
-  it('returns newly constructed array when called', function () {
+  it('should return newly constructed array when called', function () {
 
     var a = [-1, 2, 4, -3, -2, 0];
 
@@ -104,7 +104,7 @@ describe('filter()', function () {
 
   });
 
-  it('keeps source untouched', function () {
+  it('should keep source untouched', function () {
 
     var a = [-1, -2, -3];
 
@@ -122,13 +122,13 @@ describe('filterMap()', function () {
 
   const doublePositives = _.filterMap(aboveZero, square);
 
-  it('returns function to be called', function () {
+  it('should return function to be called', function () {
 
     expect(doublePositives).to.be.a('function');
 
   });
 
-  it('returns newly constructed array when called', function () {
+  it('should return newly constructed array when called', function () {
 
     var a = [-1, 1, -2, 2, -3, 3];
 
@@ -136,7 +136,7 @@ describe('filterMap()', function () {
 
   });
 
-  it('keeps source untouched', function () {
+  it('should keep source untouched', function () {
 
     var a = [1, 2];
 
@@ -157,19 +157,19 @@ describe('reduce()', function () {
   const sumReducer = _.reduce(sum);
   const overall = sumReducer(data);
 
-  it('returns function to be called', function () {
+  it('should return function to be called', function () {
 
     expect(sumReducer).to.be.a('function');
 
   });
 
-  it('returns another function when called', function () {
+  it('should return another function when called', function () {
 
     expect(overall).to.be.a('function');
 
   });
 
-  it('returns proper result when called', function () {
+  it('should return proper result when called', function () {
 
     expect(overall(36)).to.equal(42);
 
@@ -195,19 +195,19 @@ describe('pipe()', function () {
     42
   ]);
 
-  it('returns function to be called', function () {
+  it('should return function to be called', function () {
 
     expect(ops).to.be.a('function');
 
   });
 
-  it('calls all specified functions in chain', function () {
+  it('should call all specified functions in chain', function () {
 
     expect(ops(5)).to.equal(42);
 
   });
 
-  it('throws on bad array member', function () {
+  it('should throw on bad array member', function () {
 
     expect(function () { return badOps(2); }).to.throw();
 
@@ -228,19 +228,19 @@ describe('pipeP()', function () {
     minus7
   ]);
 
-  it('returns function to be called', function () {
+  it('should return function to be called', function () {
 
     expect(ops).to.be.a('function');
 
   });
 
-  it('returns promise when called', function () {
+  it('should return promise when called', function () {
 
     expect(ops(5)).to.be.a('promise');
 
   });
 
-  it('calls all specified functions in chain', function (done) {
+  it('should call all specified functions in chain', function (done) {
 
     ops(5).then(function (x) { expect(x).to.equal(42); }).then(done);
 
@@ -256,14 +256,14 @@ describe('join()', function () {
   const commaJoin = _.join();
   const dotJoin = _.join('.');
 
-  it('returns function to be called', function () {
+  it('should return function to be called', function () {
 
     expect(commaJoin).to.be.a('function');
     expect(dotJoin).to.be.a('function');
 
   });
 
-  it('returns joined string', function () {
+  it('should return joined string', function () {
 
     expect(commaJoin([])).to.be.equal('');
     expect(commaJoin(a)).to.be.equal('foo,baz,bar');
@@ -280,13 +280,13 @@ describe('concat()', function () {
     b = ['bar'],
     c = _.concat(a);
 
-  it('returns newly constructed array', function () {
+  it('should return newly constructed array', function () {
 
     expect(c(b)).to.deep.equal(['foo', 'bar']);
 
   });
 
-  it('keeps sources untouched', function () {
+  it('should keep sources untouched', function () {
 
     var x = c(b);
 
@@ -302,7 +302,7 @@ describe('toArray()', function () {
 
   const o = {0: 'foo', 1: 'baz', 2: 'bar', length: 3};
 
-  it('returns newly constructed array', function () {
+  it('should return newly constructed array', function () {
 
     expect(_.toArray(o)).to.be.an('array');
     expect(_.toArray(o)).to.deep.equal(['foo', 'baz', 'bar']);
@@ -315,9 +315,73 @@ describe('flatten()', function () {
 
   var a = [[1, 2], [[3, 4], [5, 6]], [[[7], 8, 9], 0]];
 
-  it('returns newly constructed flattened array', function () {
+  it('should return newly constructed flattened array', function () {
 
     expect(_.flatten(a)).to.deep.equal([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
+
+  });
+
+});
+
+describe('all()', function () {
+
+  it('should return function to be called', function () {
+
+    function test() { return false; }
+
+    expect(_.all(test)).to.be.a('function');
+
+  });
+
+  it('should return true when test for all array members evaluates to true', function () {
+
+    function test(smth) { return smth < 10; }
+
+    const allBelow10 = _.all(test);
+
+    expect(allBelow10([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])).to.be.true;
+
+    });
+
+  it('should return false when test for any array member evaluates to false', function () {
+
+    function test(smth) { return smth < 10; }
+
+    const allBelow10 = _.all(test);
+
+    expect(allBelow10([5, 4, 10, 1])).to.be.false;
+
+  });
+
+});
+
+describe('any()', function () {
+
+  it('should return function to be called', function () {
+
+    function test() { return false; }
+
+    expect(_.any(test)).to.be.a('function');
+
+  });
+
+  it('should return true when test for any array member evaluates to true', function () {
+
+    function test(smth) { return smth < 10; }
+
+    const anyBelow10 = _.any(test);
+
+    expect(anyBelow10([10, 20, 30, 5, 40])).to.be.true;
+
+    });
+
+  it('should return false when test for all array members evaluates to false', function () {
+
+    function test(smth) { return smth < 10; }
+
+    const anyBelow10 = _.any(test);
+
+    expect(anyBelow10([10, 20, 30, 40])).to.be.false;
 
   });
 

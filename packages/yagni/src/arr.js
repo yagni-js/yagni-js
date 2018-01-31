@@ -72,3 +72,15 @@ export function flatten(arr) {
     return acc.concat(nested);
   }, []);
 }
+
+export function all(predicate) {
+  return function (arr) {
+    return arr.every(predicate);
+  };
+}
+
+export function any(predicate) {
+  return function (arr) {
+    return arr.some(predicate);
+  };
+}
