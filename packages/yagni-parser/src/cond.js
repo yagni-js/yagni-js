@@ -1,26 +1,31 @@
 
 import { and, not, pipe, pick, equals } from 'yagni';
 
-const nodeName = pick('nodeName');
 const tagName = pick('tagName');
+const tokenType = pick('type');
 
 export const isComment = pipe([
-  nodeName,
-  equals('#comment')
+  tokenType,
+  equals('comment')
 ]);
 
 export const isText = pipe([
-  nodeName,
-  equals('#text')
+  tokenType,
+  equals('text')
 ]);
 
-export const isTag = and(not(isComment), not(isText));
+export const isTag = pipe([
+  tokenType,
+  equals('startTag')
+]);
+
+export const isEndTag = pipe([
+  tokenType,
+  equals('endTag')
+]);
 
 export const isPartial = and(isTag, pipe([tagName, equals('partial')]));
 
 export const isNotPartial = and(isTag, not(pipe([tagName, equals('partial')])));
 
-export const isSVG = pipe([
-  tagName,
-  equals('svg')
-]);
+export const isSvg = pick('isSVG');

@@ -8,11 +8,13 @@ import { SAXParser } from 'parse5';
 import Tokenizer from 'parse5/lib/tokenizer/index.js';
 
 
-function YagniParser() {
+function YagniParser(transform) {
 
   SAXParser.call(this);
 
   this._yagni = [];
+  this._yagni_transform = transform;
+  this._isSvg = false;
 
 }
 
@@ -21,41 +23,62 @@ YagniParser.prototype.constructor = YagniParser;
 
 YagniParser.prototype._handleToken = function (token) {
 
+  const transform = this._yagni_transform;
+
   if (token.type === Tokenizer.START_TAG_TOKEN) {
-    this._yagni.push({
-      type: 'startTag',
-      tagName: token.tagName,
-      attrs: token.attrs,
-      selfClosing: token.selfClosing
-    });
+    if (token.tagName === 'svg') {
+      this._isSvg = true;
+    }
+    this._yagni.push(
+      transform({
+        type: 'startTag',
+        tagName: token.tagName,
+        attrs: token.attrs,
+        isSvg: this._isSvg,
+        selfClosing: token.selfClosing
+      })
+    );
   } else if (token.type === Tokenizer.END_TAG_TOKEN) {
-    this._yagni.push({
-      type: 'endTag',
-      tagName: token.tagName
-    });
-  } else if (token.type === Tokenizer.COMMENT_TOKEN) {
-    this._yagni.push({
-      type: 'comment',
-      value: token.data
-    });
-  } else if (token.type === Tokenizer.DOCTYPE_TOKEN) {
-    this._yagni.push({
-      type: 'doctype',
-      name: token.name,
-      publicId: token.publicId,
-      systemId: token.systemId
-    });
+    if (token.tagName === 'svg') {
+      this._isSvg = false;
+    }
+    this._yagni.push(
+      transform({
+        type: 'endTag',
+        tagName: token.tagName
+      })
+    );
+  // } else if (token.type === Tokenizer.COMMENT_TOKEN) {
+  //   this._yagni.push(
+  //     transform({
+  //       type: 'comment',
+  //       value: token.data
+  //     })
+  //   );
+  // } else if (token.type === Tokenizer.DOCTYPE_TOKEN) {
+  //   this._yagni.push(
+  //     transform({
+  //       type: 'doctype',
+  //       name: token.name,
+  //       publicId: token.publicId,
+  //       systemId: token.systemId
+  //     })
+  //   );
   }
 
 };
 
 YagniParser.prototype._emitPendingText = function () {
 
+  const transform = this._yagni_transform;
+
   if (this.pendingText !== null) {
-    this._yagni.push({
-      nodeName: '#text',
-      value: this.pendingText
-    });
+    this._yagni.push(
+      transform({
+        type: 'text',
+        value: this.pendingText
+      })
+    );
     this.pendingText = null;
   }
 
@@ -64,15 +87,17 @@ YagniParser.prototype._emitPendingText = function () {
 YagniParser.prototype.parse = function (source) {
 
   this._yagni = [];
+  this._isSVG = false;
+
   this.end(source);
 
   return this._yagni.slice();
 };
 
 
-export function getParser() {
+export function getParser(transform) {
 
-  return new YagniParser();
+  return new YagniParser(transform);
 
 }
 
