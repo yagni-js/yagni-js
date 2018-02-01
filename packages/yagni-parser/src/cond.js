@@ -26,6 +26,4 @@ export const isEndTag = pipe([
 
 export const isPartial = and(isTag, pipe([tagName, equals('partial')]));
 
-export const isNotPartial = and(isTag, not(pipe([tagName, equals('partial')])));
-
-export const isSvg = pick('isSVG');
+export const isSVG = and(isTag, pipe([pick('isSVG'), equals(true)]));

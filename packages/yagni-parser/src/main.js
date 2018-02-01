@@ -2,7 +2,9 @@
 import { ifElse } from 'yagni';
 
 import { getParser } from './sax.js';
-import { isEndTag, isPartial, isText } from './cond.js';
+import { isComment, isEndTag, isPartial, isSVG, isTag, isText } from './cond.js';
+
+export { isComment, isEndTag, isPartial, isSVG, isTag, isText };
 
 
 function transformText(spec) {
