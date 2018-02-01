@@ -130,3 +130,24 @@ describe('isSVG()', function () {
   });
 
 });
+
+
+describe('isWhitespace()', function () {
+
+  it('should return true if token is of type text and contains whitespace only', function () {
+
+    const token = {type: 'text', value: '  \n  \t  '};
+
+    expect(yp.isWhitespace(token)).to.be.true;
+
+  });
+
+  it('should return false if token is of type text and contains some text', function () {
+
+    const token = {type: 'text', value: '  \n  \t  a'};
+
+    expect(yp.isWhitespace(token)).to.be.false;
+
+  });
+
+});
