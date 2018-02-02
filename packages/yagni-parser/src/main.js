@@ -1,17 +1,22 @@
 
-import { ifElse } from 'yagni';
+import { ifElse, objOf, pick, pipe } from 'yagni';
 
 import { getParser } from './sax.js';
 import { isComment, isEndTag, isPartial, isSVG, isTag, isText, isWhitespace } from './cond.js';
+import { hasVars, quotedText, templateLiteral, smartText } from './text.js';
 
 export { isComment, isEndTag, isPartial, isSVG, isTag, isText, isWhitespace };
+export { hasVars, quotedText, templateLiteral, smartText };
 
 
-function transformText(spec) {
-  return {
-    line: '"' + spec.value + '"'
-  };
-}
+const value = pick('value');
+const toLineSpec = objOf('line');
+
+const transformText = pipe([
+  value,
+  smartText,
+  toLineSpec
+]);
 
 function transformEndTag(spec) {
   return {
