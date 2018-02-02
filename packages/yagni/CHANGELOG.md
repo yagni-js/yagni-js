@@ -7,6 +7,7 @@
 - [+] add `fn()` and `fn2()` function
 - [+] add `and()`, `or()` and `not()` functions
 - [+] add `all()` and `any()` functions
+- [+] add `test()` function
 
 
 ## 0.1.0 (10.01.2018)
