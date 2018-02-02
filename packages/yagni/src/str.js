@@ -26,3 +26,9 @@ export function test(regexp) {
     return regexp.test(str);
   };
 }
+
+export function replace(from, to) {
+  return function (str) {
+    return str.replace(from, to);
+  };
+}

@@ -98,3 +98,17 @@ describe('test()', function () {
   });
 
 });
+
+
+describe('replace()', function () {
+
+  it('should replace foo with bar', function () {
+
+    const replacer = _.replace(/foo/g, 'bar');
+
+    expect(replacer('foo')).to.equal('bar');
+    expect(replacer('foo-foo-foo')).to.equal('bar-bar-bar');
+
+  });
+
+});
