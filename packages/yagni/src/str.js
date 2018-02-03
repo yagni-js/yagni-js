@@ -32,3 +32,15 @@ export function replace(from, to) {
     return str.replace(from, to);
   };
 }
+
+export function slice(pos) {
+  return function (str) {
+    return str.slice(pos);
+  };
+}
+
+export function slice2(start, end) {
+  return function (str) {
+    return str.slice(start, end);
+  };
+}

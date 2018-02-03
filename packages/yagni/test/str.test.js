@@ -112,3 +112,41 @@ describe('replace()', function () {
   });
 
 });
+
+
+describe('slice()', function () {
+
+  it('should return proper substring from specified start position to string end', function () {
+
+    const skip1 = _.slice(1);
+    const skip4 = _.slice(4);
+    const skip4b = _.slice(-4);
+
+    const str = 'foo-baz-bar';
+
+    expect(skip1(str)).to.equal('oo-baz-bar');
+    expect(skip4(str)).to.equal('baz-bar');
+    expect(skip4b(str)).to.equal('-bar');
+
+  });
+
+});
+
+
+describe('slice2()', function () {
+
+  it('should return proper substring from specified start position to specified end position', function () {
+
+    const foo = _.slice2(0, 3);
+    const baz = _.slice2(4, -4);
+    const bar = _.slice2(8, 11);
+
+    const str = 'foo-baz-bar';
+
+    expect(foo(str)).to.equal('foo');
+    expect(baz(str)).to.equal('baz');
+    expect(bar(str)).to.equal('bar');
+
+  });
+
+});
