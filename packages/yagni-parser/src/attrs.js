@@ -1,11 +1,16 @@
 
-import { equals, ifElse, join, pick, pipe, replace, slice, transformArr } from 'yagni';
+import { equals, ifElse, join, map, pick, pipe, prefix, replace, slice, suffix, transformArr } from 'yagni';
 
 import { quotedText, smartText } from './text.js';
 
 
 const attrName = pick('name');
 const attrValue = pick('value');
+
+const leftCurlyBrace = prefix('{');
+const rightCurlyBrace = suffix('}');
+
+const joinUsingComma = join(', ');
 
 const normalizeWs = pipe([
   replace(/\n/g, ' '),
@@ -39,3 +44,10 @@ export const stringifyAttr = ifElse(
   stringifyR,
   stringifyA
 );
+
+export const stringifyAttrs = pipe([
+  map(stringifyAttr),
+  joinUsingComma,
+  leftCurlyBrace,
+  rightCurlyBrace
+]);

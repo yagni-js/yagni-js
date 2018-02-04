@@ -4,12 +4,12 @@ import { ifElse, objOf, pick, pipe } from 'yagni';
 import { getParser } from './sax.js';
 import { isComment, isEndTag, isPartial, isSVG, isTag, isText, isWhitespace } from './cond.js';
 import { hasVars, quotedText, templateLiteral, smartText } from './text.js';
-import { stringifyAttr } from './attrs.js';
+import { stringifyAttr, stringifyAttrs } from './attrs.js';
 
 // FIXME re-export needed for tests, should be a better way to test modules
 export { isComment, isEndTag, isPartial, isSVG, isTag, isText, isWhitespace };
 export { hasVars, quotedText, templateLiteral, smartText };
-export { stringifyAttr };
+export { stringifyAttr, stringifyAttrs };
 
 
 const value = pick('value');

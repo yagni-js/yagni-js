@@ -38,3 +38,28 @@ describe('stringifyAttr()', function () {
   });
 
 });
+
+
+describe('stingifyAttrs()', function () {
+
+  it('should properly stringify array of attrs', function () {
+
+    const attrs = [
+      {name: 'name', value: 'username'},
+      {name: '@value', value: 'ctx.username'},
+      {name: 'class', value: 'input block {{ ctx.isReadonly ? \'readonly\' : \'\' }}'},
+      {name: '@readonly', value: 'ctx.isReadonly'}
+    ];
+
+    const expected = '{' +
+      '"name": "username", ' +
+      '"value": ctx.username, ' +
+      '"class": `input block ${ctx.isReadonly ? \'readonly\' : \'\'}`, ' +
+      '"readonly": ctx.isReadonly' +
+      '}';
+
+    expect(yp.stringifyAttrs(attrs)).to.equal(expected);
+
+  });
+
+});
