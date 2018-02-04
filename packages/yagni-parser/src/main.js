@@ -5,11 +5,13 @@ import { getParser } from './sax.js';
 import { isComment, isEndTag, isPartial, isSVG, isTag, isText, isWhitespace } from './cond.js';
 import { hasVars, quotedText, templateLiteral, smartText } from './text.js';
 import { stringifyAttr, stringifyAttrs } from './attrs.js';
+import { stringifyStartTag, stringifyEndTag } from './tags.js';
 
 // FIXME re-export needed for tests, should be a better way to test modules
 export { isComment, isEndTag, isPartial, isSVG, isTag, isText, isWhitespace };
 export { hasVars, quotedText, templateLiteral, smartText };
 export { stringifyAttr, stringifyAttrs };
+export { stringifyStartTag, stringifyEndTag };
 
 
 const value = pick('value');
@@ -21,11 +23,10 @@ const transformText = pipe([
   toLineSpec
 ]);
 
-function transformEndTag(spec) {
-  return {
-    line: ''
-  };
-}
+const transformEndTag = pipe([
+  stringifyEndTag,
+  toLineSpec
+]);
 
 function transformPartial(spec) {
   return {
@@ -34,11 +35,10 @@ function transformPartial(spec) {
   };
 }
 
-function transformTag(spec) {
-  return {
-    line: ''
-  };
-}
+const transformTag = pipe([
+  stringifyStartTag,
+  toLineSpec
+]);
 
 const transform = ifElse(
   isText,
