@@ -386,3 +386,67 @@ describe('any()', function () {
   });
 
 });
+
+
+describe('indexIn()', function () {
+
+  it('should return function to be called', function () {
+
+    expect(_.indexIn([])).to.be.a('function');
+
+  });
+
+  it('should return item index from array', function () {
+
+    const items = ['foo', 'baz', 'bar', 42];
+    const getIndexFor = _.indexIn(items);
+
+    expect(getIndexFor('foo')).to.equal(0);
+    expect(getIndexFor('baz')).to.equal(1);
+    expect(getIndexFor('bar')).to.equal(2);
+    expect(getIndexFor(42)).to.equal(3);
+
+  });
+
+  it('should return -1 if item is not within array', function () {
+
+    const getIndexFor = _.indexIn(['foo']);
+
+    expect(getIndexFor(42)).to.equal(-1);
+
+  });
+
+});
+
+
+describe('existsIn()', function () {
+
+  it('should return function to be called', function () {
+
+    expect(_.existsIn([])).to.be.a('function');
+
+  });
+
+  it('should return true if item is in array', function () {
+
+    const items = ['foo', 'baz', 42];
+    const exists = _.existsIn(items);
+
+    expect(exists('foo')).to.be.true;
+    expect(exists('baz')).to.be.true;
+    expect(exists(42)).to.be.true;
+
+  });
+
+  it('should return false if item is not in array', function () {
+
+    const items = ['foo', 'baz', 42];
+    const exists = _.existsIn(items);
+
+    expect(exists('zaq')).to.be.false;
+    expect(exists('qaz')).to.be.false;
+    expect(exists(29)).to.be.false;
+
+  });
+
+});

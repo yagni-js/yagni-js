@@ -9,6 +9,7 @@
 - [+] add `all()` and `any()` functions
 - [+] add `test()` and `replace()` functions
 - [+] add `slice()` and `slice2()` functions
+- [+] add `indexIn()` and `existsIn()` functions
 
 
 ## 0.1.0 (10.01.2018)

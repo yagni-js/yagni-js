@@ -1,4 +1,5 @@
 
+import { equals, not } from './cond.js';
 import { isDefined, isArray } from './is.js';
 import { pick } from './obj.js';
 
@@ -83,4 +84,17 @@ export function any(predicate) {
   return function (arr) {
     return arr.some(predicate);
   };
+}
+
+export function indexIn(arr) {
+  return function (smth) {
+    return arr.indexOf(smth);
+  };
+}
+
+export function existsIn(arr) {
+  return pipe([
+    indexIn(arr),
+    not(equals(-1))
+  ]);
 }
