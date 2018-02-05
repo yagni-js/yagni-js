@@ -1,10 +1,9 @@
 
-import { and, callMethod, identity, not, pipe, pick, equals } from 'yagni';
+import { and, pipe, pick, equals } from 'yagni';
 
 const tagName = pick('tagName');
 const tokenType = pick('type');
 const value = pick('value');
-const trim = callMethod(identity, 'trim');
 
 export const isComment = pipe([
   tokenType,
@@ -27,7 +26,3 @@ export const isEndTag = pipe([
 ]);
 
 export const isPartial = and(isTag, pipe([tagName, equals('partial')]));
-
-export const isSVG = and(isTag, pipe([pick('isSVG'), equals(true)]));
-
-export const isWhitespace = and(isText, not(pipe([value, trim])));

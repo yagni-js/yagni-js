@@ -2,13 +2,13 @@
 import { ifElse, map, objOf, pick, pipe } from 'yagni';
 
 import { getParser } from './sax.js';
-import { isComment, isEndTag, isPartial, isSVG, isTag, isText, isWhitespace } from './cond.js';
+import { isComment, isEndTag, isPartial, isTag, isText } from './cond.js';
 import { hasVars, quotedText, templateLiteral, smartText } from './text.js';
 import { stringifyAttr, stringifyAttrs } from './attrs.js';
 import { stringifyStartTag, stringifyEndTag } from './tags.js';
 
 // FIXME re-export needed for tests, should be a better way to test modules
-export { isComment, isEndTag, isPartial, isSVG, isTag, isText, isWhitespace };
+export { isComment, isEndTag, isPartial, isTag, isText };
 export { hasVars, quotedText, templateLiteral, smartText };
 export { stringifyAttr, stringifyAttrs };
 export { stringifyStartTag, stringifyEndTag };
