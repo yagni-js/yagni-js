@@ -4,16 +4,19 @@
 
 // NB. see https://github.com/reshape/parser for reference
 
+import { identity } from 'yagni';
+
 import { SAXParser } from 'parse5';
 import Tokenizer from 'parse5/lib/tokenizer/index.js';
 
 
-function YagniParser(transform) {
+function YagniParser(source) {
 
   SAXParser.call(this);
 
   this._yagni = [];
-  this._yagni_transform = transform;
+  this._yagni_source = source;
+  this._yagni_transform = identity;
   this._isSvg = false;
 
 }
@@ -84,20 +87,21 @@ YagniParser.prototype._emitPendingText = function () {
 
 };
 
-YagniParser.prototype.parse = function (source) {
+YagniParser.prototype.map = function (transform) {
 
   this._yagni = [];
   this._isSVG = false;
+  this._yagni_transform = transform;
 
-  this.end(source);
+  this.end(this._yagni_source);
 
   return this._yagni.slice();
 };
 
 
-export function getParser(transform) {
+export function getParser(source) {
 
-  return new YagniParser(transform);
+  return new YagniParser(source);
 
 }
 

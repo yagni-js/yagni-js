@@ -1,5 +1,5 @@
 
-import { ifElse, objOf, pick, pipe } from 'yagni';
+import { ifElse, map, objOf, pick, pipe } from 'yagni';
 
 import { getParser } from './sax.js';
 import { isComment, isEndTag, isPartial, isSVG, isTag, isText, isWhitespace } from './cond.js';
@@ -53,8 +53,7 @@ const transform = ifElse(
   )
 );
 
-export function parse(source) {
-  const parser = getParser(transform);
-  const doc = parser.parse(source)
-  return doc;
-}
+export const parse = pipe([
+  getParser,
+  map(transform)
+]);
