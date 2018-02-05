@@ -97,6 +97,20 @@ describe('test()', function () {
 
   });
 
+  it('should return proper result while testing for whitespace', function () {
+
+    const tester = _.test(/^\s+$/);
+
+    expect(tester('\n')).to.be.true;
+    expect(tester('  ')).to.be.true;
+    expect(tester('   \n   ')).to.be.true;
+    expect(tester('  \n\t  \n\n')).to.be.true;
+    expect(tester('  a\n  \n')).to.be.false;
+    expect(tester('a  ')).to.be.false;
+    expect(tester('a\n\tb\n\t')).to.be.false;
+
+  });
+
 });
 
 
