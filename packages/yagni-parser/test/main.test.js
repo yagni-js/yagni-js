@@ -23,7 +23,7 @@ describe('parse()', function () {
     const tree = parser.parse(layout);
 
     expect(tree).to.be.an('array');
-    expect(tree).to.have.length(24);
+    expect(tree).to.have.length(16);
 
   });
 

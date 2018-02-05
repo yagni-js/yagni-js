@@ -4,10 +4,13 @@
 
 // NB. see https://github.com/reshape/parser for reference
 
-import { identity } from 'yagni';
+import { identity, test } from 'yagni';
 
 import { SAXParser } from 'parse5';
 import Tokenizer from 'parse5/lib/tokenizer/index.js';
+
+
+const isWhitespace = test(/^\s+$/);
 
 
 function YagniParser(source) {
@@ -76,12 +79,14 @@ YagniParser.prototype._emitPendingText = function () {
   const transform = this._yagni_transform;
 
   if (this.pendingText !== null) {
-    this._yagni.push(
-      transform({
-        type: 'text',
-        value: this.pendingText
-      })
-    );
+    if (!isWhitespace(this.pendingText)) {
+      this._yagni.push(
+        transform({
+          type: 'text',
+          value: this.pendingText
+        })
+      );
+    }
     this.pendingText = null;
   }
 
