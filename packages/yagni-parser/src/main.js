@@ -6,12 +6,14 @@ import { isComment, isEndTag, isPartial, isTag, isText } from './cond.js';
 import { hasVars, quotedText, templateLiteral, smartText } from './text.js';
 import { stringifyAttr, stringifyAttrs } from './attrs.js';
 import { stringifyStartTag, stringifyEndTag } from './tags.js';
+import { partialName, stringifyPartial } from './partials.js';
 
 // FIXME re-export needed for tests, should be a better way to test modules
 export { isComment, isEndTag, isPartial, isTag, isText };
 export { hasVars, quotedText, templateLiteral, smartText };
 export { stringifyAttr, stringifyAttrs };
 export { stringifyStartTag, stringifyEndTag };
+export { partialName, stringifyPartial };
 
 
 const value = pick('value');
