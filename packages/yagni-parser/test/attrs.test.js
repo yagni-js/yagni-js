@@ -63,3 +63,49 @@ describe('stingifyAttrs()', function () {
   });
 
 });
+
+
+describe('attrsToObj()', function () {
+
+  it('should properly convert array of attrs to object', function () {
+
+    const attrs = [
+      {name: 'name', value: 'username'},
+      {name: '@value', value: 'ctx.username'},
+      {name: '@readonly', value: 'ctx.isReadonly'}
+    ];
+
+    const expected = {
+      'name': 'username',
+      '@value': 'ctx.username',
+      '@readonly': 'ctx.isReadonly'
+    };
+
+    expect(yp.attrsToObj(attrs)).to.deep.equal(expected);
+
+  });
+
+});
+
+
+describe('stringifyObj()', function () {
+
+  it('should properly stringify object', function () {
+
+    const obj = {
+      'name': 'username',
+      '@value': 'ctx.username',
+      '@readonly': 'ctx.isReadonly'
+    };
+
+    const str = yp.stringifyObj(obj);
+
+    expect(str).to.have.string('"name": "username"');
+    expect(str).to.have.string('"value": ctx.username');
+    expect(str).to.have.string('"readonly": ctx.isReadonly');
+    expect(str[0]).to.equal('{');
+    expect(str[str.length - 1]).to.equal('}');
+
+  });
+
+});

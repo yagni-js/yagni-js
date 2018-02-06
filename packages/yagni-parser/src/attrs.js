@@ -1,5 +1,5 @@
 
-import { equals, ifElse, join, map, pick, pipe, prefix, replace, slice, suffix, transformArr } from 'yagni';
+import { equals, ifElse, items, join, map, obj, pick, pipe, prefix, replace, slice, suffix, transform, transformArr } from 'yagni';
 
 import { quotedText, smartText } from './text.js';
 
@@ -47,6 +47,28 @@ export const stringifyAttr = ifElse(
 
 export const stringifyAttrs = pipe([
   map(stringifyAttr),
+  joinUsingComma,
+  leftCurlyBrace,
+  rightCurlyBrace
+]);
+
+export function attrsToObj(attrs) {
+  return attrs.reduce(function (acc, attr) {
+    return Object.assign({}, acc, obj(attr.name, attr.value));
+  }, {});
+}
+
+export const stringifyObj = pipe([
+  items,
+  map(
+    pipe([
+      transform({
+        name: pick('key'),
+        value: pick('value')
+      }),
+      stringifyAttr
+    ])
+  ),
   joinUsingComma,
   leftCurlyBrace,
   rightCurlyBrace
