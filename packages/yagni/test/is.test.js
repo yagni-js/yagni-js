@@ -5,7 +5,7 @@ const _ = require('..');
 
 describe('isNil()', function () {
 
-  it('returns true for null and undefined', function () {
+  it('should return true for null and undefined', function () {
 
     var a = null,
       b;
@@ -15,7 +15,7 @@ describe('isNil()', function () {
 
   });
 
-  it('returns false for other values', function () {
+  it('should return false for other values', function () {
 
     expect(_.isNil('foo')).to.be.false;
     expect(_.isNil(42)).to.be.false;
@@ -29,7 +29,7 @@ describe('isNil()', function () {
 
 describe('isDefined()', function () {
 
-  it('returns false for null and undefined', function () {
+  it('should return false for null and undefined', function () {
 
     var a = null,
       b;
@@ -39,7 +39,7 @@ describe('isDefined()', function () {
 
   });
 
-  it('returns true for other values', function () {
+  it('should return true for other values', function () {
 
     expect(_.isDefined('foo')).to.be.true;
     expect(_.isDefined(42)).to.be.true;
@@ -53,13 +53,13 @@ describe('isDefined()', function () {
 
 describe('isArray()', function () {
 
-  it('returns true for array', function () {
+  it('should return true for array', function () {
 
     expect(_.isArray([])).to.be.true;
 
   });
 
-  it('returns false for other values', function () {
+  it('should return false for other values', function () {
 
     expect(_.isArray({})).to.be.false;
     expect(_.isArray('foo')).to.be.false;
@@ -74,14 +74,14 @@ describe('isArray()', function () {
 
 describe('isObject()', function () {
 
-  it('returns true for object', function () {
+  it('should return true for object', function () {
 
     expect(_.isObject({})).to.be.true;
     expect(_.isObject(Object.create(null))).to.be.true;
 
   });
 
-  it('returns false for other values', function () {
+  it('should return false for other values', function () {
 
     expect(_.isObject([])).to.be.false;
     expect(_.isObject('foo')).to.be.false;
@@ -97,13 +97,13 @@ describe('isObject()', function () {
 
 describe('isString()', function () {
 
-  it('returns true for string', function () {
+  it('should return true for string', function () {
 
     expect(_.isString('foo')).to.be.true;
 
   });
 
-  it('returns false for other values', function () {
+  it('should return false for other values', function () {
 
     expect(_.isString(42)).to.be.false;
     expect(_.isString({})).to.be.false;
@@ -119,13 +119,13 @@ describe('isString()', function () {
 
 describe('isFunction()', function () {
 
-  it('returns true for function', function () {
+  it('should return true for function', function () {
 
     expect(_.isFunction(function () {})).to.be.true;
 
   });
 
-  it('returns false for other values', function () {
+  it('should return false for other values', function () {
 
     expect(_.isFunction('foo')).to.be.false;
     expect(_.isFunction(42)).to.be.false;
@@ -141,13 +141,13 @@ describe('isFunction()', function () {
 
 describe('isTrue()', function () {
 
-  it('returns true for true', function () {
+  it('should return true for true', function () {
 
     expect(_.isTrue(true)).to.be.true;
 
   });
 
-  it('returns false for other values', function () {
+  it('should return false for other values', function () {
 
     expect(_.isTrue(1)).to.be.false;
     expect(_.isTrue(0)).to.be.false;
@@ -164,13 +164,13 @@ describe('isTrue()', function () {
 
 describe('isFalse()', function () {
 
-  it('returns true for false', function () {
+  it('should return true for false', function () {
 
     expect(_.isFalse(false)).to.be.true;
 
   });
 
-  it('returns false for other values', function () {
+  it('should return false for other values', function () {
 
     expect(_.isFalse(1)).to.be.false;
     expect(_.isFalse(0)).to.be.false;
@@ -187,7 +187,7 @@ describe('isFalse()', function () {
 
 describe('isEmpty()', function () {
 
-  it('returns true for empty array or null or undefined', function () {
+  it('should return true for empty array or null or undefined', function () {
 
     expect(_.isEmpty([])).to.be.true;
     expect(_.isEmpty(null)).to.be.true;
@@ -195,12 +195,16 @@ describe('isEmpty()', function () {
 
   });
 
-  it('returns false for other values', function () {
+  it('should return true for empty object', function () {
+
+    expect(_.isEmpty({})).to.be.true;
+
+  });
+
+  it('should return false for other values', function () {
 
     expect(_.isEmpty('foo')).to.be.false;
     expect(_.isEmpty('')).to.be.false;
-    expect(_.isEmpty({})).to.be.false;
-    expect(_.isEmpty({length: 0})).to.be.false;
     expect(_.isEmpty(0)).to.be.false;
 
   });

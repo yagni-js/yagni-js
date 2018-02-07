@@ -1,6 +1,7 @@
 
 import { ifElse, equals } from './cond.js';
 import { length, pipe } from './arr.js';
+import { keys } from './obj.js';
 
 export function isNil(smth) {
   return (smth === null) || (smth === void 0);
@@ -29,4 +30,11 @@ export function isFunction(smth) {
 
 export const isTrue = equals(true);
 export const isFalse = equals(false);
-export const isEmpty = ifElse(isArray, pipe([length, equals(0)]), isNil);
+export const isEmpty = ifElse(
+  isArray,
+  pipe([length, equals(0)]),
+  ifElse(
+    isObject,
+    pipe([keys, length, equals(0)]),
+    isNil)
+);
