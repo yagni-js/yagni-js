@@ -7,16 +7,16 @@ describe('partialName()', function () {
 
   it('should return camelized filename without file extension', function () {
 
-    expect(yp.partialName('/foo/baz/bar.html')).to.equal('bar');
-    expect(yp.partialName('/foo/baz/bar.svg')).to.equal('bar');
-    expect(yp.partialName('/foo-baz-bar.html')).to.equal('fooBazBar');
+    expect(yp.partialName('/foo/baz/bar.html')).to.equal('barView');
+    expect(yp.partialName('/foo/baz/bar.svg')).to.equal('barView');
+    expect(yp.partialName('/foo-baz-bar.html')).to.equal('fooBazBarView');
 
   });
 
 });
 
 
-describe('stringifyPartial()', function () {
+describe('transformPartial()', function () {
 
   it('should return proper partial call', function () {
 
@@ -24,8 +24,12 @@ describe('stringifyPartial()', function () {
       tagName: 'partial',
       attrs: [{name: 'src', value: './html/layout.html'}, {name: 'username', value: 'John Smith'}]
     };
+    const expected = {
+      partial: 'import { view as layoutView } from "./html/layout.html";',
+      line: 'layoutView({"username": "John Smith"})'
+    };
 
-    expect(yp.stringifyPartial(p)).to.equal('layout({"username": "John Smith"})');
+    expect(yp.transformPartial(p)).to.deep.equal(expected);
 
   });
 
