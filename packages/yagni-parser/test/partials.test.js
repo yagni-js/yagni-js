@@ -16,6 +16,31 @@ describe('partialName()', function () {
 });
 
 
+describe('partialImport()', function () {
+
+  it('should return proper import statement for html', function () {
+
+    const spec = {src: './html/foo.html', name: 'fooView'};
+
+    const expected = 'import { view as fooView } from "./html/foo.html";';
+
+    expect(yp.partialImport(spec)).to.equal(expected);
+
+  });
+
+  it('should return proper import statement for svg', function () {
+
+    const spec = {src: './svg/alarm.svg', name: 'alarmView'};
+
+    const expected = 'import { view as alarmView } from "./svg/alarm.svg";';
+
+    expect(yp.partialImport(spec)).to.equal(expected);
+
+  });
+
+});
+
+
 describe('transformPartial()', function () {
 
   it('should return proper partial call', function () {
