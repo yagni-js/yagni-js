@@ -25,18 +25,11 @@ export const partialName = pipe([
   suffix('View')
 ]);
 
-export const partialImport = pipe([
-  transformArr([
-    always('import'),
-    always('{'),
-    always('view as'),
-    pName,
-    always('}'),
-    always('from'),
-    pipe([pSrc, quotedText, suffix(';')])
-  ]),
-  join(' ')
-]);
+export function partialImport(spec) {
+  const name = pName(spec);
+  const src = pSrc(spec);
+  return 'import { view as ' + name + ' } from "' + src + '";';
+}
 
 const leftParenthesis = always('(');
 const rightParenthesis = always(')');
