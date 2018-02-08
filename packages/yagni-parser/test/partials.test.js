@@ -43,7 +43,7 @@ describe('partialImport()', function () {
 
 describe('transformPartial()', function () {
 
-  it('should return proper partial call', function () {
+  it('should return proper transformed partial for simple partial case', function () {
 
     const p = {
       tagName: 'partial',
@@ -52,6 +52,42 @@ describe('transformPartial()', function () {
     const expected = {
       partial: 'import { view as layoutView } from "./html/layout.html";',
       line: 'layoutView({"username": "John Smith"})'
+    };
+
+    expect(yp.transformPartial(p)).to.deep.equal(expected);
+
+  });
+
+  it('should return proper transformed partial for mapped partial without extra context', function () {
+
+    const p = {
+      tagName: 'partial',
+      attrs: [{name: 'src', value: './html/item.html'}, {name: 'p-map', value: 'ctx.items'}]
+    };
+
+    const expected = {
+      partial: 'import { view as itemView } from "./html/item.html";',
+      line: 'isArray(ctx.items) ? ctx.items.map(itemView) : ""'
+    };
+
+    expect(yp.transformPartial(p)).to.deep.equal(expected);
+
+  });
+
+  it('should return proper transformed partial for mapped partial with some extra context', function () {
+
+    const p = {
+      tagName: 'partial',
+      attrs: [
+        {name: 'src', value: './html/item.html'},
+        {name: 'p-map', value: 'ctx.items'},
+        {name: 'foo', value: 'baz'}
+      ]
+    };
+
+    const expected = {
+      partial: 'import { view as itemView } from "./html/item.html";',
+      line: 'isArray(ctx.items) ? ctx.items.map(pipe([merge({"foo": "baz"}), itemView])) : ""'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);

@@ -1,5 +1,5 @@
 
-import { always, and, camelize, equals, join, ifElse, isEmpty, omit, pick, pipe, suffix, transform, transformArr} from 'yagni';
+import { always, and, camelize, equals, isNil, join, ifElse, isEmpty, omit, pick, pipe, suffix, transform, transformArr} from 'yagni';
 
 import { attrsToObj, stringifyObj } from './attrs.js';
 import { quotedText } from './text.js';
@@ -48,7 +48,31 @@ const partialCall = pipe([
   join('')
 ]);
 
-export const stringifyPartial = partialCall;
+function mergeAndPipe(spec) {
+  const name = pName(spec);
+  const obj = attrs(spec);
+  return 'pipe([merge(' + stringifyObj(obj) + '), ' + name + '])';
+}
+const pMapCaller = ifElse(
+  pipe([attrs, isEmpty]),
+  pName,
+  mergeAndPipe
+);
+
+function partialMap(spec) {
+  const mapCaller = pMapCaller(spec);
+  const mapTarget = pMap(spec);
+
+  return 'isArray(' + mapTarget + ') ? ' + mapTarget + '.map(' + mapCaller + ') : ""';
+}
+
+const partialBody = ifElse(
+  pipe([pMap, isNil]),
+  partialCall,
+  partialMap
+);
+
+export const stringifyPartial = partialBody;
 
 export const transformPartial = pipe([
   attrs,
@@ -56,9 +80,9 @@ export const transformPartial = pipe([
   transform({
     src: pSrc,
     name: pipe([pSrc, partialName]),
-    pIf: pIf,
-    pIfNot: pIfNot,
-    pMap: pMap,
+    'p-if': pIf,
+    'p-if-not': pIfNot,
+    'p-map': pMap,
     attrs: omit(['src', 'p-if', 'p-if-not', 'p-map'])
   }),
   transform({
