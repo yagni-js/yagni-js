@@ -72,7 +72,29 @@ const partialBody = ifElse(
   partialMap
 );
 
-export const stringifyPartial = partialBody;
+function partialIf(spec) {
+  const cond = pIf(spec);
+  const body = partialBody(spec);
+
+  return '!!(' + cond + ') ? (' + body + ') : ""';
+}
+
+function partialIfNot(spec) {
+  const cond = pIfNot(spec);
+  const body = partialBody(spec);
+
+  return '!(' + cond + ') ? (' + body + ') : ""';
+}
+
+export const stringifyPartial = ifElse(
+  pipe([pIf, isNil]),
+  ifElse(
+    pipe([pIfNot, isNil]),
+    partialBody,
+    partialIfNot
+  ),
+  partialIf
+);
 
 export const transformPartial = pipe([
   attrs,

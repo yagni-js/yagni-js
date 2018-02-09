@@ -47,7 +47,10 @@ describe('transformPartial()', function () {
 
     const p = {
       tagName: 'partial',
-      attrs: [{name: 'src', value: './html/layout.html'}, {name: 'username', value: 'John Smith'}]
+      attrs: [
+        {name: 'src', value: './html/layout.html'},
+        {name: 'username', value: 'John Smith'}
+      ]
     };
     const expected = {
       partial: 'import { view as layoutView } from "./html/layout.html";',
@@ -58,11 +61,14 @@ describe('transformPartial()', function () {
 
   });
 
-  it('should return proper transformed partial for mapped partial without extra context', function () {
+  it('should return proper transformed partial with p-map attribute without extra context', function () {
 
     const p = {
       tagName: 'partial',
-      attrs: [{name: 'src', value: './html/item.html'}, {name: 'p-map', value: 'ctx.items'}]
+      attrs: [
+        {name: 'src', value: './html/item.html'},
+        {name: 'p-map', value: 'ctx.items'}
+      ]
     };
 
     const expected = {
@@ -74,7 +80,7 @@ describe('transformPartial()', function () {
 
   });
 
-  it('should return proper transformed partial for mapped partial with some extra context', function () {
+  it('should return proper transformed partial with p-map attribute with some extra context', function () {
 
     const p = {
       tagName: 'partial',
@@ -88,6 +94,104 @@ describe('transformPartial()', function () {
     const expected = {
       partial: 'import { view as itemView } from "./html/item.html";',
       line: 'isArray(ctx.items) ? ctx.items.map(pipe([merge({"foo": "baz"}), itemView])) : ""'
+    };
+
+    expect(yp.transformPartial(p)).to.deep.equal(expected);
+
+  });
+
+  it('should return proper transformed partial with p-if attribute without extra context', function () {
+
+    const p = {
+      tagName: 'partial',
+      attrs: [
+        {name: 'src', value: './html/foo.html'},
+        {name: 'p-if', value: 'ctx.isVisible'}
+      ]
+    };
+
+    const expected = {
+      partial: 'import { view as fooView } from "./html/foo.html";',
+      line: '!!(ctx.isVisible) ? (fooView(ctx)) : ""'
+    };
+
+    expect(yp.transformPartial(p)).to.deep.equal(expected);
+
+  });
+
+  it('should return proper transformed partial with p-if attribute with some extra context', function () {
+
+    const p = {
+      tagName: 'partial',
+      attrs: [
+        {name: 'src', value: './html/foo.html'},
+        {name: 'p-if', value: 'ctx.isVisible'},
+        {name: '@parent', value: 'ctx'}
+      ]
+    };
+
+    const expected = {
+      partial: 'import { view as fooView } from "./html/foo.html";',
+      line: '!!(ctx.isVisible) ? (fooView({"parent": ctx})) : ""'
+    };
+
+    expect(yp.transformPartial(p)).to.deep.equal(expected);
+
+  });
+
+  it('should return proper transformed partial with p-if-not attribute without extra context', function () {
+
+    const p = {
+      tagName: 'partial',
+      attrs: [
+        {name: 'src', value: './html/baz.html'},
+        {name: 'p-if-not', value: 'ctx.isVisible'}
+      ]
+    };
+
+    const expected = {
+      partial: 'import { view as bazView } from "./html/baz.html";',
+      line: '!(ctx.isVisible) ? (bazView(ctx)) : ""'
+    };
+
+    expect(yp.transformPartial(p)).to.deep.equal(expected);
+
+  });
+
+  it('should return proper transformed partial with p-if-not attribute with some extra context', function () {
+
+    const p = {
+      tagName: 'partial',
+      attrs: [
+        {name: 'src', value: './html/baz.html'},
+        {name: 'p-if-not', value: 'ctx.isVisible'},
+        {name: 'title', value: 'Item {{ ctx.name }} is hidden'}
+      ]
+    };
+
+    const expected = {
+      partial: 'import { view as bazView } from "./html/baz.html";',
+      line: '!(ctx.isVisible) ? (bazView({"title": `Item ${ctx.name} is hidden`})) : ""'
+    };
+
+    expect(yp.transformPartial(p)).to.deep.equal(expected);
+
+  });
+
+  it('should return proper transformed partial with p-if and p-map attributes', function () {
+
+    const p = {
+      tagName: 'partial',
+      attrs: [
+        {name: 'src', value: './html/item.html'},
+        {name: 'p-map', value: 'ctx.items'},
+        {name: 'p-if', value: 'ctx.items.length'}
+      ]
+    };
+
+    const expected = {
+      partial: 'import { view as itemView } from "./html/item.html";',
+      line: '!!(ctx.items.length) ? (isArray(ctx.items) ? ctx.items.map(itemView) : "") : ""'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);
