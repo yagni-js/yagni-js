@@ -98,3 +98,12 @@ export function existsIn(arr) {
     not(equals(-1))
   ]);
 }
+
+export function unique(arr) {
+  return arr.reduce(
+    function (acc, item) {
+      return acc.indexOf(item) === -1 ? acc.concat(item) : acc;
+    },
+    []
+  );
+}

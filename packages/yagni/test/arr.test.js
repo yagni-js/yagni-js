@@ -450,3 +450,18 @@ describe('existsIn()', function () {
   });
 
 });
+
+
+describe('unique()', function () {
+
+  it('should return array without duplicates', function () {
+
+    const o = {};
+
+    expect(_.unique([1, 2, 2, 3, 3, 4])).to.deep.equal([1, 2, 3, 4]);
+    expect(_.unique(['foo', 'baz', 'foo', 42, 'foo'])).to.deep.equal(['foo', 'baz', 42]);
+    expect(_.unique([o, o, o, o])).to.deep.equal([o]);
+
+  });
+
+});

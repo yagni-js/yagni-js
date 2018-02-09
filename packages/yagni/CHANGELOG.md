@@ -11,6 +11,7 @@
 - [+] add `slice()` and `slice2()` functions
 - [+] add `indexIn()` and `existsIn()` functions
 - [*] `isEmpty()` function can check object for emptiness
+- [+] add `unique()` function
 
 
 ## 0.1.0 (10.01.2018)
