@@ -66,15 +66,21 @@ describe('stringifyStartTag()', function () {
 
 describe('stringifyEndTag()', function () {
 
-  it('should always return same value', function () {
+  it('should always return same value for standard tags', function () {
 
     const expected = '])';
 
-    expect(yp.stringifyEndTag()).to.equal(expected);
-    expect(yp.stringifyEndTag({})).to.equal(expected);
-    expect(yp.stringifyEndTag([])).to.equal(expected);
-    expect(yp.stringifyEndTag(42)).to.equal(expected);
-    expect(yp.stringifyEndTag('foo')).to.equal(expected);
+    expect(yp.stringifyEndTag({tagName: 'div'})).to.equal(expected);
+    expect(yp.stringifyEndTag({tagName: 'h1'})).to.equal(expected);
+    expect(yp.stringifyEndTag({tagName: 'p'})).to.equal(expected);
+    expect(yp.stringifyEndTag({tagName: 'a'})).to.equal(expected);
+
+  });
+
+  it('should return empty string for partial or for empty element', function () {
+
+    expect(yp.stringifyEndTag({tagName: 'partial'})).to.equal('');
+    expect(yp.stringifyEndTag({tagName: 'input'})).to.equal('');
 
   });
 

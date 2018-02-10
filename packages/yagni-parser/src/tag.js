@@ -28,6 +28,9 @@ const attrs = pick('attrs');
 const isSvg = pick('isSvg');
 const selfClosing = pick('selfClosing');
 
+const endTagStr = always('])');
+const emptyStr = always('');
+
 const isSelfClosing = pipe([
   selfClosing,
   equals(true)
@@ -43,6 +46,11 @@ const isEmptyElement = or(
   isEmpty
 );
 
+const isPartialElement = pipe([
+  tagName,
+  equals('partial')
+]);
+
 const tagToH = pipe([
   transformArr([
     ifElse(isSvg, always('hSVG'), always('h')),
@@ -51,7 +59,11 @@ const tagToH = pipe([
   join('(')
 ]);
 
-export const stringifyEndTag = always('])');
+export const stringifyEndTag = ifElse(
+  or(isPartialElement, isEmptyElement),
+  emptyStr,
+  endTagStr
+);
 
 export const stringifyStartTag = pipe([
   transformArr([
@@ -59,9 +71,10 @@ export const stringifyStartTag = pipe([
     pipe([attrs, stringifyAttrs, suffix(', ')]),
     always('{}, '),
     always('['),
-    ifElse(isEmptyElement,
-      stringifyEndTag,
-      always('')
+    ifElse(
+      isEmptyElement,
+      endTagStr,
+      emptyStr
     )
   ]),
   join('')
