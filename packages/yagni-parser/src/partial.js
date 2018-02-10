@@ -1,7 +1,7 @@
 
 import { always, and, camelize, equals, isNil, join, ifElse, isEmpty, omit, pick, pipe, suffix, transform, transformArr} from 'yagni';
 
-import { attrsToObj, stringifyObj } from './attrs.js';
+import { attrsToObj, stringifyObj } from './attr.js';
 import { quotedText } from './text.js';
 
 // FIXME do not use nodejs path module

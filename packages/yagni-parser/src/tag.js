@@ -2,7 +2,7 @@
 import { always, existsIn, equals, ifElse, join, or, pick, pipe, suffix, transformArr } from 'yagni';
 
 import { quotedText } from './text.js';
-import { stringifyAttrs } from './attrs.js';
+import { stringifyAttrs } from './attr.js';
 
 // see https://developer.mozilla.org/en-US/docs/Glossary/empty_element
 const emptyElements = [
