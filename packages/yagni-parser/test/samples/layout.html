@@ -1,7 +1,15 @@
 <div class="root">
-    <div class="header">Header</div>
+    <div class="header">
+        <h1>Header</h1>
+        <partial src="./login-form.html" p-if-not="ctx.user.isLoggedIn"></partial>
+        <partial src="./logout-form.html" p-if="ctx.user.isLoggedIn"></partial>
+    </div>
     <div class="main">
-        <div class="sidebar">Sidebar</div>
+        <div class="sidebar">
+            <nav class="mainmenu">
+                <partial src="./mainmenu/item.html" p-map="ctx.mainmenu"/>
+            </nav>
+        </div>
         <div class="content" id="content">Content</div>
     </div>
     <div class="footer">Footer</div>
