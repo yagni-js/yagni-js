@@ -48,12 +48,14 @@ YagniParser.prototype._handleToken = function (token) {
     if (token.tagName === 'svg') {
       this._isSvg = false;
     }
-    this._yagni.push(
-      transform({
-        type: 'endTag',
-        tagName: token.tagName
-      })
-    );
+    if (token.tagName !== 'partial') {
+      this._yagni.push(
+        transform({
+          type: 'endTag',
+          tagName: token.tagName
+        })
+      );
+    }
   // } else if (token.type === Tokenizer.COMMENT_TOKEN) {
   //   this._yagni.push(
   //     transform({
