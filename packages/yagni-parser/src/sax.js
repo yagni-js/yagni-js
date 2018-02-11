@@ -35,25 +35,27 @@ YagniParser.prototype._handleToken = function (token) {
     if (token.tagName === 'svg') {
       this._isSvg = true;
     }
-    this._yagni.push(
-      transform({
+    this._yagni = transform(
+      this._yagni,
+      {
         type: 'startTag',
         tagName: token.tagName,
         attrs: token.attrs,
         isSvg: this._isSvg,
         selfClosing: token.selfClosing
-      })
+      }
     );
   } else if (token.type === Tokenizer.END_TAG_TOKEN) {
     if (token.tagName === 'svg') {
       this._isSvg = false;
     }
     if (token.tagName !== 'partial') {
-      this._yagni.push(
-        transform({
+      this._yagni = transform(
+        this._yagni,
+        {
           type: 'endTag',
           tagName: token.tagName
-        })
+        }
       );
     }
   // } else if (token.type === Tokenizer.COMMENT_TOKEN) {
@@ -82,11 +84,12 @@ YagniParser.prototype._emitPendingText = function () {
 
   if (this.pendingText !== null) {
     if (!isWhitespace(this.pendingText)) {
-      this._yagni.push(
-        transform({
+      this._yagni = transform(
+        this._yagni,
+        {
           type: 'text',
           value: this.pendingText
-        })
+        }
       );
     }
     this.pendingText = null;
@@ -94,15 +97,15 @@ YagniParser.prototype._emitPendingText = function () {
 
 };
 
-YagniParser.prototype.map = function (transform) {
+YagniParser.prototype.parse = function (initial, transform) {
 
-  this._yagni = [];
+  this._yagni = initial;
   this._isSVG = false;
   this._yagni_transform = transform;
 
   this.end(this._yagni_source);
 
-  return this._yagni.slice();
+  return Object.assign({}, this._yagni);
 };
 
 

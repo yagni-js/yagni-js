@@ -20,10 +20,11 @@ describe('parse()', function () {
 
     const layout = loadLayoutHtml();
 
-    const tree = parser.parse(layout);
+    const module = parser.parse(layout);
 
-    expect(tree).to.be.an('array');
-    expect(tree).to.have.length(22);
+    expect(module).to.be.an('object');
+    expect(module).to.have.property('imports');
+    expect(module).to.have.property('body');
 
   });
 

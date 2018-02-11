@@ -1,5 +1,5 @@
 
-import { ifElse, map, objOf, pick, pipe } from 'yagni';
+import { always, concat, concatIfUnique, has, ifElse, map, objOf, pick, pipe } from 'yagni';
 
 import { getParser } from './sax.js';
 import { isComment, isEndTag, isPartial, isTag, isText } from './cond.js';
@@ -35,7 +35,7 @@ const transformEndTag = pipe([
   toLineSpec
 ]);
 
-const transform = ifElse(
+const transformSpec = ifElse(
   isText,
   transformText,
   ifElse(
@@ -48,7 +48,36 @@ const transform = ifElse(
   )
 );
 
-export const parse = pipe([
-  getParser,
-  map(transform)
-]);
+function transformImports(imports) {
+  return ifElse(
+    has('import'),
+    pipe([
+      pick('import'),
+      concatIfUnique(imports)
+    ]),
+    always(imports)
+  );
+}
+
+function transform(acc, line) {
+  const spec = transformSpec(line);
+  const imports = transformImports(acc.imports);
+  const body = pipe([pick('line'), concat(acc.body)]);
+
+  return {
+    imports: imports(spec),
+    body: body(spec)
+  };
+}
+
+export function parse(source) {
+  const parser = getParser(source);
+
+  return parser.parse(
+    {
+      imports: [],
+      body: []
+    },
+    transform
+  );
+}
