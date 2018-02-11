@@ -53,7 +53,7 @@ describe('transformPartial()', function () {
       ]
     };
     const expected = {
-      partial: 'import { view as layoutView } from "./html/layout.html";',
+      import: 'import { view as layoutView } from "./html/layout.html";',
       line: 'layoutView({"username": "John Smith"})'
     };
 
@@ -72,7 +72,7 @@ describe('transformPartial()', function () {
     };
 
     const expected = {
-      partial: 'import { view as itemView } from "./html/item.html";',
+      import: 'import { view as itemView } from "./html/item.html";',
       line: 'isArray(ctx.items) ? ctx.items.map(itemView) : ""'
     };
 
@@ -92,7 +92,7 @@ describe('transformPartial()', function () {
     };
 
     const expected = {
-      partial: 'import { view as itemView } from "./html/item.html";',
+      import: 'import { view as itemView } from "./html/item.html";',
       line: 'isArray(ctx.items) ? ctx.items.map(pipe([merge({"foo": "baz"}), itemView])) : ""'
     };
 
@@ -111,7 +111,7 @@ describe('transformPartial()', function () {
     };
 
     const expected = {
-      partial: 'import { view as fooView } from "./html/foo.html";',
+      import: 'import { view as fooView } from "./html/foo.html";',
       line: '!!(ctx.isVisible) ? (fooView(ctx)) : ""'
     };
 
@@ -131,7 +131,7 @@ describe('transformPartial()', function () {
     };
 
     const expected = {
-      partial: 'import { view as fooView } from "./html/foo.html";',
+      import: 'import { view as fooView } from "./html/foo.html";',
       line: '!!(ctx.isVisible) ? (fooView({"parent": ctx})) : ""'
     };
 
@@ -150,7 +150,7 @@ describe('transformPartial()', function () {
     };
 
     const expected = {
-      partial: 'import { view as bazView } from "./html/baz.html";',
+      import: 'import { view as bazView } from "./html/baz.html";',
       line: '!(ctx.isVisible) ? (bazView(ctx)) : ""'
     };
 
@@ -170,7 +170,7 @@ describe('transformPartial()', function () {
     };
 
     const expected = {
-      partial: 'import { view as bazView } from "./html/baz.html";',
+      import: 'import { view as bazView } from "./html/baz.html";',
       line: '!(ctx.isVisible) ? (bazView({"title": `Item ${ctx.name} is hidden`})) : ""'
     };
 
@@ -190,7 +190,7 @@ describe('transformPartial()', function () {
     };
 
     const expected = {
-      partial: 'import { view as itemView } from "./html/item.html";',
+      import: 'import { view as itemView } from "./html/item.html";',
       line: '!!(ctx.items.length) ? (isArray(ctx.items) ? ctx.items.map(itemView) : "") : ""'
     };
 

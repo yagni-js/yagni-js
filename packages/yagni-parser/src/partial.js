@@ -108,7 +108,7 @@ export const transformPartial = pipe([
     attrs: omit(['src', 'p-if', 'p-if-not', 'p-map'])
   }),
   transform({
-    partial: partialImport,
+    import: partialImport,
     line: stringifyPartial
   })
 ]);
