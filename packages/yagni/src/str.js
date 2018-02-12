@@ -44,3 +44,10 @@ export function slice2(start, end) {
     return str.slice(start, end);
   };
 }
+
+export function repeat(str) {
+  return function (count) {
+    // NB. ES2015 feature
+    return str.repeat(count);
+  };
+}

@@ -13,6 +13,7 @@
 - [*] `isEmpty()` function can check object for emptiness
 - [+] add `unique()` function
 - [+] add `concatIfUnique()` function
+- [+] add `repeat()` function
 
 
 ## 0.1.0 (10.01.2018)
