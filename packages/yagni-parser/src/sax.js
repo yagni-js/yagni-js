@@ -4,10 +4,12 @@
 
 // NB. see https://github.com/reshape/parser for reference
 
-import { identity, test } from 'yagni';
+import { existsIn, identity, test } from 'yagni';
 
 import { SAXParser } from 'parse5';
 import Tokenizer from 'parse5/lib/tokenizer/index.js';
+
+import { isEmptyElement } from './tag.js';
 
 
 const isWhitespace = test(/^\s+$/);
@@ -42,19 +44,25 @@ YagniParser.prototype._handleToken = function (token) {
         tagName: token.tagName,
         attrs: token.attrs,
         isSvg: this._isSvg,
-        selfClosing: token.selfClosing
+        selfClosing: token.selfClosing,
+        level: this._yagni_level
       }
     );
+    if (!isEmptyElement(token)) {
+      this._yagni_level = this._yagni_level + 2;
+    }
   } else if (token.type === Tokenizer.END_TAG_TOKEN) {
     if (token.tagName === 'svg') {
       this._isSvg = false;
     }
+    this._yagni_level = this._yagni_level - 2;
     if (token.tagName !== 'partial') {
       this._yagni = transform(
         this._yagni,
         {
           type: 'endTag',
-          tagName: token.tagName
+          tagName: token.tagName,
+          level: this._yagni_level
         }
       );
     }
@@ -88,7 +96,8 @@ YagniParser.prototype._emitPendingText = function () {
         this._yagni,
         {
           type: 'text',
-          value: this.pendingText
+          value: this.pendingText,
+          level: this._yagni_level
         }
       );
     }
@@ -102,6 +111,7 @@ YagniParser.prototype.parse = function (initial, transform) {
   this._yagni = initial;
   this._isSVG = false;
   this._yagni_transform = transform;
+  this._yagni_level = 0;
 
   this.end(this._yagni_source);
 

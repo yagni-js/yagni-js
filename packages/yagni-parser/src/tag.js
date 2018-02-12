@@ -41,7 +41,7 @@ const isEmpty = pipe([
   existsIn(emptyElements)
 ]);
 
-const isEmptyElement = or(
+export const isEmptyElement = or(
   isSelfClosing,
   isEmpty
 );

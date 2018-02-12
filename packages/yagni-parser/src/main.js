@@ -1,5 +1,5 @@
 
-import { always, concat, concatIfUnique, has, ifElse, map, objOf, pick, pipe } from 'yagni';
+import { always, concat, concatIfUnique, has, ifElse, map, objOf, pick, pipe, prefix, repeat } from 'yagni';
 
 import { getParser } from './sax.js';
 import { isComment, isEndTag, isPartial, isTag, isText } from './cond.js';
@@ -18,6 +18,15 @@ export { partialImport, partialName, stringifyPartial, transformPartial };
 
 const value = pick('value');
 const toLineSpec = objOf('line');
+
+const level = pick('level');
+const repeatSpace = repeat(' ');
+
+const makeIndent = pipe([
+  level,
+  repeatSpace
+]);
+
 
 const transformText = pipe([
   value,
@@ -62,7 +71,8 @@ function transformImports(imports) {
 function transform(acc, line) {
   const spec = transformSpec(line);
   const imports = transformImports(acc.imports);
-  const body = pipe([pick('line'), concat(acc.body)]);
+  const indent = makeIndent(line);
+  const body = pipe([pick('line'), prefix(indent), concat(acc.body)]);
 
   return {
     imports: imports(spec),
