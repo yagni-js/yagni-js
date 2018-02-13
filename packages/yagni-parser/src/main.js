@@ -1,5 +1,5 @@
 
-import { always, concat, concatIfUnique, has, ifElse, map, objOf, pick, pipe, prefix, repeat } from 'yagni';
+import { always, concat, equals, identity, ifElse, indexIn, isNil, objOf, pick, pipe, prefix, repeat, unique } from 'yagni';
 
 import { getParser } from './sax.js';
 import { isComment, isEndTag, isPartial, isTag, isText } from './cond.js';
@@ -57,26 +57,31 @@ const transformSpec = ifElse(
   )
 );
 
-function transformImports(imports) {
-  return ifElse(
-    has('import'),
-    pipe([
-      pick('import'),
-      concatIfUnique(imports)
-    ]),
-    always(imports)
-  );
-}
-
 function transform(acc, line) {
   const spec = transformSpec(line);
-  const imports = transformImports(acc.imports);
   const indent = makeIndent(line);
-  const body = pipe([pick('line'), prefix(indent), concat(acc.body)]);
+  const body = pipe([prefix(indent), concat(acc.body)]);
+
+  const partials = ifElse(
+    isNil,
+    always(acc.partials),
+    ifElse(
+      pipe([indexIn(acc.partials), equals(-1)]),
+      concat(acc.partials),
+      always(acc.partials)
+    )
+  );
+
+  const yagni = ifElse(
+    isNil,
+    always(acc.yagni),
+    pipe([concat(acc.yagni), unique])
+  );
 
   return {
-    imports: imports(spec),
-    body: body(spec)
+    partials: partials(spec.partial),
+    yagni: yagni(spec.yagni),
+    body: body(spec.line)
   };
 }
 
@@ -85,7 +90,8 @@ export function parse(source) {
 
   return parser.parse(
     {
-      imports: [],
+      partials: [],
+      yagni: [],
       body: []
     },
     transform

@@ -23,7 +23,8 @@ describe('parse()', function () {
     const module = parser.parse(layout);
 
     expect(module).to.be.an('object');
-    expect(module).to.have.property('imports');
+    expect(module).to.have.property('partials');
+    expect(module).to.have.property('yagni');
     expect(module).to.have.property('body');
 
   });
