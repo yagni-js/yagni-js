@@ -7,10 +7,15 @@
     <div class="main">
         <div class="sidebar">
             <nav class="mainmenu">
-                <partial src="./mainmenu/item.html" p-map="ctx.mainmenu"/>
+                <partial src="./menu/item.html" p-map="ctx.mainmenu"/>
             </nav>
         </div>
-        <div class="content" id="content">Content</div>
+        <div class="content" id="content">
+            <div class="content-body" id="content-body">Content</div>
+            <nav class="relatedmenu">
+                <partial src="./menu/item.html" p-if="ctx.showRelatedMenu" related="yes" p-map="ctx.relatedmenu"/>
+            </nav>
+        </div>
     </div>
     <div class="footer">Footer</div>
 </div>
