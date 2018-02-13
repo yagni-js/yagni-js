@@ -12,7 +12,6 @@
 - [+] add `indexIn()` and `existsIn()` functions
 - [*] `isEmpty()` function can check object for emptiness
 - [+] add `unique()` function
-- [+] add `concatIfUnique()` function
 - [+] add `repeat()` function
 
 

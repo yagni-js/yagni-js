@@ -107,9 +107,3 @@ export function unique(arr) {
     []
   );
 }
-
-export function concatIfUnique(arr) {
-  return function (smth) {
-    return arr.indexOf(smth) === -1 ? arr.concat(smth) : arr;
-  };
-}

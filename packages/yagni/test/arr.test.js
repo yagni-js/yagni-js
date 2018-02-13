@@ -465,21 +465,3 @@ describe('unique()', function () {
   });
 
 });
-
-
-describe('concatIfUnique()', function () {
-
-  it('should concat value to array only if it is not present in it', function () {
-
-    const collectUniqueNumbers = _.concatIfUnique([1, 2, 3, 4, 5]);
-
-    expect(collectUniqueNumbers(1)).to.deep.equal([1, 2, 3, 4, 5]);
-    expect(collectUniqueNumbers(2)).to.deep.equal([1, 2, 3, 4, 5]);
-    expect(collectUniqueNumbers(3)).to.deep.equal([1, 2, 3, 4, 5]);
-    expect(collectUniqueNumbers(4)).to.deep.equal([1, 2, 3, 4, 5]);
-    expect(collectUniqueNumbers(5)).to.deep.equal([1, 2, 3, 4, 5]);
-    expect(collectUniqueNumbers(6)).to.deep.equal([1, 2, 3, 4, 5, 6]);
-
-  });
-
-});
