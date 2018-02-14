@@ -1,5 +1,5 @@
 
-import { always, existsIn, equals, ifElse, join, or, pick, pipe, suffix, transformArr } from 'yagni';
+import { always, existsIn, equals, ifElse, join, or, pick, pipe, suffix, transformArr, transform } from 'yagni';
 
 import { quotedText } from './text.js';
 import { stringifyAttrs } from './attr.js';
@@ -51,31 +51,42 @@ const isPartialElement = pipe([
   equals('partial')
 ]);
 
+const yagniDomFn = ifElse(
+  isSvg,
+  always('hSVG'),
+  always('h')
+);
+
 const tagToH = pipe([
   transformArr([
-    ifElse(isSvg, always('hSVG'), always('h')),
+    yagniDomFn,
     pipe([tagName, quotedText, suffix(', ')])
   ]),
   join('(')
 ]);
 
-export const stringifyEndTag = ifElse(
-  or(isPartialElement, isEmptyElement),
-  emptyStr,
-  endTagStr
-);
+export const transformEndTag = transform({
+  line: ifElse(
+    or(isPartialElement, isEmptyElement),
+    emptyStr,
+    endTagStr
+  )
+});
 
-export const stringifyStartTag = pipe([
-  transformArr([
-    tagToH,
-    pipe([attrs, stringifyAttrs, suffix(', ')]),
-    always('{}, '),
-    always('['),
-    ifElse(
-      isEmptyElement,
-      endTagStr,
-      emptyStr
-    )
-  ]),
-  join('')
-]);
+export const transformStartTag = transform({
+  yagniDom: yagniDomFn,
+  line: pipe([
+    transformArr([
+      tagToH,
+      pipe([attrs, stringifyAttrs, suffix(', ')]),
+      always('{}, '),
+      always('['),
+      ifElse(
+        isEmptyElement,
+        endTagStr,
+        emptyStr
+      )
+    ]),
+    join('')
+  ])
+});

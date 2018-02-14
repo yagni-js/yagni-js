@@ -3,9 +3,9 @@ const expect = require('chai').expect;
 const yp = require('..');
 
 
-describe('stringifyStartTag()', function () {
+describe('transformStartTag()', function () {
 
-  it('should properly stringify div tag', function () {
+  it('should properly transform div tag', function () {
 
     const div = {
       tagName: 'div',
@@ -13,13 +13,16 @@ describe('stringifyStartTag()', function () {
       isSvg: false,
       selfClosing: false
     };
-    const expected = 'h("div", {"class": "sidebar"}, {}, [';
+    const expected = {
+      yagniDom: 'h',
+      line: 'h("div", {"class": "sidebar"}, {}, ['
+    };
 
-    expect(yp.stringifyStartTag(div)).to.equal(expected);
+    expect(yp.transformStartTag(div)).to.deep.equal(expected);
 
   });
 
-  it('should properly stringify self closing div tag', function () {
+  it('should properly transform self closing div tag', function () {
 
     const div = {
       tagName: 'div',
@@ -27,13 +30,16 @@ describe('stringifyStartTag()', function () {
       isSvg: false,
       selfClosing: true
     };
-    const expected = 'h("div", {"class": "sidebar"}, {}, [])';
+    const expected = {
+      yagniDom: 'h',
+      line: 'h("div", {"class": "sidebar"}, {}, [])'
+    };
 
-    expect(yp.stringifyStartTag(div)).to.equal(expected);
+    expect(yp.transformStartTag(div)).to.deep.equal(expected);
 
   });
 
-  it('should properly stringify input tag', function () {
+  it('should properly transform input tag', function () {
 
     const inp = {
       tagName: 'input',
@@ -41,13 +47,16 @@ describe('stringifyStartTag()', function () {
       isSvg: false,
       selfClosing: false
     };
-    const expected = 'h("input", {"class": "block", "name": "username"}, {}, [])';
+    const expected = {
+      yagniDom: 'h',
+      line: 'h("input", {"class": "block", "name": "username"}, {}, [])'
+    };
 
-    expect(yp.stringifyStartTag(inp)).to.equal(expected);
+    expect(yp.transformStartTag(inp)).to.deep.equal(expected);
 
   });
 
-  it('should properly stringify line tag (svg)', function () {
+  it('should properly transform line tag (svg)', function () {
 
     const line = {
       tagName: 'line',
@@ -55,32 +64,35 @@ describe('stringifyStartTag()', function () {
       isSvg: true,
       selfClosing: false
     };
-    const expected = 'hSVG("line", {"x1": "5", "y1": "5", "x2": "10", "y2": "12"}, {}, [';
+    const expected = {
+      yagniDom: 'hSVG',
+      line: 'hSVG("line", {"x1": "5", "y1": "5", "x2": "10", "y2": "12"}, {}, ['
+    };
 
-    expect(yp.stringifyStartTag(line)).to.equal(expected);
+    expect(yp.transformStartTag(line)).to.deep.equal(expected);
 
   });
 
 });
 
 
-describe('stringifyEndTag()', function () {
+describe('transformEndTag()', function () {
 
   it('should always return same value for standard tags', function () {
 
-    const expected = '])';
+    const expected = {line: '])'};
 
-    expect(yp.stringifyEndTag({tagName: 'div'})).to.equal(expected);
-    expect(yp.stringifyEndTag({tagName: 'h1'})).to.equal(expected);
-    expect(yp.stringifyEndTag({tagName: 'p'})).to.equal(expected);
-    expect(yp.stringifyEndTag({tagName: 'a'})).to.equal(expected);
+    expect(yp.transformEndTag({tagName: 'div'})).to.deep.equal(expected);
+    expect(yp.transformEndTag({tagName: 'h1'})).to.deep.equal(expected);
+    expect(yp.transformEndTag({tagName: 'p'})).to.deep.equal(expected);
+    expect(yp.transformEndTag({tagName: 'a'})).to.deep.equal(expected);
 
   });
 
   it('should return empty string for partial or for empty element', function () {
 
-    expect(yp.stringifyEndTag({tagName: 'partial'})).to.equal('');
-    expect(yp.stringifyEndTag({tagName: 'input'})).to.equal('');
+    expect(yp.transformEndTag({tagName: 'partial'})).to.deep.equal({line: ''});
+    expect(yp.transformEndTag({tagName: 'input'})).to.deep.equal({line: ''});
 
   });
 
