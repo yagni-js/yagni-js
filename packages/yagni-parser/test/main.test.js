@@ -25,6 +25,7 @@ describe('parse()', function () {
     expect(module).to.be.an('object');
     expect(module).to.have.property('partials');
     expect(module).to.have.property('yagni');
+    expect(module).to.have.property('yagniDom');
     expect(module).to.have.property('body');
 
   });

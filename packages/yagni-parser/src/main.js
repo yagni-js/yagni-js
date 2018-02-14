@@ -47,30 +47,42 @@ const transformSpec = ifElse(
   )
 );
 
+function concatIfUnique(arr) {
+  return ifElse(
+    pipe([indexIn(arr), equals(-1)]),
+    concat(arr),
+    always(arr)
+  );
+}
+function concatIfNotNilAndUnique(arr) {
+  return ifElse(
+    isNil,
+    always(arr),
+    concatIfUnique(arr)
+  );
+}
+function concatIfNotNilAndKeepUnique(arr) {
+  return ifElse(
+    isNil,
+    always(arr),
+    pipe([concat(arr), unique])
+  );
+}
+
 function transform(acc, line) {
   const spec = transformSpec(line);
+
   const indent = makeIndent(line);
   const body = pipe([prefix(indent), concat(acc.body)]);
 
-  const partials = ifElse(
-    isNil,
-    always(acc.partials),
-    ifElse(
-      pipe([indexIn(acc.partials), equals(-1)]),
-      concat(acc.partials),
-      always(acc.partials)
-    )
-  );
-
-  const yagni = ifElse(
-    isNil,
-    always(acc.yagni),
-    pipe([concat(acc.yagni), unique])
-  );
+  const partials = concatIfNotNilAndUnique(acc.partials);
+  const yagni = concatIfNotNilAndKeepUnique(acc.yagni);
+  const yagniDom = concatIfNotNilAndUnique(acc.yagniDom);
 
   return {
     partials: partials(spec.partial),
     yagni: yagni(spec.yagni),
+    yagniDom: yagniDom(spec.yagniDom),
     body: body(spec.line)
   };
 }
@@ -82,6 +94,7 @@ export function parse(source) {
     {
       partials: [],
       yagni: [],
+      yagniDom: [],
       body: []
     },
     transform
