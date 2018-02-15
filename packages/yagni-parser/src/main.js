@@ -1,5 +1,5 @@
 
-import { always, concat, equals, identity, ifElse, indexIn, isNil, objOf, pick, pipe, prefix, repeat, unique } from 'yagni';
+import { always, concat, equals, identity, ifElse, indexIn, isEmpty, isNil, join, objOf, pick, pipe, prefix, repeat, replace, suffix, transformArr, unique } from 'yagni';
 
 import { getParser } from './sax.js';
 import { isComment, isEndTag, isPartial, isTag, isText } from './cond.js';
@@ -87,16 +87,68 @@ function transform(acc, line) {
   };
 }
 
+const yagniImport = pipe([
+  pick('yagni'),
+  ifElse(
+    isEmpty,
+    always(''),
+    pipe([join(', '), prefix('import { '), suffix(' } from "yagni";')])
+  )
+]);
+
+const yagniDomImport = pipe([
+  pick('yagniDom'),
+  ifElse(
+    isEmpty,
+    always(''),
+    pipe([join(', '), prefix('import { '), suffix(' } from "yagni-dom";')])
+  )
+]);
+
+const partialsImport = pipe([
+  pick('partials'),
+  join('\n')
+]);
+
+const viewFunction = pipe([
+  pick('body'),
+  // join body using comma and newline
+  join(',\n'),
+  // add return statement
+  prefix('  return '),
+  // add 2 more spaces to each line for proper function body indentation
+  replace(/\n/g, '\n  '),
+  // strip comma after left square bracket
+  replace(/\[,/g, '['),
+  // strip comma before right square bracket
+  replace(/,\n(?=\s+\])/g, '\n'),
+  // add export statement and left curly bracket
+  prefix('\n\nexport function view(ctx) {\n'),
+  // add right curly bracket
+  suffix(';\n}')
+]);
+
+const specToModule = pipe([
+  transformArr([
+    yagniImport,
+    yagniDomImport,
+    partialsImport,
+    viewFunction
+  ]),
+  join('\n'),
+  prefix('\n')
+]);
+
 export function parse(source) {
   const parser = getParser(source);
+  const initial = {
+    partials: [],
+    yagni: [],
+    yagniDom: [],
+    body: []
+  };
 
-  return parser.parse(
-    {
-      partials: [],
-      yagni: [],
-      yagniDom: [],
-      body: []
-    },
-    transform
-  );
+  const spec = parser.parse(initial, transform);
+
+  return specToModule(spec);
 }

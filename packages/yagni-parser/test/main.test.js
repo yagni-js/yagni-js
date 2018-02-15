@@ -6,9 +6,9 @@ const expect = require('chai').expect;
 const parser = require('..');
 
 
-function loadLayoutHtml() {
+function loadSample(name) {
   return fs.readFileSync(
-    path.resolve(__dirname, 'samples', 'layout.html'),
+    path.resolve(__dirname, 'samples', name),
     {encoding: 'utf8'}
   );
 }
@@ -18,15 +18,12 @@ describe('parse()', function () {
 
   it('should convert layout', function () {
 
-    const layout = loadLayoutHtml();
+    const layoutHtml = loadSample('layout.html');
+    const layoutJs = loadSample('layout.js');
 
-    const module = parser.parse(layout);
+    const module = parser.parse(layoutHtml);
 
-    expect(module).to.be.an('object');
-    expect(module).to.have.property('partials');
-    expect(module).to.have.property('yagni');
-    expect(module).to.have.property('yagniDom');
-    expect(module).to.have.property('body');
+    expect(module).to.equal(layoutJs);
 
   });
 
