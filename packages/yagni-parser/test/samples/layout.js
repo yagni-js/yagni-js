@@ -13,7 +13,7 @@ export function view(ctx) {
         "Header"
       ]),
       !(ctx.user.isLoggedIn) ? (loginFormView(ctx)) : "",
-      !!(ctx.user.isLoggedIn) ? (logoutFormView(ctx)) : ""
+      (ctx.user.isLoggedIn) ? (logoutFormView(ctx)) : ""
     ]),
     h("div", {"class": "main"}, {}, [
       h("div", {"class": "sidebar"}, {}, [
@@ -26,7 +26,7 @@ export function view(ctx) {
           "Content"
         ]),
         h("nav", {"class": "relatedmenu"}, {}, [
-          !!(ctx.showRelatedMenu) ? (isArray(ctx.relatedmenu) ? ctx.relatedmenu.map(pipe([merge({"related": "yes"}), itemView])) : "") : ""
+          (ctx.showRelatedMenu) ? (isArray(ctx.relatedmenu) ? ctx.relatedmenu.map(pipe([merge({"related": "yes"}), itemView])) : "") : ""
         ])
       ])
     ]),

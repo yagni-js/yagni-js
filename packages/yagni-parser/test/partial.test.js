@@ -116,7 +116,7 @@ describe('transformPartial()', function () {
     const expected = {
       yagni: [],
       partial: 'import { view as fooView } from "./html/foo.html";',
-      line: '!!(ctx.isVisible) ? (fooView(ctx)) : ""'
+      line: '(ctx.isVisible) ? (fooView(ctx)) : ""'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);
@@ -137,7 +137,7 @@ describe('transformPartial()', function () {
     const expected = {
       yagni: [],
       partial: 'import { view as fooView } from "./html/foo.html";',
-      line: '!!(ctx.isVisible) ? (fooView({"parent": ctx})) : ""'
+      line: '(ctx.isVisible) ? (fooView({"parent": ctx})) : ""'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);
@@ -199,7 +199,7 @@ describe('transformPartial()', function () {
     const expected = {
       yagni: ['isArray'],
       partial: 'import { view as itemView } from "./html/item.html";',
-      line: '!!(ctx.items.length) ? (isArray(ctx.items) ? ctx.items.map(itemView) : "") : ""'
+      line: '(ctx.items.length) ? (isArray(ctx.items) ? ctx.items.map(itemView) : "") : ""'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);

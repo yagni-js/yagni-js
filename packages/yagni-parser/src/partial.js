@@ -89,7 +89,7 @@ function partialIf(spec) {
   const cond = pIf(spec);
   const body = partialBody(spec);
 
-  return '!!(' + cond + ') ? (' + body + ') : ""';
+  return '(' + cond + ') ? (' + body + ') : ""';
 }
 
 function partialIfNot(spec) {
