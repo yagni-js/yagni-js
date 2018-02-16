@@ -47,5 +47,8 @@
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-node-resolve": "^3.0.2",
     "yagni": "^0.1.0"
+  },
+  "peerDependencies": {
+      "yagni-dom": "^0.1.0"
   }
 }
