@@ -19,9 +19,11 @@ function YagniParser(source) {
 
   SAXParser.call(this);
 
-  this._yagni = [];
-  this._yagni_source = source;
-  this._yagni_transform = identity;
+  this._yagni = {};
+  this._yagniSource = source;
+  this._yagniTransform = identity;
+  this._yagniLevel = 0;
+  this._yagniRootCounter = 0;
   this._isSvg = false;
 
 }
@@ -31,11 +33,18 @@ YagniParser.prototype.constructor = YagniParser;
 
 YagniParser.prototype._handleToken = function (token) {
 
-  const transform = this._yagni_transform;
+  const transform = this._yagniTransform;
 
   if (token.type === Tokenizer.START_TAG_TOKEN) {
     if (token.tagName === 'svg') {
       this._isSvg = true;
+    }
+    if (this._yagniLevel === 0) {
+      // force single root element in template
+      if(this._yagniRootCounter > 0) {
+        throw new Error('Multiple root elements error');
+      }
+      this._yagniRootCounter += 1;
     }
     this._yagni = transform(
       this._yagni,
@@ -45,24 +54,24 @@ YagniParser.prototype._handleToken = function (token) {
         attrs: token.attrs,
         isSvg: this._isSvg,
         selfClosing: token.selfClosing,
-        level: this._yagni_level
+        level: this._yagniLevel
       }
     );
     if (!isEmptyElement(token)) {
-      this._yagni_level = this._yagni_level + 2;
+      this._yagniLevel += 2;
     }
   } else if (token.type === Tokenizer.END_TAG_TOKEN) {
     if (token.tagName === 'svg') {
       this._isSvg = false;
     }
-    this._yagni_level = this._yagni_level - 2;
+    this._yagniLevel -= 2;
     if (token.tagName !== 'partial') {
       this._yagni = transform(
         this._yagni,
         {
           type: 'endTag',
           tagName: token.tagName,
-          level: this._yagni_level
+          level: this._yagniLevel
         }
       );
     }
@@ -88,7 +97,7 @@ YagniParser.prototype._handleToken = function (token) {
 
 YagniParser.prototype._emitPendingText = function () {
 
-  const transform = this._yagni_transform;
+  const transform = this._yagniTransform;
 
   if (this.pendingText !== null) {
     if (!isWhitespace(this.pendingText)) {
@@ -97,7 +106,7 @@ YagniParser.prototype._emitPendingText = function () {
         {
           type: 'text',
           value: this.pendingText,
-          level: this._yagni_level
+          level: this._yagniLevel
         }
       );
     }
@@ -110,10 +119,11 @@ YagniParser.prototype.parse = function (initial, transform) {
 
   this._yagni = initial;
   this._isSVG = false;
-  this._yagni_transform = transform;
-  this._yagni_level = 0;
+  this._yagniTransform = transform;
+  this._yagniLevel = 0;
+  this._yagniRootCounter = 0;
 
-  this.end(this._yagni_source);
+  this.end(this._yagniSource);
 
   return Object.assign({}, this._yagni);
 };

@@ -27,4 +27,12 @@ describe('parse()', function () {
 
   });
 
+  it('should throw if multiple root elements in template', function () {
+
+    const invalidRootHtml = loadSample('invalid-root.html');
+
+    expect(function () { return parser.parse(invalidRootHtml); }).to.throw();
+
+  });
+
 });
