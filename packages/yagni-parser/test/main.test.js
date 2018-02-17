@@ -49,4 +49,12 @@ describe('parse()', function () {
 
   });
 
+  it('should throw if closing tag does not correspond to opening tag', function () {
+
+    const template = '<ul><li>Foo</li><li>Baz</p></ul>';
+
+    expect(function () { return parser.parse(template); }).to.throw();
+
+  });
+
 });

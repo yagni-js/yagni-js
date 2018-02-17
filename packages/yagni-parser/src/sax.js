@@ -77,7 +77,9 @@ YagniParser.prototype._handleToken = function (token) {
         }
       );
     }
-    this._yagniStack.pop();
+    if (token.tagName !== this._yagniStack.pop()) {
+      throw new Error('Html markup error (opening/closing tags differ)');
+    }
   // } else if (token.type === Tokenizer.COMMENT_TOKEN) {
   //   this._yagni.push(
   //     transform({
