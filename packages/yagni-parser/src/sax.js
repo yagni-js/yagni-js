@@ -24,6 +24,7 @@ function YagniParser(source) {
   this._yagniTransform = identity;
   this._yagniLevel = 0;
   this._yagniRootCounter = 0;
+  this._yagniStack = [];
   this._isSvg = false;
 
 }
@@ -59,6 +60,7 @@ YagniParser.prototype._handleToken = function (token) {
     );
     if (!isEmptyElement(token)) {
       this._yagniLevel += 2;
+      this._yagniStack.push(token.tagName);
     }
   } else if (token.type === Tokenizer.END_TAG_TOKEN) {
     if (token.tagName === 'svg') {
@@ -75,6 +77,7 @@ YagniParser.prototype._handleToken = function (token) {
         }
       );
     }
+    this._yagniStack.pop();
   // } else if (token.type === Tokenizer.COMMENT_TOKEN) {
   //   this._yagni.push(
   //     transform({
@@ -122,8 +125,13 @@ YagniParser.prototype.parse = function (initial, transform) {
   this._yagniTransform = transform;
   this._yagniLevel = 0;
   this._yagniRootCounter = 0;
+  this._yagniStack = [];
 
   this.end(this._yagniSource);
+
+  if(this._yagniStack.length) {
+    throw new Error('Html markup error');
+  }
 
   return Object.assign({}, this._yagni);
 };

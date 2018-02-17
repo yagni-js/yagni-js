@@ -35,4 +35,10 @@ describe('parse()', function () {
 
   });
 
+  it('should throw if unclosed root tag', function () {
+
+    expect(function () { return parser.parse('<div>Foo'); }).to.throw();
+
+  });
+
 });
