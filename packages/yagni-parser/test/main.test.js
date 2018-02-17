@@ -41,4 +41,12 @@ describe('parse()', function () {
 
   });
 
+  it('should not throw if template consists of only empty element', function () {
+
+    const inp = '<input name="foo" value="baz">';
+
+    expect(function () { return parser.parse(inp); }).to.not.throw();
+
+  });
+
 });
