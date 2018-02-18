@@ -46,9 +46,9 @@
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-node-resolve": "^3.0.2",
-    "@yagni-js/yagni": "^0.2.0"
+    "@yagni-js/yagni": "^0.2.1"
   },
   "peerDependencies": {
-      "@yagni-js/yagni-dom": "^0.1.0"
+      "@yagni-js/yagni-dom": "^0.1.1"
   }
 }
