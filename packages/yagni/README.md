@@ -113,10 +113,11 @@ const query = toQuery(params);
 
 ## License
 
-MIT
+[Unlicense][unlicense]
 
 
 [eslint-plugin-fp]: https://github.com/jfmengels/eslint-plugin-fp
 [eslint-plugin-better]: https://github.com/idmitriev/eslint-plugin-better
 [es6-modules]: https://hacks.mozilla.org/2015/08/es6-in-depth-modules/
 [rollup]: https://rollupjs.org/
+[unlicense]: http://unlicense.org/
