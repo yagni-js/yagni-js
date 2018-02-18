@@ -1,5 +1,5 @@
 
-import { always, existsIn, equals, ifElse, join, or, pick, pipe, suffix, transformArr, transform } from 'yagni';
+import { always, existsIn, equals, ifElse, join, or, pick, pipe, suffix, transformArr, transform } from '@yagni-js/yagni';
 
 import { quotedText } from './text.js';
 import { stringifyAttrs } from './attr.js';

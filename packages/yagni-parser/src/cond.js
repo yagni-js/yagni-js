@@ -1,5 +1,5 @@
 
-import { and, pipe, pick, equals } from 'yagni';
+import { and, pipe, pick, equals } from '@yagni-js/yagni';
 
 const tagName = pick('tagName');
 const tokenType = pick('type');

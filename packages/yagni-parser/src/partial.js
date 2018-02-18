@@ -1,5 +1,5 @@
 
-import { always, camelize, equals, identity, isNil, join, ifElse, isEmpty, omit, or, pick, pipe, suffix, transform, transformArr } from 'yagni';
+import { always, camelize, equals, identity, isNil, join, ifElse, isEmpty, omit, or, pick, pipe, suffix, transform, transformArr } from '@yagni-js/yagni';
 
 import { attrsToObj, stringifyObj } from './attr.js';
 import { quotedText } from './text.js';

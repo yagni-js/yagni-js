@@ -1,5 +1,5 @@
 
-import { equals, ifElse, items, join, map, obj, pick, pipe, prefix, replace, slice, suffix, transform, transformArr } from 'yagni';
+import { equals, ifElse, items, join, map, obj, pick, pipe, prefix, replace, slice, suffix, transform, transformArr } from '@yagni-js/yagni';
 
 import { quotedText, smartText } from './text.js';
 

@@ -1,5 +1,5 @@
 
-import { always, concat, equals, identity, ifElse, indexIn, isEmpty, isNil, join, objOf, pick, pipe, prefix, repeat, replace, suffix, transformArr, unique } from 'yagni';
+import { always, concat, equals, identity, ifElse, indexIn, isEmpty, isNil, join, objOf, pick, pipe, prefix, repeat, replace, suffix, transformArr, unique } from '@yagni-js/yagni';
 
 import { getParser } from './sax.js';
 import { isComment, isEndTag, isPartial, isTag, isText } from './cond.js';
@@ -92,7 +92,7 @@ const yagniImport = pipe([
   ifElse(
     isEmpty,
     always(''),
-    pipe([join(', '), prefix('import { '), suffix(' } from "yagni";')])
+    pipe([join(', '), prefix('import { '), suffix(' } from "@yagni-js/yagni";')])
   )
 ]);
 
@@ -101,7 +101,7 @@ const yagniDomImport = pipe([
   ifElse(
     isEmpty,
     always(''),
-    pipe([join(', '), prefix('import { '), suffix(' } from "yagni-dom";')])
+    pipe([join(', '), prefix('import { '), suffix(' } from "@yagni-js/yagni-dom";')])
   )
 ]);
 

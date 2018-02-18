@@ -1,5 +1,5 @@
 
-import { and, ifElse, or, pipe, prefix, replace, suffix, test } from 'yagni';
+import { and, ifElse, or, pipe, prefix, replace, suffix, test } from '@yagni-js/yagni';
 
 
 const hasNewLine = test(/\n/);

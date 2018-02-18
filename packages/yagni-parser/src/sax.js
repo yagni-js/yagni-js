@@ -4,7 +4,7 @@
 
 // NB. see https://github.com/reshape/parser for reference
 
-import { existsIn, identity, test } from 'yagni';
+import { existsIn, identity, test } from '@yagni-js/yagni';
 
 import { SAXParser } from 'parse5';
 import Tokenizer from 'parse5/lib/tokenizer/index.js';

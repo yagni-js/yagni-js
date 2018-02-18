@@ -1,6 +1,6 @@
 
-import { isArray, merge, pipe } from "yagni";
-import { h } from "yagni-dom";
+import { isArray, merge, pipe } from "@yagni-js/yagni";
+import { h } from "@yagni-js/yagni-dom";
 import { view as loginFormView } from "./login-form.html";
 import { view as logoutFormView } from "./logout-form.html";
 import { view as itemView } from "./menu/item.html";

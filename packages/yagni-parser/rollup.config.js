@@ -12,7 +12,7 @@ export default [
       {file: pkg.module, format: 'es'}
     ],
     external: [
-      'yagni',
+      '@yagni-js/yagni',
       'parse5',
       'parse5/lib/tokenizer/index.js',
       'path'
