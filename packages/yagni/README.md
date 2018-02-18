@@ -17,7 +17,7 @@ Using `npm`:
 
 ```shell
 
-$ npm install --save-dev yagni
+$ npm install --save-dev @yagni-js/yagni
 
 ```
 
@@ -25,7 +25,7 @@ Using `yarn`:
 
 ```shell
 
-$ yarn add -D yagni
+$ yarn add -D @yagni-js/yagni
 
 ```
 
@@ -39,7 +39,7 @@ CommonJS usage:
 
 ```javascript
 
-const _ = require('yagni');
+const _ = require('@yagni-js/yagni');
 
 ```
 
@@ -47,9 +47,9 @@ ES6 module usage:
 
 ```javascript
 
-import * as _ from 'yagni';
+import * as _ from '@yagni-js/yagni';
 // or
-import { pipe, transform, map } from 'yagni';
+import { pipe, transform, map } from '@yagni-js/yagni';
 
 ```
 
@@ -66,7 +66,7 @@ Here is a function to convert an array of objects to http request query string:
 
 ```javascript
 
-import * as _ from 'yagni';
+import * as _ from '@yagni-js/yagni';
 
 
 const toQuery = _.pipe([

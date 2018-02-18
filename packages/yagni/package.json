@@ -1,11 +1,11 @@
 {
-  "name": "yagni",
-  "version": "0.1.0",
+  "name": "@yagni-js/yagni",
+  "version": "0.2.0",
   "description": "Yet another functional library",
   "main": "dist/yagni.cjs.js",
   "module": "dist/yagni.esm.js",
   "files": [
-      "dist"
+    "dist"
   ],
   "scripts": {
     "test": "mocha",
