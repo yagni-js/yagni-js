@@ -1,0 +1,49 @@
+{
+  "name": "@yagni-js/rollup-plugin-yagni",
+  "version": "0.1.0",
+  "description": "Rollup plugin for html template to yagni-dom compatible js module compilation ",
+  "main": "dist/rollup-plugin-yagni.cjs.js",
+  "module": "dist/rollup-plugin-yagni.esm.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "mocha",
+    "pretest": "npm run build",
+    "build": "rollup -c",
+    "prebuild": "rm -rf dist/*",
+    "prepublishOnly": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ysegorov/rollup-plugin-yagni.git"
+  },
+  "keywords": [
+    "frontend",
+    "functional",
+    "stateless",
+    "yagni",
+    "rollup",
+    "plugin"
+  ],
+  "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/ysegorov/rollup-plugin-yagni/issues"
+  },
+  "homepage": "https://github.com/ysegorov/rollup-plugin-yagni#readme",
+  "devDependencies": {
+    "@yagni-js/yagni-dom": "^0.1.1",
+    "@yagni-js/yagni-parser": "^0.1.0",
+    "chai": "^4.1.2",
+    "eslint": "^4.15.0",
+    "eslint-plugin-better": "^0.1.5",
+    "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-import": "^2.8.0",
+    "mocha": "^4.1.0",
+    "rollup": "^0.53.4",
+    "rollup-plugin-buble": "^0.18.0",
+    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-pluginutils": "^2.0.1"
+  }
+}
