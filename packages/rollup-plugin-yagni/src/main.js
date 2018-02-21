@@ -6,7 +6,7 @@ import { createFilter } from 'rollup-pluginutils';
 export default function yagni(options) {
   const opts = options || {};
 
-  const filter = createFilter(options.include || ['**/*.html', '**/*.svg'], options.exclude);
+  const filter = createFilter(opts.include || ['**/*.html', '**/*.svg'], opts.exclude);
 
   return {
     name: 'yagni',
