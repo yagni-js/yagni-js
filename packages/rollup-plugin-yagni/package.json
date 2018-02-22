@@ -33,8 +33,6 @@
   },
   "homepage": "https://github.com/ysegorov/rollup-plugin-yagni#readme",
   "devDependencies": {
-    "@yagni-js/yagni": "^0.2.1",
-    "@yagni-js/yagni-dom": "^0.1.1",
     "@yagni-js/yagni-parser": "^0.1.0",
     "chai": "^4.1.2",
     "eslint": "^4.15.0",
@@ -47,5 +45,12 @@
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-node-resolve": "^3.0.2",
     "rollup-pluginutils": "^2.0.1"
+  },
+  "peerDependencies": {
+    "@yagni-js/yagni": "^0.2.1",
+    "@yagni-js/yagni-dom": "^0.1.1",
+    "jsdom": "^11.6.2",
+    "jsdom-global": "^3.0.2",
+    "parse5": "^4.0.0"
   }
 }
