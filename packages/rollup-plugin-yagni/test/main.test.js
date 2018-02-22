@@ -22,13 +22,15 @@ describe('rollup-plugin-yagni', function () {
       ]
     }).then(function (bundle) {
 
-      return bundle.generate({format: 'iife', name: 'rp'});
+      return bundle.generate({format: 'umd', name: 'rp'});
 
     }).then(function (bundle) {
 
       const fn = new Function(bundle.code);
 
-      const rp = fn();
+      fn();
+
+      const rp = global.rp;
 
       expect(rp).to.be.an('object');
     });
