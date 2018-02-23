@@ -50,7 +50,6 @@
     "@yagni-js/yagni": "^0.2.1",
     "@yagni-js/yagni-dom": "^0.1.1",
     "jsdom": "^11.6.2",
-    "jsdom-global": "^3.0.2",
-    "parse5": "^4.0.0"
+    "jsdom-global": "^3.0.2"
   }
 }
