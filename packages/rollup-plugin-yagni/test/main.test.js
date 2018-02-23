@@ -22,7 +22,7 @@ describe('rollup-plugin-yagni', function () {
       ]
     }).then(function (bundle) {
 
-      return bundle.generate({format: 'umd', name: 'rp'});
+      return bundle.generate({format: 'umd', name: 'tree'});
 
     }).then(function (bundle) {
 
@@ -30,9 +30,31 @@ describe('rollup-plugin-yagni', function () {
 
       fn();
 
-      const rp = global.rp;
+      const tree = global.tree;
 
-      expect(rp).to.be.an('object');
+      const expected = {
+        tagName: 'div',
+        attrs: {'class': 'body'},
+        props: {},
+        children: [
+          {
+            tagName: 'div',
+            attrs: {'class': 'sidebar'},
+            props: {},
+            children: ['Sidebar']
+          },
+          {
+            tagName: 'div',
+            attrs: {'class': 'content'},
+            props: {},
+            children: ['Hello, John Smith!']
+          }
+        ]
+      };
+
+      expect(tree).to.be.an('object');
+      expect(tree).to.deep.equal(expected);
+
     });
 
   });

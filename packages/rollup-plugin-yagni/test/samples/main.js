@@ -1,4 +1,4 @@
 
 import { view as layoutView } from './layout.html';
 
-export default layoutView({});
+export default layoutView({username: 'John Smith'});
