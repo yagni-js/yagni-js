@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@yagni-js/yagni-dom@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@yagni-js/yagni-dom/-/yagni-dom-0.1.2.tgz#87ef0a0457a1e54019af4b0e81425535e71ccbd7"
+
+"@yagni-js/yagni@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@yagni-js/yagni/-/yagni-0.2.1.tgz#06707d324eabaabad0536300cf4840fa07959bdd"
+
 abab@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -1882,10 +1890,6 @@ ws@^4.0.0:
 xml-name-validator@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-3.0.0.tgz#6ae73e06de4d8c6e47f9fb181f78d648ad457c6a"
-
-yagni@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/yagni/-/yagni-0.1.0.tgz#6150d4bb5e0c2fcc400f77bb93606b3507396c66"
 
 yallist@^2.1.2:
   version "2.1.2"
