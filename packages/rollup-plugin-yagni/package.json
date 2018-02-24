@@ -1,6 +1,6 @@
 {
   "name": "@yagni-js/rollup-plugin-yagni",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Rollup plugin for html template to yagni-dom compatible js module compilation ",
   "main": "dist/rollup-plugin-yagni.cjs.js",
   "module": "dist/rollup-plugin-yagni.esm.js",
@@ -21,10 +21,8 @@
   "keywords": [
     "frontend",
     "functional",
-    "stateless",
-    "yagni",
-    "rollup",
-    "plugin"
+    "yagni-js",
+    "rollup-plugin"
   ],
   "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
   "license": "Unlicense",
@@ -33,12 +31,14 @@
   },
   "homepage": "https://github.com/ysegorov/rollup-plugin-yagni#readme",
   "devDependencies": {
-    "@yagni-js/yagni-parser": "^0.1.0",
+    "@yagni-js/yagni-parser": "^0.1.1",
     "chai": "^4.1.2",
     "eslint": "^4.15.0",
     "eslint-plugin-better": "^0.1.5",
     "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-import": "^2.8.0",
+    "jsdom": "^11.6.2",
+    "jsdom-global": "^3.0.2",
     "mocha": "^4.1.0",
     "rollup": "^0.53.4",
     "rollup-plugin-buble": "^0.18.0",
@@ -48,8 +48,6 @@
   },
   "peerDependencies": {
     "@yagni-js/yagni": "^0.2.1",
-    "@yagni-js/yagni-dom": "^0.1.1",
-    "jsdom": "^11.6.2",
-    "jsdom-global": "^3.0.2"
+    "@yagni-js/yagni-dom": "^0.1.2"
   }
 }

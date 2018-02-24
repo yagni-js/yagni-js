@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@yagni-js/yagni-dom@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@yagni-js/yagni-dom/-/yagni-dom-0.1.1.tgz#53ac9ca29f1bcbfe94c18847536deb1f8e812243"
+"@yagni-js/yagni-dom@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@yagni-js/yagni-dom/-/yagni-dom-0.1.2.tgz#87ef0a0457a1e54019af4b0e81425535e71ccbd7"
 
-"@yagni-js/yagni-parser@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@yagni-js/yagni-parser/-/yagni-parser-0.1.0.tgz#137ef5148e5968412004f037c122b3e46722d5e0"
+"@yagni-js/yagni-parser@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@yagni-js/yagni-parser/-/yagni-parser-0.1.1.tgz#4cb78a9c73c503921380287a7c74c78ddd1f8592"
 
 "@yagni-js/yagni@^0.2.1":
   version "0.2.1"
