@@ -8,7 +8,11 @@
     "dist"
   ],
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "pretest": "npm run build",
+    "build": "rollup -c",
+    "prebuild": "rm -rf dist/*",
+    "prepublishOnly": "npm test"
   },
   "repository": {
     "type": "git",
