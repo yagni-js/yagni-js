@@ -42,6 +42,16 @@ function getCompiler() {
 
 describe('yagni-loader', function () {
 
+  beforeEach(function () {
+
+    const bundle = path.resolve(__dirname, 'dist', 'bundle.js');
+
+    if (fs.existsSync(bundle)) {
+      fs.unlinkSync(bundle);
+    }
+
+  });
+
   it('converts html template to js module', function (done) {
 
     const compiler = getCompiler();
