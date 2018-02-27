@@ -1,4 +1,6 @@
 
 import { view as layoutView } from './layout.html';
 
-export default layoutView({username: 'John Smith'});
+const layout = layoutView({username: 'John Smith'});
+
+export { layout };

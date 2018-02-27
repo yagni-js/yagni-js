@@ -2,4 +2,8 @@
 import { parse } from '@yagni-js/yagni-parser';
 
 
-export default parse;
+export default function loader(content) {
+
+  return parse(content);
+
+}
