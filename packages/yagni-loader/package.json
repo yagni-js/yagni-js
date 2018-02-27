@@ -47,6 +47,7 @@
   },
   "peerDependencies": {
     "@yagni-js/yagni": "^0.2.1",
-    "@yagni-js/yagni-dom": "^0.1.2"
+    "@yagni-js/yagni-dom": "^0.1.2",
+    "webpack": "^4.0.1"
   }
 }
