@@ -12,8 +12,7 @@ logic (this module is excluded from linting).
 Parsing logic is based on [parse5][parse5] library, on [SAXParser][SAXParser].
 
 This library is **not expected** to be used on it's own but as an engine for
-[rollup][rollup] plugin or [webpack][webpack] loader (both to be released
-soon).
+[rollup plugin][rollup-plugin-yagni] and [webpack loader][yagni-loader].
 
 
 ## Features
@@ -152,6 +151,8 @@ export function view(ctx) {
 [eslint-plugin-better]: https://github.com/idmitriev/eslint-plugin-better
 [es6-modules]: https://hacks.mozilla.org/2015/08/es6-in-depth-modules/
 [yagni-dom]: https://github.com/ysegorov/yagni-dom
+[yagni-loader]: https://github.com/ysegorov/yagni-loader
+[rollup-plugin-yagni]: https://github.com/ysegorov/rollup-plugin-yagni
 [parse5]: http://inikulin.github.io/parse5/
 [SAXParser]: http://inikulin.github.io/parse5/classes/saxparser.html
 [rollup]: https://rollupjs.org/
