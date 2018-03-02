@@ -27,6 +27,12 @@ export function test(regexp) {
   };
 }
 
+export function match(regexp) {
+  return function (str) {
+    return str.match(regexp);
+  };
+}
+
 export function replace(from, to) {
   return function (str) {
     return str.replace(from, to);

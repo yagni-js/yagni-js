@@ -114,6 +114,38 @@ describe('test()', function () {
 });
 
 
+describe('match()', function () {
+
+  it('should return function to be called', function () {
+
+    expect(_.match(/foo/)).to.be.a('function');
+
+  });
+
+  it('should return array of captured matches', function () {
+
+    const matcher = _.match(/(foo|baz)/);
+
+    const res = matcher('hello, foo');
+
+    expect(res).to.be.an('array');
+    expect(res).to.have.length(2);
+    expect(res[0]).to.equal('foo');
+    expect(res[1]).to.equal('foo');
+
+  });
+
+  it('should return null if there were no matches', function () {
+
+    const matcher = _.match(/foo/);
+
+    expect(matcher('baz')).to.be.null;
+
+  });
+
+});
+
+
 describe('replace()', function () {
 
   it('should replace foo with bar', function () {

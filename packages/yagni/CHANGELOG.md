@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 0.3.0 (?)
+
+- [+] add `match()` function
+
+
 ## 0.2.0 (18.02.2018)
 
 - [+] add `camelize()` function
