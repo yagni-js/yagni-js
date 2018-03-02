@@ -47,6 +47,6 @@
     "rollup-plugin-node-resolve": "^3.0.2"
   },
   "peerDependencies": {
-    "@yagni-js/yagni": "^0.2.1"
+    "@yagni-js/yagni": "^0.3.0"
   }
 }
