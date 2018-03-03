@@ -11,7 +11,7 @@ describe('url()', function () {
 
   });
 
-  it('should set path and handler properties of returned object', function () {
+  it('should set path, handler and match properties of returned object', function () {
 
     function handler() {}
 
@@ -20,6 +20,8 @@ describe('url()', function () {
 
     expect(u).to.have.property('path', path);
     expect(u).to.have.property('handler', handler);
+    expect(u).to.have.property('match');
+    expect(u.match).to.be.a('function');
 
   });
 
