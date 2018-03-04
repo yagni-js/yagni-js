@@ -1,5 +1,5 @@
 
-import { always, call, identity, ifElse, isEmpty, isNil, map, or, pipe, pick, pickPath, slice, tap } from '@yagni-js/yagni';
+import { always, call, first, identity, ifElse, isEmpty, isNil, or, pipe, pick, pickPath, slice } from '@yagni-js/yagni';
 
 
 const getHash = pickPath(['target', 'location', 'hash']);
@@ -16,18 +16,22 @@ function matcher(routes) {
   };
 }
 
+const callHandler = call(pick('handler'), pick('match'));
+
 export function hashRouter(routes) {
-  return tap(
-    pipe([
-      getHash,
-      ifElse(
-        or(isNil, isEmpty),
-        always('#'),
-        identity
-      ),
-      slice(1),
-      matcher(routes),
-      map(call(pick('handler'), pick('match')))
-    ])
-  );
+  return pipe([
+    getHash,
+    ifElse(
+      or(isNil, isEmpty),
+      always('#'),
+      identity
+    ),
+    slice(1),                   // strip # from hash
+    matcher(routes),
+    ifElse(
+      isEmpty,
+      identity,
+      pipe([first, callHandler])
+    )
+  ]);
 }
