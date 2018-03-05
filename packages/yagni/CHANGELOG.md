@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 0.3.0 (?)
+## 0.3.0 (05.03.2018)
 
 - [+] add `match()` function
 
