@@ -1,6 +1,6 @@
 {
   "name": "@yagni-js/yagni-parser",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Yet another functional library (DOM API related)",
   "main": "dist/yagni-parser.cjs.js",
   "module": "dist/yagni-parser.esm.js",
@@ -49,7 +49,7 @@
     "rollup-plugin-node-resolve": "^3.0.2"
   },
   "peerDependencies": {
-    "@yagni-js/yagni": "^0.2.1",
-    "@yagni-js/yagni-dom": "^0.1.2"
+    "@yagni-js/yagni": "^0.3.0",
+    "@yagni-js/yagni-dom": "^0.2.0"
   }
 }
