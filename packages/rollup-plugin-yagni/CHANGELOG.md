@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 0.2.0 (06.03.2018)
+
+- update dev dependency @yagni-js/yagni-parser@0.2.0
+- update peer dependencies @yagni-js/yagni@0.3.0, @yagni-js/yagni-dom@0.2.0
+
+
 ## 0.1.1 (24.02.2018)
 
 - @yagni-js/yagni-parser@0.1.1, move jsdom and jsdom-global to dev dependencies
