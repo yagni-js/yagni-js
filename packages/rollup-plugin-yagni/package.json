@@ -1,6 +1,6 @@
 {
   "name": "@yagni-js/rollup-plugin-yagni",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Rollup plugin for html template to yagni-dom compatible js module compilation ",
   "main": "dist/rollup-plugin-yagni.cjs.js",
   "module": "dist/rollup-plugin-yagni.esm.js",
@@ -30,8 +30,10 @@
     "url": "https://github.com/ysegorov/rollup-plugin-yagni/issues"
   },
   "homepage": "https://github.com/ysegorov/rollup-plugin-yagni#readme",
+  "dependencies": {
+    "@yagni-js/yagni-parser": "^0.2.1"
+  },
   "devDependencies": {
-    "@yagni-js/yagni-parser": "^0.2.0",
     "chai": "^4.1.2",
     "eslint": "^4.15.0",
     "eslint-plugin-better": "^0.1.5",
