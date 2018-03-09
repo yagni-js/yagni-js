@@ -1,6 +1,6 @@
 {
   "name": "@yagni-js/yagni-loader",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Webpack loader for html template to yagni-dom compatible js module compilation",
   "main": "dist/yagni-loader.cjs.js",
   "module": "dist/yagni-loader.esm.js",
@@ -31,8 +31,10 @@
     "url": "https://github.com/ysegorov/yagni-loader/issues"
   },
   "homepage": "https://github.com/ysegorov/yagni-loader#readme",
+  "dependencies": {
+    "@yagni-js/yagni-parser": "^0.2.0"
+  },
   "devDependencies": {
-    "@yagni-js/yagni-parser": "^0.2.0",
     "chai": "^4.1.2",
     "eslint": "^4.18.1",
     "eslint-plugin-better": "^0.1.5",
