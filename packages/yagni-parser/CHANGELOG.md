@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 0.3.0 (10.03.2018)
+
+- update peer dependency @yagni-js/yagni-dom@0.3.0
+
+
 ## 0.2.1 (09.03.2018)
 
 - proper package dependencies (parse5 moved to dependencies in package.json)
