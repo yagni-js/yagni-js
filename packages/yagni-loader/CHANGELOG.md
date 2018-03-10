@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 0.3.0 (10.03.2018)
+
+- update package dependency @yagni-js/yagni-parser@0.3.0
+- update peer dependency @yangi-js/yagni-dom@0.3.0
+
+
 ## 0.2.1 (09.03.2018)
 
 - update package dependencies @yagni-js/yagni-parser@0.2.1
