@@ -1,11 +1,10 @@
 
 import { isNil, isDefined } from './is.js';
+import { mutate } from './impure.js';
 
 
 export function obj(key, value) {
-  return {
-    [key]: value   // NB. ES2015 computed property name
-  };
+  return mutate({}, key, value);
 }
 
 export function objOf(key) {
