@@ -52,8 +52,7 @@ export function slice2(start, end) {
 }
 
 export function repeat(str) {
-  return function (count) {
-    // NB. ES2015 feature
-    return str.repeat(count);
+  return function inner(count) {
+    return count === 0 ? '' : (count > 1 ? (str + inner(count - 1)) : str);
   };
 }

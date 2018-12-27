@@ -205,6 +205,8 @@ describe('repeat()', function () {
     const repeatFoo = _.repeat('foo');;
     const repeatSpace = _.repeat(' ');
 
+    expect(repeatFoo(0)).to.equal('');
+    expect(repeatFoo(1)).to.equal('foo');
     expect(repeatFoo(3)).to.equal('foofoofoo');
     expect(repeatSpace(5)).to.equal('     ');
 
