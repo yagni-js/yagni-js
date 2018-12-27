@@ -1,0 +1,15 @@
+
+import { isArray, isObject, isNil } from './is.js';
+import { ifElse, equals } from './cond.js';
+import { length, pipe } from './arr.js';
+import { keys } from './obj.js';
+
+
+export const isEmpty = ifElse(
+  isArray,
+  pipe([length, equals(0)]),
+  ifElse(
+    isObject,
+    pipe([keys, length, equals(0)]),
+    isNil)
+);

@@ -6,4 +6,5 @@ export * from './obj.js';
 export * from './fn.js';
 export * from './str.js';
 export * from './transform.js';
+export * from './isEmpty.js';
 export * from './impure.js';
