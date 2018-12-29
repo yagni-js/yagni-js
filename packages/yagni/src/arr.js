@@ -39,11 +39,7 @@ export function reduce(reducer) {
   };
 }
 
-export function pipe(arr) {
-  return function (initial) {
-    return arr.reduce(function (acc, piper) { return piper(acc); }, initial);
-  };
-}
+export const pipe = reduce(function (acc, piper) { return piper(acc); });
 
 export function pipeP(arr) {
   return function (initial) {
