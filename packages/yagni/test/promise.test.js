@@ -72,7 +72,9 @@ describe('then()', function () {
 
   });
 
-  it('should call error handler', function (done) {
+  it('should call error handler for rejected promise', function (done) {
+
+    let cnt = 0;
 
     function onSuccess(msg) {
 
@@ -82,16 +84,45 @@ describe('then()', function () {
     function onError(err) {
 
       expect(err.message).to.equal('baz');
+      cnt = cnt + 1;
 
     }
 
     const ops = _.pipe([
       _.rejectP,
       _.then(onSuccess, onError),
+      _.then(function () { expect(cnt).to.equal(1); }),
       _.then(done)
     ]);
 
     ops(new Error('baz'));
+
+  });
+
+  it('should call error handler on error thrown', function (done) {
+
+    let cnt = 0;
+
+    function onSuccess(msg) {
+
+      throw new Error('bar');
+
+    }
+    function onError(err) {
+
+      expect(err.message).to.equal('bar');
+      cnt = cnt + 1;
+
+    }
+
+    const ops = _.pipe([
+      _.resolveP,
+      _.then(onSuccess, onError),
+      _.then(function () { expect(cnt).to.equal(1); }),
+      _.then(done)
+    ]);
+
+    ops(42);
 
   });
 

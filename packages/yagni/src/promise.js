@@ -14,6 +14,6 @@ export function rejectP(smth) {
 
 export function then(onSuccess, onError) {
   return function (thenable) {
-    return thenable.then(onSuccess, onError);
+    return thenable.then(onSuccess).catch(onError);
   };
 }
