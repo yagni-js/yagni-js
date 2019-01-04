@@ -1,6 +1,17 @@
 # Changelog
 
 
+## 0.4.0 (?)
+
+- [*] change `obj()` function implementation
+- [*] change `repeat()` function implementation
+- [*] change `pipe()` function implementation
+- [+] add `promise()` function
+- [+] add `resolveP()` function
+- [+] add `rejectP()` function
+- [+] add `then()` function
+
+
 ## 0.3.0 (05.03.2018)
 
 - [+] add `match()` function
