@@ -6,6 +6,12 @@
 - [*] change `obj()` function implementation
 - [*] change `repeat()` function implementation
 - [*] change `pipe()` function implementation
+- [*] change `filterMap()` function implementation
+- [*] change `flatten()` function implementation
+- [*] change `unique()` function implementation
+- [+] add `reduceToArr()` function
+- [+] add `index()` function
+- [+] add `exists()` function
 - [+] add `promise()` function
 - [+] add `resolveP()` function
 - [+] add `rejectP()` function
