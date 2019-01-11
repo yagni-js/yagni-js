@@ -178,6 +178,29 @@ describe('reduce()', function () {
 });
 
 
+describe('reduceToArr()', function () {
+
+  function reducer(acc, val) { return val === 0 ? acc : acc.concat(val); }
+
+  var data = [2, 0, 5, 8, 0, 1];
+
+  const excludeZeros = _.reduceToArr(reducer);
+
+  it('should return function to be called', function () {
+
+    expect(excludeZeros).to.be.a('function');
+
+  });
+
+  it('should return proper result when called', function () {
+
+    expect(excludeZeros(data)).to.deep.equal([2, 5, 8, 1]);
+
+  });
+
+});
+
+
 describe('pipe()', function () {
 
   function add2(x) { return x + 2; }
@@ -204,6 +227,7 @@ describe('pipe()', function () {
   it('should call all specified functions in chain', function () {
 
     expect(ops(5)).to.equal(42);
+    expect(ops(6)).to.equal(57);
 
   });
 
@@ -388,6 +412,40 @@ describe('any()', function () {
 });
 
 
+describe('index()', function () {
+
+  it('should return function to be called', function () {
+
+    expect(_.index(42)).to.be.a('function');
+
+  });
+
+  it('should return item index from array', function () {
+
+    const items = ['foo', 'baz', 'bar', 42];
+    const fooIndex = _.index('foo');
+    const bazIndex = _.index('baz');
+    const barIndex = _.index('bar');
+    const ftIndex = _.index(42);
+
+    expect(fooIndex(items)).to.equal(0);
+    expect(bazIndex(items)).to.equal(1);
+    expect(barIndex(items)).to.equal(2);
+    expect(ftIndex(items)).to.equal(3);
+
+  });
+
+  it('should return -1 if item is not within array', function () {
+
+    const ftIndex = _.index(42);
+
+    expect(ftIndex(['foo', 'baz', 'bar'])).to.equal(-1);
+
+  });
+
+});
+
+
 describe('indexIn()', function () {
 
   it('should return function to be called', function () {
@@ -413,6 +471,43 @@ describe('indexIn()', function () {
     const getIndexFor = _.indexIn(['foo']);
 
     expect(getIndexFor(42)).to.equal(-1);
+
+  });
+
+});
+
+
+describe('exists()', function () {
+
+  it('should return function to be called', function () {
+
+    expect(_.exists(42)).to.be.a('function');
+
+  });
+
+  it('should return true if item is in array', function () {
+
+    const items = ['foo', 'baz', 42];
+    const fooExists = _.exists('foo');
+    const bazExists = _.exists('baz');
+    const ftExists = _.exists(42);
+
+    expect(fooExists(items)).to.be.true;
+    expect(bazExists(items)).to.be.true;
+    expect(ftExists(items)).to.be.true;
+
+  });
+
+  it('should return false if item is not in array', function () {
+
+    const items = ['foo', 'baz', 42];
+    const zaqExists = _.exists('zaq');
+    const qazExists = _.exists('qaz');
+    const tnExists = _.exists(29);
+
+    expect(zaqExists(items)).to.be.false;
+    expect(qazExists(items)).to.be.false;
+    expect(tnExists(items)).to.be.false;
 
   });
 
