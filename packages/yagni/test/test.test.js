@@ -183,3 +183,25 @@ describe('isFalse()', function () {
   });
 
 });
+
+
+describe('equals()', function () {
+
+  const test = _.equals('1');
+
+  it('should return function to be called', function () {
+
+    expect(test).to.be.a('function');
+
+  });
+
+  it('should strictly check for equality', function () {
+
+    expect(test('1')).to.be.true;
+    expect(test(1)).to.be.false;
+    expect(test(true)).to.be.false;
+    expect(test(false)).to.be.false;
+
+  });
+
+});

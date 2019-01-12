@@ -47,34 +47,6 @@ export function ifElse(predicate, fnIf, fnElse) {
 
 
 /**
- * Takes some value `left` as an argument and returns **a new function**,
- * which then takes some value `right` as an argument and returns **boolean**
- * as a result of strict comparision of `left` and `right`.
- *
- * @category Logic
- *
- * @param {*} left some value to check equality to
- * @returns {Function} a new function to take `right` as an argument and
- * return true if `left` is strictly equal to `right` or false otherwise
- *
- * @example
- *
- *     import {equals} from '@yagni-js/yagni';
- *
- *     const isZero = equals(0);
- *
- *     const res0 = isZero(0);   // => true
- *     const res1 = isZero(42);  // => false
- *
- */
-export function equals(left) {
-  return function _equals(right) {
-    return left === right;
-  };
-}
-
-
-/**
  * Takes two functions `left` and `right` as arguments and returns
  * **a new function**, which then takes some value `smth` as an argument
  * and returns **boolean** - `true` if both `left(smth)` and `right(smth)`

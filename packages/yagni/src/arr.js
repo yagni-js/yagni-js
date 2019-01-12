@@ -1,6 +1,6 @@
 
-import { equals, not } from './logic.js';
-import { isDefined, isArray } from './test.js';
+import { not } from './logic.js';
+import { isDefined, isArray, equals } from './test.js';
 import { pick } from './obj.js';
 
 
