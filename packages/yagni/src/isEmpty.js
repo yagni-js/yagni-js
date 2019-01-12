@@ -1,5 +1,5 @@
 
-import { isArray, isObject, isNil, equals } from './test.js';
+import { isArray, isObject, isString, isNil, equals } from './test.js';
 import { ifElse } from './logic.js';
 import { length, pipe } from './arr.js';
 import { keys } from './obj.js';
@@ -11,5 +11,9 @@ export const isEmpty = ifElse(
   ifElse(
     isObject,
     pipe([keys, length, equals(0)]),
-    isNil)
+    ifElse(
+      isString,
+      equals(''),
+      isNil)
+  )
 );
