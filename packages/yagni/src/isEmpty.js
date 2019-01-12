@@ -1,6 +1,6 @@
 
 import { isArray, isObject, isNil } from './is.js';
-import { ifElse, equals } from './cond.js';
+import { ifElse, equals } from './logic.js';
 import { length, pipe } from './arr.js';
 import { keys } from './obj.js';
 

@@ -1,5 +1,5 @@
 
-import { equals } from './cond.js';
+import { equals } from './logic.js';
 
 
 export function isNil(smth) {

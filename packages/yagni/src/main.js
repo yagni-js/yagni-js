@@ -1,5 +1,5 @@
 
-export * from './cond.js';
+export * from './logic.js';
 export * from './is.js';
 export * from './arr.js';
 export * from './obj.js';
