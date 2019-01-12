@@ -1,5 +1,5 @@
 
-import { isDefined, isFunction } from './is.js';
+import { isDefined, isFunction } from './test.js';
 
 
 export function identity(smth) {

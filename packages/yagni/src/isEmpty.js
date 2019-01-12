@@ -1,5 +1,5 @@
 
-import { isArray, isObject, isNil } from './is.js';
+import { isArray, isObject, isNil } from './test.js';
 import { ifElse, equals } from './logic.js';
 import { length, pipe } from './arr.js';
 import { keys } from './obj.js';

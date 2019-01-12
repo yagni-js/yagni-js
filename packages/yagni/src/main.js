@@ -1,6 +1,6 @@
 
 export * from './logic.js';
-export * from './is.js';
+export * from './test.js';
 export * from './arr.js';
 export * from './obj.js';
 export * from './fn.js';

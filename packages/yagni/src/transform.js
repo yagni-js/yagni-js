@@ -1,7 +1,7 @@
 
 import { obj, keys } from './obj.js';
 import { result, resultArr } from './fn.js';
-import { isArray, isFunction } from './is.js';
+import { isArray, isFunction } from './test.js';
 
 
 export function transform(spec) {
