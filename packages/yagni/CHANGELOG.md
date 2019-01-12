@@ -9,6 +9,9 @@
 - [*] change `filterMap()` function implementation
 - [*] change `flatten()` function implementation
 - [*] change `unique()` function implementation
+- [*] change `isTrue()` function implementation
+- [*] change `isFalse()` function implementation
+- [*] add support for empty string to `isEmpty()` function
 - [+] add `reduceToArr()` function
 - [+] add `index()` function
 - [+] add `exists()` function
