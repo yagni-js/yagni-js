@@ -90,8 +90,8 @@ describe('result()', function () {
 
     function add2IfDefined(x) { return _.isDefined(x) ? x + 2 : -1; }
 
-    expect(add2IfDefined()).to.equal(-1);
-    expect(add2IfDefined(40)).to.equal(42);
+    expect(_.result(add2IfDefined)).to.equal(-1);
+    expect(_.result(add2IfDefined, 40)).to.equal(42);
 
   });
 
