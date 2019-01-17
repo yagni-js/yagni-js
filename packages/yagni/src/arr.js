@@ -209,7 +209,7 @@ export function reduceToArr(reducer) {
  * @function
  * @category Array
  *
- * @param {[Function]} arr array of functions
+ * @param {Array} arr array of functions
  * @returns {Function} a new function to take `initial` value as an argument
  * and execute one by one function from source `array` producing a single
  * output value
@@ -266,7 +266,7 @@ export const pipe = reduce(
  * @function
  * @category Array
  *
- * @param {[Function]} arr array of functions
+ * @param {Array} arr array of functions
  * @returns {Function} a new function to take `initial` value as an argument
  * and execute one by one function from source `array` producing a single
  * output value (an instance of Promise, ie. `thenable`)
