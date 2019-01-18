@@ -240,3 +240,59 @@ describe('omit()', function () {
   });
 
 });
+
+
+describe('mapObj()', function () {
+
+  function toParam(key, value) { return key + '=' + value; }
+
+  const mapper = _.mapObj(toParam);
+
+  it('should return function to be called', function () {
+
+    expect(mapper).to.be.a('function');
+
+  });
+
+  it('should return newly constructed array when called', function () {
+
+    const src = {foo: 'baz', bar: 42};
+
+    const res = mapper(src);
+
+    expect(res).to.include('foo=baz');
+    expect(res).to.include('bar=42');
+
+  });
+
+});
+
+
+describe('reduceObj()', function () {
+
+  function swap(acc, key, value) { return Object.assign({}, acc, _.obj(value, key)); }
+
+  var data = {foo: 'baz', bar: 42};
+
+  const swapper = _.reduceObj(swap);
+  const swapData = swapper(data);
+
+  it('should return function to be called', function () {
+
+    expect(swapper).to.be.a('function');
+
+  });
+
+  it('should return another function when called', function () {
+
+    expect(swapData).to.be.a('function');
+
+  });
+
+  it('should return proper result when called', function () {
+
+    expect(swapData({})).to.deep.equal({baz: 'foo', '42': 'bar'});
+
+  });
+
+});

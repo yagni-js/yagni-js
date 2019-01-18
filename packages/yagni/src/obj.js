@@ -337,12 +337,114 @@ export function items(smth) {
  *
  */
 export function omit(arr) {
-  return function (smth) {
+  return function _omit(smth) {
     return keys(smth).reduce(
       function (acc, key) {
         return arr.indexOf(key) === -1 ? Object.assign({}, acc, obj(key, smth[key])) : acc;
       },
       {}
     );
+  };
+}
+
+
+/**
+ * Takes a function `mapper` as an argument and returns **a new function**,
+ * which then takes an object `obj` as an argument and returns **a new array**,
+ * produced by applying `mapper` to each `(key, value)` pair of `obj`.
+ *
+ * `mapper` function must have the following signature:
+ *
+ *     function mapper(key, value[, idx])
+ *
+ * Delegates to `map` method of array of `obj` keys.
+ *
+ * @category Object
+ *
+ * @param {Function} mapper function to apply to each `(key, value)` pair
+ * of source object
+ * @returns {Function} a new function to take an object `obj` as an argument
+ * and produce a new array by applying `mapper` to each `(key, value)` pair
+ * of `obj`.
+ *
+ * @see map
+ *
+ * @example
+ *     import {mapObj} from '@yagni-js/yagni';
+ *
+ *     function toParam(key, value) { return key + '=' + value; }
+ *     const mapper = mapObj(toParam);
+ *
+ *     const src = {foo: 'baz', bar: 42};
+ *
+ *     const res = mapper(src);  // => ['foo=baz', 'bar=42']
+ *
+ */
+export function mapObj(mapper) {
+  return function _mapObj(obj) {
+    return keys(obj).map(
+      function __mapObj(key, idx) {
+        return mapper(key, obj[key], idx);
+      }
+    );
+  };
+}
+
+
+/**
+ * Takes a function `reducer` as an argument and returns **a new function**,
+ * which then takes an object `obj` as an argument and returns
+ * **a new function**, which then takes some `initial` value as an argument
+ * resulting **in a single output value**, produced by executing the specified
+ * `reducer` function on each `(key, value)` pair from `obj`.
+ *
+ * `reducer` function must have the following signature:
+ *
+ *     function reducer(accumulator, key, value[, idx])
+ *
+ * and must return single output value.
+ *
+ * Delegates to `reduce` method of array of `obj` keys.
+ *
+ * @category Object
+ *
+ * @param {Function} reducer function to iterativly apply to each key, value
+ * pair of source object
+ * @returns {Function} a new function to take `obj` as an argument and
+ * produce another new function to take `initial` value and execute
+ * `reducer` function over each `(key, value)` pair of the `obj`
+ * producing a single output value
+ *
+ * @see reduce
+ *
+ * @example
+ *     import {reduceObj} from '@yagni-js/yagni';
+ *
+ *     function swap(acc, key, value) {
+ *       return Object.assign({}, acc, _.obj(value, key));
+ *     }
+ *     const swapper = reduceObj(swap);
+ *     const data = {foo: 'baz', bar: 42};
+ *     const swapData = swapper(data);
+ *
+ *     const res0 = swapData({});
+ *     // =>
+ *     // {baz: 'foo', '42': 'bar'}
+ *
+ *     const res1 = swapData({lorem: 'ipsum'});
+ *     // =>
+ *     // {baz: 'foo', '42': 'bar', ipsum: 'lorem'}
+ *
+ */
+export function reduceObj(reducer) {
+  return function _reduceObj(obj) {
+    return function __reduceObj(initial) {
+      return keys(obj).reduce(
+        function ___reduceObj(acc, key, idx) {
+          return reducer(acc, key, obj[key], idx);
+        },
+        initial
+      );
+    };
   };
 }

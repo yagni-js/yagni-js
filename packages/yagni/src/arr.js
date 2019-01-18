@@ -79,6 +79,7 @@ export const length = pick('length');
  * and produce a new array by applying `mapper` to each element of `array`
  *
  * @see pipe
+ * @see mapObj
  *
  * @example
  *     import {map} from '@yagni-js/yagni';
@@ -116,12 +117,13 @@ export function map(mapper) {
  *
  * @param {Function} reducer function to iterativly apply to each element of
  * source array
- * @returns {Function} a new function to take `array` as an argument and
+ * @returns {Function} a new function to take `arr` as an argument and
  * produce another new function to take `initial` value and execute
- * `reducer` function over each member of the `array` producing a single
+ * `reducer` function over each member of the `arr` producing a single
  * output value
  *
  * @see pipe
+ * @see reduceObj
  *
  * @example
  *     import {reduce} from '@yagni-js/yagni';
