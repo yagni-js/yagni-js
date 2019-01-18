@@ -19,6 +19,9 @@
 - [+] add `resolveP()` function
 - [+] add `rejectP()` function
 - [+] add `then()` function
+- [+] add `mapObj()` function
+- [+] add `reduceObj()` function
+- [+] add jsdoc comments
 
 
 ## 0.3.0 (05.03.2018)
