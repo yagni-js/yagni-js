@@ -1,6 +1,6 @@
 {
   "name": "@yagni-js/yagni",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Yet another functional library",
   "main": "dist/yagni.cjs.js",
   "module": "dist/yagni.esm.js",
@@ -21,8 +21,7 @@
   "keywords": [
     "frontend",
     "functional",
-    "stateless",
-    "cleanjs"
+    "yagni"
   ],
   "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
   "license": "Unlicense",
