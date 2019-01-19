@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ysegorov/yagni.git"
+    "url": "git+https://github.com/yagni-js/yagni.git"
   },
   "keywords": [
     "frontend",
@@ -27,9 +27,9 @@
   "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/ysegorov/yagni/issues"
+    "url": "https://github.com/yagni-js/yagni/issues"
   },
-  "homepage": "https://github.com/ysegorov/yagni#readme",
+  "homepage": "https://github.com/yagni-js/yagni#readme",
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.2.0",
