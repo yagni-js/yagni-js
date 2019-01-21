@@ -115,7 +115,7 @@ export function map(mapper) {
  *
  * @category Array
  *
- * @param {Function} reducer function to iterativly apply to each element of
+ * @param {Function} reducer function to iteratively apply to each element of
  * source array
  * @returns {Function} a new function to take `arr` as an argument and
  * produce another new function to take `initial` value and execute
@@ -163,7 +163,7 @@ export function reduce(reducer) {
  *
  * @category Array
  *
- * @param {Function} reducer function to iterativly apply to each element of
+ * @param {Function} reducer function to iteratively apply to each element of
  * source array
  * @returns {Function} a new function to take `array` as an argument and
  * execute `reducer` function over each member of the `array` producing a new
@@ -194,7 +194,7 @@ export function reduceToArr(reducer) {
  * Takes an array `arr` of functions as an argument
  * and returns **a new function**,
  * which then takes an `initial` value as an argument resulting in **a single
- * output value**, produced by iterativly executing each function from `array`
+ * output value**, produced by iteratively executing each function from `array`
  * over the result of a previous function call.
  *
  * This is the **cornerstone** of `@yagni-js/yagni`.
@@ -249,7 +249,7 @@ export const pipe = reduce(
  * and returns **a new function**,
  * which then takes an `initial` value as an argument resulting in **a single
  * output value** (an instance of Promise, ie. `thenable`),
- * produced by iterativly executing each function from `array`
+ * produced by iteratively executing each function from `array`
  * over the result of a previous function call.
  *
  * All functions to execute must be unary (must take only one argument) and

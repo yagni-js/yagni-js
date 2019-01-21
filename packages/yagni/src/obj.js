@@ -408,7 +408,7 @@ export function mapObj(mapper) {
  *
  * @category Object
  *
- * @param {Function} reducer function to iterativly apply to each key, value
+ * @param {Function} reducer function to iteratively apply to each key, value
  * pair of source object
  * @returns {Function} a new function to take `obj` as an argument and
  * produce another new function to take `initial` value and execute
