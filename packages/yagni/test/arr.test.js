@@ -347,6 +347,20 @@ describe('flatten()', function () {
 
 });
 
+describe('flattenMap()', function () {
+
+  var a = [[1, 2], [[3, 4], [5, 6]], [[[7], 8, 9], 0]];
+
+  it('should return newly constructed flattened and mapped array', function () {
+
+    const processor = _.flattenMap(function square(x) { return x * x; });
+
+    expect(processor(a)).to.deep.equal([1, 4, 9, 16, 25, 36, 49, 64, 81, 0]);
+
+  });
+
+});
+
 describe('all()', function () {
 
   it('should return function to be called', function () {

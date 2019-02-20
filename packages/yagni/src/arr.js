@@ -460,6 +460,47 @@ export const flatten = reduceToArr(
 
 
 /**
+ * Takes a function `mapper` as an argument and returns **a new function**,
+ * which then takes an array `arr` as an argument and produces **a new array**
+ * by taking all elements from source `arr` and it's sub-arrays,
+ * applying `mapper` to them and placing the result in a new array.
+ *
+ * Uses `reduce` method of source array and `concat` method of new array.
+ *
+ * @category Array
+ *
+ * @param {Function} mapper function to apply to each element of new array
+ * @returns {Function} a new function to take an array `arr` as an argument
+ * and produce a new array by taking all elements from source `arr` and
+ * it's sub-arrays, apply `mapper` to them and place the result in a new array
+ *
+ * @see flatten
+ *
+ * @example
+ *     import {flattenMap} from '@yagni-js/yagni';
+ *
+ *     function square(x) { return x * x; }
+ *
+ *     const processor = flattenMap(square);
+ *
+ *     const src = [[1, 2], [[3], 4, [[5]]]];
+ *
+ *     const dst = processor(src);  // => [1, 4, 9, 16, 25]
+ *
+ */
+export function flattenMap(mapper) {
+  return function _flattenMap(arr) {
+    return arr.reduce(
+      function __flattenMap(acc, item) {
+        return acc.concat(isArray(item) ? _flattenMap(item) : mapper(item));
+      },
+      []
+    );
+  };
+}
+
+
+/**
  * Takes a function `predicate` as an argument and returns **a new function**,
  * which then takes an array `arr` as an argument and returns **true** if
  * all `arr` items satisfy `predicate` or **false** otherwise.
