@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 0.5.0 (2019-02-20)
+
+- [+] add `flattenMap()` function
+
+
 ## 0.4.0 (2019-01-19)
 
 - [*] change `obj()` function implementation
