@@ -150,9 +150,9 @@ export function view(ctx) {
 [eslint-plugin-fp]: https://github.com/jfmengels/eslint-plugin-fp
 [eslint-plugin-better]: https://github.com/idmitriev/eslint-plugin-better
 [es6-modules]: https://hacks.mozilla.org/2015/08/es6-in-depth-modules/
-[yagni-dom]: https://github.com/ysegorov/yagni-dom
-[yagni-loader]: https://github.com/ysegorov/yagni-loader
-[rollup-plugin-yagni]: https://github.com/ysegorov/rollup-plugin-yagni
+[yagni-dom]: https://github.com/yagni-js/yagni-dom
+[yagni-loader]: https://github.com/yagni-js/yagni-loader
+[rollup-plugin-yagni]: https://github.com/yagni-js/rollup-plugin-yagni
 [parse5]: http://inikulin.github.io/parse5/
 [SAXParser]: http://inikulin.github.io/parse5/classes/saxparser.html
 [rollup]: https://rollupjs.org/

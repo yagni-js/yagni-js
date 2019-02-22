@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ysegorov/yagni-parser.git"
+    "url": "git+https://github.com/yagni-js/yagni-parser.git"
   },
   "keywords": [
     "frontend",
@@ -29,9 +29,9 @@
   "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/ysegorov/yagni-parser/issues"
+    "url": "https://github.com/yagni-js/yagni-parser/issues"
   },
-  "homepage": "https://github.com/ysegorov/yagni-parser#readme",
+  "homepage": "https://github.com/yagni-js/yagni-parser#readme",
   "dependencies": {
     "parse5": "^4.0.0"
   },
