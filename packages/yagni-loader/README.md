@@ -91,7 +91,7 @@ module.exports = {
 [Unlicense][unlicense]
 
 
-[yagni-dom]: https://github.com/ysegorov/yagni-dom
-[yagni-parser]: https://github.com/ysegorov/yagni-parser
+[yagni-dom]: https://github.com/yagni-js/yagni-dom
+[yagni-parser]: https://github.com/yagni-js/yagni-parser
 [webpack]: https://webpack.js.org/
 [unlicense]: http://unlicense.org/

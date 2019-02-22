@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ysegorov/yagni-loader.git"
+    "url": "git+https://github.com/yagni-js/yagni-loader.git"
   },
   "keywords": [
     "frontend",
@@ -28,9 +28,9 @@
   "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/ysegorov/yagni-loader/issues"
+    "url": "https://github.com/yagni-js/yagni-loader/issues"
   },
-  "homepage": "https://github.com/ysegorov/yagni-loader#readme",
+  "homepage": "https://github.com/yagni-js/yagni-loader#readme",
   "dependencies": {
     "@yagni-js/yagni-parser": "^0.3.0"
   },
