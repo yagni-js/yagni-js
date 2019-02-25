@@ -1,6 +1,6 @@
 
 const expect = require('chai').expect;
-const yp = require('..');
+const yp = require('../src/tag.js');
 
 
 describe('transformStartTag()', function () {
