@@ -1,5 +1,5 @@
 
-import { always, concat, equals, indexIn, isEmpty, isNil, ifElse, obj, pick, pipe, prefix, repeat, test, transform, unique } from '@yagni-js/yagni';
+import { always, concat, equals, indexIn, isEmpty, isNil, ifElse, obj, pick, pipe, prefix, repeat, suffix, test, transform, unique } from '@yagni-js/yagni';
 
 import Tokenizer from 'parse5/lib/tokenizer';
 
@@ -14,8 +14,11 @@ const repeatSpace = repeat(' ');
 const transformText = transform({
   line: pipe([
     pick('chars'),
-    smartText
-  ])
+    smartText,
+    prefix('hText('),
+    suffix(')')
+  ]),
+  yagniDom: always(['hText'])
 });
 const isPartial = pipe([
   pick('tagName'),
@@ -37,20 +40,6 @@ const tokenTransformers = Object.assign({},
   obj(Tokenizer.EOF_TOKEN, emptyObj)
 );
 
-function concatIfUnique(arr) {
-  return ifElse(
-    pipe([indexIn(arr), equals(-1)]),
-    concat(arr),
-    always(arr)
-  );
-}
-function concatIfNotNilAndUnique(arr) {
-  return ifElse(
-    isNil,
-    always(arr),
-    concatIfUnique(arr)
-  );
-}
 function concatIfNotNilAndKeepUnique(arr) {
   return ifElse(
     isNil,
@@ -63,9 +52,9 @@ function mergeSpec(state, spec, level) {
   const indent = repeatSpace(level);
   const body = pipe([prefix(indent), concat(state.body)]);
 
-  const partials = concatIfNotNilAndUnique(state.partials);
+  const partials = concatIfNotNilAndKeepUnique(state.partials);
   const yagni = concatIfNotNilAndKeepUnique(state.yagni);
-  const yagniDom = concatIfNotNilAndUnique(state.yagniDom);
+  const yagniDom = concatIfNotNilAndKeepUnique(state.yagniDom);
 
   return {
     partials: partials(spec.partial),

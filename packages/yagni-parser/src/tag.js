@@ -53,8 +53,8 @@ const isPartialElement = pipe([
 
 const yagniDomFn = ifElse(
   isSvg,
-  always('hSVG'),
-  always('h')
+  always(['hSVG']),
+  always(['h'])
 );
 
 const tagToH = pipe([

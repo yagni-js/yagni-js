@@ -22,9 +22,9 @@ describe('partialImport()', function () {
 
     const spec = {src: './html/foo.html', name: 'fooView'};
 
-    const expected = 'import { view as fooView } from "./html/foo.html";';
+    const expected = ['import { view as fooView } from "./html/foo.html";'];
 
-    expect(yp.partialImport(spec)).to.equal(expected);
+    expect(yp.partialImport(spec)).to.deep.equal(expected);
 
   });
 
@@ -32,9 +32,9 @@ describe('partialImport()', function () {
 
     const spec = {src: './svg/alarm.svg', name: 'alarmView'};
 
-    const expected = 'import { view as alarmView } from "./svg/alarm.svg";';
+    const expected = ['import { view as alarmView } from "./svg/alarm.svg";'];
 
-    expect(yp.partialImport(spec)).to.equal(expected);
+    expect(yp.partialImport(spec)).to.deep.equal(expected);
 
   });
 
@@ -54,7 +54,8 @@ describe('transformPartial()', function () {
     };
     const expected = {
       yagni: [],
-      partial: 'import { view as layoutView } from "./html/layout.html";',
+      yagniDom: [],
+      partial: ['import { view as layoutView } from "./html/layout.html";'],
       line: 'layoutView({"username": "John Smith"})'
     };
 
@@ -74,8 +75,9 @@ describe('transformPartial()', function () {
 
     const expected = {
       yagni: ['isArray'],
-      partial: 'import { view as itemView } from "./html/item.html";',
-      line: 'isArray(ctx.items) ? ctx.items.map(itemView) : ""'
+      yagniDom: ['hSkip'],
+      partial: ['import { view as itemView } from "./html/item.html";'],
+      line: 'isArray(ctx.items) ? ctx.items.map(itemView) : hSkip()'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);
@@ -95,8 +97,9 @@ describe('transformPartial()', function () {
 
     const expected = {
       yagni: ['isArray', 'merge', 'pipe'],
-      partial: 'import { view as itemView } from "./html/item.html";',
-      line: 'isArray(ctx.items) ? ctx.items.map(pipe([merge({"foo": "baz"}), itemView])) : ""'
+      yagniDom: ['hSkip'],
+      partial: ['import { view as itemView } from "./html/item.html";'],
+      line: 'isArray(ctx.items) ? ctx.items.map(pipe([merge({"foo": "baz"}), itemView])) : hSkip()'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);
@@ -115,8 +118,9 @@ describe('transformPartial()', function () {
 
     const expected = {
       yagni: [],
-      partial: 'import { view as fooView } from "./html/foo.html";',
-      line: '(ctx.isVisible) ? (fooView(ctx)) : ""'
+      yagniDom: ['hSkip'],
+      partial: ['import { view as fooView } from "./html/foo.html";'],
+      line: '(ctx.isVisible) ? (fooView(ctx)) : hSkip()'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);
@@ -136,8 +140,9 @@ describe('transformPartial()', function () {
 
     const expected = {
       yagni: [],
-      partial: 'import { view as fooView } from "./html/foo.html";',
-      line: '(ctx.isVisible) ? (fooView({"parent": ctx})) : ""'
+      yagniDom: ['hSkip'],
+      partial: ['import { view as fooView } from "./html/foo.html";'],
+      line: '(ctx.isVisible) ? (fooView({"parent": ctx})) : hSkip()'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);
@@ -156,8 +161,9 @@ describe('transformPartial()', function () {
 
     const expected = {
       yagni: [],
-      partial: 'import { view as bazView } from "./html/baz.html";',
-      line: '!(ctx.isVisible) ? (bazView(ctx)) : ""'
+      yagniDom: ['hSkip'],
+      partial: ['import { view as bazView } from "./html/baz.html";'],
+      line: '!(ctx.isVisible) ? (bazView(ctx)) : hSkip()'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);
@@ -177,8 +183,9 @@ describe('transformPartial()', function () {
 
     const expected = {
       yagni: [],
-      partial: 'import { view as bazView } from "./html/baz.html";',
-      line: '!(ctx.isVisible) ? (bazView({"title": `Item ${ctx.name} is hidden`})) : ""'
+      yagniDom: ['hSkip'],
+      partial: ['import { view as bazView } from "./html/baz.html";'],
+      line: '!(ctx.isVisible) ? (bazView({"title": `Item ${ctx.name} is hidden`})) : hSkip()'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);
@@ -198,8 +205,9 @@ describe('transformPartial()', function () {
 
     const expected = {
       yagni: ['isArray'],
-      partial: 'import { view as itemView } from "./html/item.html";',
-      line: '(ctx.items.length) ? (isArray(ctx.items) ? ctx.items.map(itemView) : "") : ""'
+      yagniDom: ['hSkip'],
+      partial: ['import { view as itemView } from "./html/item.html";'],
+      line: '(ctx.items.length) ? (isArray(ctx.items) ? ctx.items.map(itemView) : hSkip()) : hSkip()'
     };
 
     expect(yp.transformPartial(p)).to.deep.equal(expected);

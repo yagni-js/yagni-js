@@ -1,5 +1,5 @@
 
-import { always, camelize, equals, isNil, join, ifElse, isEmpty, omit, or, pick, pipe, suffix, transform, transformArr } from '@yagni-js/yagni';
+import { always, and, camelize, equals, isNil, join, ifElse, isEmpty, omit, or, pick, pipe, suffix, transform, transformArr } from '@yagni-js/yagni';
 
 import { attrsToObj, stringifyObj } from './attr.js';
 import { quotedText } from './text.js';
@@ -19,6 +19,8 @@ const pIfNot = pick('p-if-not');
 const pMap = pick('p-map');
 
 const pMapIsNil = pipe([pMap, isNil]);
+const pIfIsNil = pipe([pIf, isNil]);
+const pIfNotIsNil = pipe([pIfNot, isNil]);
 const attrsObjIsEmpty = pipe([attrs, isEmpty]);
 
 export const partialName = pipe([
@@ -31,7 +33,7 @@ export const partialName = pipe([
 export function partialImport(spec) {
   const name = pName(spec);
   const src = pSrc(spec);
-  return 'import { view as ' + name + ' } from "' + src + '";';
+  return ['import { view as ' + name + ' } from "' + src + '";'];
 }
 
 const yagniImport = ifElse(
@@ -76,7 +78,7 @@ function partialMap(spec) {
   const mapCaller = pMapCaller(spec);
   const mapTarget = pMap(spec);
 
-  return 'isArray(' + mapTarget + ') ? ' + mapTarget + '.map(' + mapCaller + ') : ""';
+  return 'isArray(' + mapTarget + ') ? ' + mapTarget + '.map(' + mapCaller + ') : hSkip()';
 }
 
 const partialBody = ifElse(
@@ -89,31 +91,31 @@ function partialIf(spec) {
   const cond = pIf(spec);
   const body = partialBody(spec);
 
-  return '(' + cond + ') ? (' + body + ') : ""';
+  return '(' + cond + ') ? (' + body + ') : hSkip()';
 }
 
 function partialIfNot(spec) {
   const cond = pIfNot(spec);
   const body = partialBody(spec);
 
-  return '!(' + cond + ') ? (' + body + ') : ""';
+  return '!(' + cond + ') ? (' + body + ') : hSkip()';
 }
 
 export const stringifyPartial = ifElse(
-  pipe([pIf, isNil]),
+  pIfIsNil,
   ifElse(
-    pipe([pIfNot, isNil]),
+    pIfNotIsNil,
     partialBody,
     partialIfNot
   ),
   partialIf
 );
 
-const yagniImportIsEmpty = pipe([
-  pick('yagniImport'),
-  pick('length'),
-  equals(0)
-]);
+const yagniDomImport = ifElse(
+  and(pMapIsNil, and(pIfIsNil, pIfNotIsNil)),
+  always([]),
+  always(['hSkip'])
+);
 
 export const transformPartial = pipe([
   attrs,
@@ -129,6 +131,7 @@ export const transformPartial = pipe([
   transform({
     partial: partialImport,
     yagni: yagniImport,
+    yagniDom: yagniDomImport,
     line: stringifyPartial
   })
 ]);

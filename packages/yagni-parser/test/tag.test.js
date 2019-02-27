@@ -14,7 +14,7 @@ describe('transformStartTag()', function () {
       selfClosing: false
     };
     const expected = {
-      yagniDom: 'h',
+      yagniDom: ['h'],
       line: 'h("div", {"class": "sidebar"}, {}, ['
     };
 
@@ -31,7 +31,7 @@ describe('transformStartTag()', function () {
       selfClosing: true
     };
     const expected = {
-      yagniDom: 'h',
+      yagniDom: ['h'],
       line: 'h("div", {"class": "sidebar"}, {}, [])'
     };
 
@@ -48,7 +48,7 @@ describe('transformStartTag()', function () {
       selfClosing: false
     };
     const expected = {
-      yagniDom: 'h',
+      yagniDom: ['h'],
       line: 'h("input", {"class": "block", "name": "username"}, {}, [])'
     };
 
@@ -65,7 +65,7 @@ describe('transformStartTag()', function () {
       selfClosing: false
     };
     const expected = {
-      yagniDom: 'hSVG',
+      yagniDom: ['hSVG'],
       line: 'hSVG("line", {"x1": "5", "y1": "5", "x2": "10", "y2": "12"}, {}, ['
     };
 
