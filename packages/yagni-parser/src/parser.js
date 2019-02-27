@@ -1,5 +1,5 @@
 
-import { always, concat, equals, indexIn, isEmpty, isNil, ifElse, obj, pick, pipe, prefix, repeat, suffix, test, transform, unique } from '@yagni-js/yagni';
+import { always, concat, equals, isEmpty, isNil, ifElse, obj, pick, pipe, prefix, repeat, suffix, test, transform, unique } from '@yagni-js/yagni';
 
 import Tokenizer from 'parse5/lib/tokenizer';
 
