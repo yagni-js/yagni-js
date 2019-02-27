@@ -14,7 +14,7 @@ export default [
     external: [
       '@yagni-js/yagni',
       'parse5',
-      'parse5/lib/tokenizer/index.js',
+      'parse5/lib/tokenizer',
       'path'
     ],
     plugins: [
