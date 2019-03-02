@@ -1,5 +1,5 @@
 
-import { always, and, ifElse, or, pick, pipe, prefix, replace, suffix, test, transform } from '@yagni-js/yagni';
+import { always, and, identity, ifElse, isNil, or, pick, pipe, prefix, replace, suffix, test, transform } from '@yagni-js/yagni';
 
 
 const hasNewLine = test(/\n/);
@@ -38,6 +38,11 @@ export const smartText = ifElse(
 export const transformText = transform({
   line: pipe([
     pick('chars'),
+    ifElse(
+      isNil,
+      always(''),
+      identity
+    ),
     smartText,
     prefix('hText('),
     suffix(')')
