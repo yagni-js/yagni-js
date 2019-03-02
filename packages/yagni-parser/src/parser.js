@@ -5,21 +5,12 @@ import Tokenizer from 'parse5/lib/tokenizer';
 
 import { transformPartial } from './partial.js';
 import { isEmptyElement, transformStartTag, transformEndTag } from './tag.js';
-import { smartText } from './text.js';
+import { smartText, transformText } from './text.js';
 
 
 // const isWhitespace = test(/^\s+$/);
 const repeatSpace = repeat(' ');
 
-const transformText = transform({
-  line: pipe([
-    pick('chars'),
-    smartText,
-    prefix('hText('),
-    suffix(')')
-  ]),
-  yagniDom: always(['hText'])
-});
 const isPartial = pipe([
   pick('tagName'),
   equals('partial')
