@@ -56,6 +56,44 @@ describe('transformStartTag()', function () {
 
   });
 
+  it('should allow to set tag property value', function () {
+
+    const inp = {
+      tagName: 'input',
+      attrs: [{name: 'prop-checked', value: 'checked'}, {name: 'type', value: 'checkbox'}],
+      isSvg: false,
+      selfClosing: false
+    };
+    const expected = {
+      yagniDom: ['h'],
+      line: 'h("input", {"type": "checkbox"}, {"checked": "checked"}, [])'
+    };
+
+    expect(yp.transformStartTag(inp)).to.deep.equal(expected);
+
+  });
+
+  it('should allow to set tag property value by reference', function () {
+
+    const inp = {
+      tagName: 'input',
+      attrs: [
+        {name: '@prop-checked', value: 'true'},
+        {name: '@prop-onclick', value: 'ctx.onclick'},
+        {name: 'type', value: 'checkbox'}
+      ],
+      isSvg: false,
+      selfClosing: false
+    };
+    const expected = {
+      yagniDom: ['h'],
+      line: 'h("input", {"type": "checkbox"}, {"checked": true, "onclick": ctx.onclick}, [])'
+    };
+
+    expect(yp.transformStartTag(inp)).to.deep.equal(expected);
+
+  });
+
   it('should properly transform line tag (svg)', function () {
 
     const line = {

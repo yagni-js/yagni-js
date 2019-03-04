@@ -2,7 +2,7 @@
 import { always, existsIn, equals, ifElse, join, or, pick, pipe, suffix, transformArr, transform } from '@yagni-js/yagni';
 
 import { quotedText } from './text.js';
-import { stringifyAttrs } from './attr.js';
+import { stringifyAttrs, stringifyProps } from './attr.js';
 
 // see https://developer.mozilla.org/en-US/docs/Glossary/empty_element
 const emptyElements = [
@@ -79,7 +79,7 @@ export const transformStartTag = transform({
     transformArr([
       tagToH,
       pipe([attrs, stringifyAttrs, suffix(', ')]),
-      always('{}, '),
+      pipe([attrs, stringifyProps, suffix(', ')]),
       always('['),
       ifElse(
         isEmptyElement,

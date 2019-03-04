@@ -62,6 +62,44 @@ describe('stingifyAttrs()', function () {
 
   });
 
+  it('should not stringify properties', function () {
+
+    const attrs = [
+      {name: 'name', value: 'username'},
+      {name: 'prop-foo', value: 'foo'},
+      {name: '@prop-baz', value: 'baz'}
+    ];
+
+    const expected = '{' +
+      '"name": "username"' +
+      '}';
+
+    expect(yp.stringifyAttrs(attrs)).to.equal(expected);
+
+  });
+
+});
+
+
+describe('stringifyProps()', function () {
+
+  it('should stringify properties only excluding attributes', function () {
+
+    const attrs = [
+      {name: 'name', value: 'username'},
+      {name: 'prop-value', value: 'uname'},
+      {name: '@prop-onclick', value: 'ctx.onclick'},
+      {name: 'type', value: 'text'}
+    ];
+
+    const expected = '{' +
+      '"value": "uname", ' +
+      '"onclick": ctx.onclick' +
+      '}';
+
+    expect(yp.stringifyProps(attrs)).to.equal(expected);
+
+  });
 });
 
 
