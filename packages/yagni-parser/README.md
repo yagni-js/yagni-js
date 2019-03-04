@@ -32,11 +32,23 @@ convert html to ES6 module.
     which is expected to be an object holding context to render view (perfectly
     suited for [yagni-dom][yagni-dom] library)
 - supports concept of partials using `partial` tag (see below)
+- supports `{{ ctx.foo }}` syntax in attribute/property value definition and in
+    static text to allow access to passed into view function context (this
+    syntax will be transpiled to ES6 template literal syntax - **be aware of
+    supported browsers**)
 - allows only single root tag in html template
 - checks for dom tree structure simple errors
 - strips whitespace from html
 - allows to set tag properties values (use `prop-foo` attribute to set `foo`
     property value on tag)
+- allows to set tag attribute or property value by reference using `@` as
+    a prefix of attribute/property name: `@prop-onclick="ctx.onlick"` (useful
+    to set tag event handlers)
+- allows to use newline in attribute value definition (useful for readability
+    sometimes)
+- normalizes whitespace in tag attributes/properties values and in static text
+    (replaces newlines to single whitespace, replaces multiple consecutive
+    whitespace characters to single whitespace character)
 
 
 ## Partials
