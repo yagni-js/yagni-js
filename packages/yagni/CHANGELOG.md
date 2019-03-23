@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 0.6.0 (2019-03-23)
+
+- [*] update dependencies
+
+
 ## 0.5.0 (2019-02-20)
 
 - [+] add `flattenMap()` function
