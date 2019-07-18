@@ -1,3 +1,2 @@
 --ui bdd
---require buble/register
 --reporter spec
