@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 0.7.1 (2019-07-18)
+
+- [*] license file has been added to distribution tarball
+
+
 ## 0.7.0 (2019-07-18)
 
 - [*] dev dependencies have been updated: mocha@6.1.4, eslint@6.0.1,
