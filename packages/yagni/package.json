@@ -5,7 +5,8 @@
   "main": "dist/yagni.cjs.js",
   "module": "dist/yagni.esm.js",
   "files": [
-    "dist"
+    "dist",
+    "UNLICENSE"
   ],
   "scripts": {
     "test": "mocha",
