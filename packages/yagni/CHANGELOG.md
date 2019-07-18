@@ -1,9 +1,15 @@
 # Changelog
 
 
+## 0.7.0 (2019-07-18)
+
+- [*] dev dependencies have been updated: mocha@6.1.4, eslint@6.0.1,
+    eslint-plugin-import@2.18.0, rollup@1.17.0, rollup-plugin-eslint@7.0.0
+
+
 ## 0.6.0 (2019-03-23)
 
-- [*] updated dependencies
+- [*] dev dependencies have been updated
 
 
 ## 0.5.0 (2019-02-20)
