@@ -3,6 +3,7 @@
 
 ## 0.4.0 (2019-07-21)
 
+- [*] production dependency has been updated: parse5@5.1.0
 - [*] peer dependencies have been updated: @yagni-js/yagni@0.7.1,
     @yagni-js/yagni-dom@2.2.0
 - [*] dev dependencies have been updated: @yagni-js/yagni@0.7.1,
@@ -10,6 +11,7 @@
     mocha@6.2.0, reify@0.20.12, rollup@1.17.0, rollup-plugin-commonjs@10.0.1,
     rollup-plugin-eslint@7.0.0, rollup-plugin-node-resolve@5.2.0
 - [*] license file has been added to distribution tarball
+- [*] parsing logic has been updated to use Tokenizer instead of SAXParser
 
 
 ## 0.3.0 (2018-03-10)
