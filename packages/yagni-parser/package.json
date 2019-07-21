@@ -36,22 +36,22 @@
     "parse5": "^5.1.0"
   },
   "devDependencies": {
-    "@yagni-js/yagni": "^0.6.0",
-    "@yagni-js/yagni-dom": "^2.1.0",
+    "@yagni-js/yagni": "^0.7.1",
+    "@yagni-js/yagni-dom": "^2.2.0",
     "chai": "^4.2.0",
-    "eslint": "^5.15.3",
+    "eslint": "6.1.0",
     "eslint-plugin-better": "^0.1.5",
     "eslint-plugin-fp": "^2.3.0",
-    "eslint-plugin-import": "^2.16.0",
-    "mocha": "^6.0.2",
-    "reify": "^0.18.1",
-    "rollup": "^1.7.0",
-    "rollup-plugin-commonjs": "^9.2.1",
-    "rollup-plugin-eslint": "^5.1.0",
-    "rollup-plugin-node-resolve": "^4.0.1"
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.0",
+    "reify": "^0.20.12",
+    "rollup": "^1.17.0",
+    "rollup-plugin-commonjs": "10.0.1",
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
   },
   "peerDependencies": {
-    "@yagni-js/yagni": "^0.6.0",
-    "@yagni-js/yagni-dom": "^2.1.0"
+    "@yagni-js/yagni": "^0.7.1",
+    "@yagni-js/yagni-dom": "^2.2.0"
   }
 }
