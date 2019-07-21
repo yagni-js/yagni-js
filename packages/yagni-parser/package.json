@@ -1,7 +1,7 @@
 {
   "name": "@yagni-js/yagni-parser",
   "version": "0.3.0",
-  "description": "Yet another functional library (DOM API related)",
+  "description": "Yet another functional HTML to Javascript compiler (compatible with @yagni-js/yagni-dom)",
   "main": "dist/yagni-parser.cjs.js",
   "module": "dist/yagni-parser.esm.js",
   "files": [
