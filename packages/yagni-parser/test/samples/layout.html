@@ -1,6 +1,6 @@
 <div class="root">
     <div class="header">
-        <h1>Header</h1>
+        <h1 class="{{ ctx.headerClass }}">Welcome to {{ ctx.headerTitle }}</h1>
         <partial src="./login-form.html" p-if-not="ctx.user.isLoggedIn"></partial>
         <partial src="./logout-form.html" p-if="ctx.user.isLoggedIn"></partial>
     </div>
@@ -17,5 +17,5 @@
             </nav>
         </div>
     </div>
-    <div class="footer">Footer</div>
+    <div class="footer">{{ ctx.copyright }}</div>
 </div>

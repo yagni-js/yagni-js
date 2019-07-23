@@ -16,9 +16,15 @@ const isPartial = pipe([
   equals('partial')
 ]);
 
+const isSVG = pipe([
+  pick('tagName'),
+  equals('svg')
+]);
+
 function plus2(x) { return x + 2; }
 function minus2(x) { return x - 2; }
 function emptyObj() { return {}; }
+function last(arr) { return arr[arr.length - 1]; }
 
 const tokenTransformers = Object.assign({},
   obj(Tokenizer.CHARACTER_TOKEN, transformText),
@@ -56,13 +62,23 @@ function mergeSpec(state, spec, level) {
 }
 
 
-function process(tokenizer, state, meta) {
-  const token = tokenizer.getNextToken();
+function isEofToken(token) { return token.type === Tokenizer.EOF_TOKEN; }
+function isStartTagToken(token) { return token.type === Tokenizer.START_TAG_TOKEN; }
+function isEndTagToken(token) { return token.type === Tokenizer.END_TAG_TOKEN; }
+function isCharacterToken(token) { return token.type === Tokenizer.CHARACTER_TOKEN; }
+function isWhitespaceToken(token) { return token.type === Tokenizer.WHITESPACE_CHARACTER_TOKEN; }
+function isNullToken(token) { return token.type === Tokenizer.NULL_CHARACTER_TOKEN; }
+function isTextToken(token) { return isCharacterToken(token) || isWhitespaceToken(token) || isNullToken(token); }
+
+
+function process(acc, token) {
+  const state = acc.state;
+  const meta = acc.meta;
   const tagName = token.tagName;
-  const isSvg = tagName === 'svg';
-  const isEof = token.type === Tokenizer.EOF_TOKEN;
-  const isStartTag = token.type === Tokenizer.START_TAG_TOKEN;
-  const isEndTag = token.type === Tokenizer.END_TAG_TOKEN;
+  const isSvg = isSVG(token);
+  const isEof = isEofToken(token);
+  const isStartTag = isStartTagToken(token);
+  const isEndTag = isEndTagToken(token);
   const emptyElement = isEmptyElement(token);
   const transformer = tokenTransformers[token.type];
 
@@ -99,7 +115,7 @@ function process(tokenizer, state, meta) {
     throw new Error('Html markup error');
   }
 
-  return isEof ? state : process(tokenizer, nextState, nextMeta);
+  return isEof ? {state: state} : {state: nextState, meta: nextMeta};
 }
 
 function createTokenizer() {
@@ -107,10 +123,25 @@ function createTokenizer() {
   return new Tokenizer();
 }
 
+function tokenize(tokenizer, tokens) {
+
+  const token = tokenizer.getNextToken();
+
+  const isEof = isEofToken(token);
+  const isText = isTextToken(token);
+  const hasPrev = tokens.length > 0;
+  const prevToken = hasPrev ? last(tokens) : false;
+  const prevIsText = hasPrev ? isTextToken(prevToken) : false;
+  const nextToken = (isText && prevIsText) ? {type: Tokenizer.CHARACTER_TOKEN, chars: prevToken.chars + token.chars} : token;
+  const nextTokens = (isText && prevIsText) ? tokens.slice(0, -1) : tokens;
+
+  return isEof ? tokens.concat([token]) : tokenize(tokenizer, nextTokens.concat([nextToken]));
+}
+
 export function htmlToSpec(source) {
   const tokenizer = createTokenizer();
   const isLastChunk = true;
-  const initial = {
+  const state = {
     partials: [],
     yagni: [],
     yagniDom: [],
@@ -126,5 +157,8 @@ export function htmlToSpec(source) {
   // NB. unused assignment with no value
   const res = tokenizer.write(source, isLastChunk);
 
-  return process(tokenizer, initial, meta);
+  const tokens = tokenize(tokenizer, []);
+  const spec = tokens.reduce(process, {state: state, meta: meta});
+
+  return spec.state;
 }

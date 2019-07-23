@@ -23,7 +23,7 @@ describe('parse()', function () {
 
     const module = parser.parse(layoutHtml);
 
-    expect(module).to.equal(layoutJs);
+    expect(module.trim()).to.equal(layoutJs.trim());
 
   });
 

@@ -9,8 +9,8 @@ import { view as itemView } from "./menu/item.html";
 export function view(ctx) {
   return h("div", {"class": "root"}, {}, [
     h("div", {"class": "header"}, {}, [
-      h("h1", {}, {}, [
-        hText("Header")
+      h("h1", {"class": `${ctx.headerClass}`}, {}, [
+        hText(`Welcome to ${ctx.headerTitle}`)
       ]),
       !(ctx.user.isLoggedIn) ? (loginFormView(ctx)) : hSkip(),
       (ctx.user.isLoggedIn) ? (logoutFormView(ctx)) : hSkip()
@@ -31,7 +31,7 @@ export function view(ctx) {
       ])
     ]),
     h("div", {"class": "footer"}, {}, [
-      hText("Footer")
+      hText(`${ctx.copyright}`)
     ])
   ]);
 }
