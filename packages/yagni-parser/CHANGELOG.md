@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 0.4.1 (2019-07-25)
+
+- [*] fixed parsing bug introduced after switching from SAXParser to Tokenizer
+    (context variables within text nodes were processed as text)
+
+
 ## 0.4.0 (2019-07-21)
 
 - [*] production dependency has been updated: parse5@5.1.0
