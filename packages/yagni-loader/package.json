@@ -1,6 +1,6 @@
 {
   "name": "@yagni-js/yagni-loader",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Webpack loader for html template to yagni-dom compatible js module compilation",
   "main": "dist/yagni-loader.cjs.js",
   "module": "dist/yagni-loader.esm.js",
