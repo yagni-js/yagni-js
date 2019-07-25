@@ -58,31 +58,17 @@ describe('yagni-loader', function () {
 
     compiler.run(function (err, stats) {
 
-      const tree = require('./dist/bundle.js').layout;
+      const factory = require('./dist/bundle.js').tree;
+      const tree = factory();
 
-      const expected = {
-        tagName: 'div',
-        attrs: {'class': 'body'},
-        props: {},
-        children: [
-          {
-            tagName: 'div',
-            attrs: {'class': 'sidebar'},
-            props: {},
-            children: ['Sidebar']
-          },
-          {
-            tagName: 'div',
-            attrs: {'class': 'content'},
-            props: {},
-            children: ['Hello, John Smith!']
-          }
-        ]
-      };
+      const expected = [
+        '<div class="body"><div class="sidebar">Sidebar</div>',
+        '<div class="content foo baz bar">Hello, John Smith!</div></div>'
+      ].join('');
 
 
-      expect(tree).to.be.an('object');
-      expect(tree).to.deep.equal(expected);
+      expect(tree).to.be.an('HTMLDivElement');
+      expect(tree.outerHTML).to.deep.equal(expected);
 
       done();
 
