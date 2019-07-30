@@ -3,6 +3,7 @@ const expect = require('chai').expect;
 const rpYagni = require('..');
 const rollup = require('rollup');
 const npm = require('rollup-plugin-node-resolve');
+const terser = require('rollup-plugin-terser').terser;
 
 
 process.chdir(__dirname);
@@ -16,44 +17,38 @@ describe('rollup-plugin-yagni', function () {
       input: './samples/main.js',
       plugins: [
         npm(),
-        rpYagni({})
+        rpYagni({}),
+        terser()
       ],
       external: [
       ]
     }).then(function (bundle) {
 
-      return bundle.generate({format: 'umd', name: 'tree'});
+      return bundle.generate({format: 'umd', name: 'layout', compact: false});
 
     }).then(function (bundle) {
 
-      const fn = new Function(bundle.code);
+      const output = bundle.output;
+
+      expect(output).to.be.an('Array');
+      expect(output).to.have.length(1);
+
+      const fn = new Function(output[0].code);
 
       fn();
 
-      const tree = global.tree;
+      const factory = global.layout;
+      const tree = factory();
 
-      const expected = {
-        tagName: 'div',
-        attrs: {'class': 'body'},
-        props: {},
-        children: [
-          {
-            tagName: 'div',
-            attrs: {'class': 'sidebar'},
-            props: {},
-            children: ['Sidebar']
-          },
-          {
-            tagName: 'div',
-            attrs: {'class': 'content'},
-            props: {},
-            children: ['Hello, John Smith!']
-          }
-        ]
-      };
+      const expected = [
+        '<div class="body"><div class="sidebar">Sidebar</div>',
+        '<div class="content foo baz bar">Hello, John Smith!</div></div>'
+      ].join('');
 
-      expect(tree).to.be.an('object');
-      expect(tree).to.deep.equal(expected);
+
+      expect(tree).to.be.an('HTMLDivElement');
+      expect(tree.outerHTML).to.deep.equal(expected);
+
 
     });
 
