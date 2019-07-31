@@ -1,6 +1,6 @@
 {
   "name": "@yagni-js/yagni-router",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "yagni-js router",
   "main": "dist/yagni-router.cjs.js",
   "module": "dist/yagni-router.esm.js",
