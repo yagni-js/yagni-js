@@ -1,6 +1,6 @@
 {
   "name": "@yagni-js/rollup-plugin-yagni",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Rollup plugin for html template to yagni-dom compatible js module compilation ",
   "main": "dist/rollup-plugin-yagni.cjs.js",
   "module": "dist/rollup-plugin-yagni.esm.js",

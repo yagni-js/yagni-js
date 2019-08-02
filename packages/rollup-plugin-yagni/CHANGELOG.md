@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 0.4.1 (2019-08-02)
+
+- proper latest peer dependencies: @yagni-js/yagni@0.7.1,
+    @yagni-js/yagni-dom@2.2.0
+
+
 ## 0.4.0 (2019-07-30)
 
 - peer dependencies have been updated: @yagni-js/yagni@0.7.1,
