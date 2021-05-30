@@ -59,16 +59,14 @@ import { isArray, isFunction } from './test.js';
  *
  */
 export function transform(spec) {
-  return function (smth) {
-    return keys(spec).reduce(
-      function (acc, key) {
-        const transformer = spec[key];
-        const value = isArray(transformer) ? resultArr(transformer, smth) : result(transformer, smth);
-        return Object.assign({}, acc, obj(key, value));
-      },
-      {}
-    );
-  };
+  return (smth) => keys(spec).reduce(
+    (acc, key) => {
+      const transformer = spec[key];
+      const value = isArray(transformer) ? resultArr(transformer, smth) : result(transformer, smth);
+      return Object.assign({}, acc, obj(key, value));
+    },
+    {}
+  );
 }
 
 
@@ -106,7 +104,5 @@ export function transform(spec) {
  *
  */
 export function transformArr(spec) {
-  return function (smth) {
-    return spec.map(function (transformer) { return isFunction(transformer) ? transformer(smth) : transformer; });
-  };
+  return (smth) => spec.map((transformer) => isFunction(transformer) ? transformer(smth) : transformer);
 }

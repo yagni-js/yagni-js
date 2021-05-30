@@ -1,5 +1,5 @@
 
-import { isDefined, isFunction } from './test.js';
+import { isFunction } from './test.js';
 
 
 /**
@@ -45,9 +45,8 @@ export function identity(smth) {
  *
  */
 export function always(smth) {
-  return function _always() {
-    return smth;
-  };
+  // eslint-disable-next-line no-unused-vars
+  return (_) => smth;
 }
 
 
@@ -78,9 +77,8 @@ export function always(smth) {
  *
  */
 export function lazy(caller, arg) {
-  return function _lazy() {
-    return caller(arg);
-  };
+  // eslint-disable-next-line no-unused-vars
+  return (_) => caller(arg);
 }
 
 
@@ -143,7 +141,7 @@ export function result(smth, arg) {
  *
  */
 export function resultArr(arr, arg) {
-  return arr.map(function _resultArr(smth) { return result(smth, arg); });
+  return arr.map((smth) => result(smth, arg));
 }
 
 
@@ -175,10 +173,7 @@ export function resultArr(arr, arg) {
  *
  */
 export function fn(caller, argGetter) {
-  return function _fn(smth) {
-    const param = argGetter(smth);
-    return caller(param);
-  };
+  return (smth) => caller(argGetter(smth));
 }
 
 
@@ -212,11 +207,7 @@ export function fn(caller, argGetter) {
  *
  */
 export function fn2(caller, arg1Getter, arg2Getter) {
-  return function _fn2(smth) {
-    const arg1 = arg1Getter(smth);
-    const arg2 = arg2Getter(smth);
-    return caller(arg1, arg2);
-  };
+  return (smth) => caller(arg1Getter(smth), arg2Getter(smth));
 }
 
 
@@ -246,9 +237,7 @@ export function fn2(caller, arg1Getter, arg2Getter) {
  *
  */
 export function method(subj, methodName) {
-  return function _method(smth) {
-    return subj[methodName](smth);
-  };
+  return (smth) => subj[methodName](smth);
 }
 
 
@@ -302,11 +291,7 @@ export function method(subj, methodName) {
  *
  */
 export function call(fnGetter, argOrGetter) {
-  return function _call(smth) {
-    const caller = fnGetter(smth);
-    const param = isFunction(argOrGetter) ? argOrGetter(smth) : argOrGetter;
-    return caller(param);
-  };
+  return (smth) => fnGetter(smth)(isFunction(argOrGetter) ? argOrGetter(smth) : argOrGetter);
 }
 
 
@@ -368,7 +353,7 @@ export function call(fnGetter, argOrGetter) {
  *
  */
 export function call2(fnGetter, argOrGetter1, argOrGetter2) {
-  return function _call2(smth) {
+  return (smth) => {
     const caller = fnGetter(smth);
     const arg1 = isFunction(argOrGetter1) ? argOrGetter1(smth) : argOrGetter1;
     const arg2 = isFunction(argOrGetter2) ? argOrGetter2(smth) : argOrGetter2;
@@ -429,7 +414,7 @@ export function call2(fnGetter, argOrGetter1, argOrGetter2) {
  *
  */
 export function callMethod(subj, meth, argOrGetter) {
-  return function _callMethod(smth) {
+  return (smth) => {
     const object = subj(smth);
     const method = isFunction(meth) ? meth(smth) : meth;
     const arg = isFunction(argOrGetter) ? argOrGetter(smth) : argOrGetter;
@@ -499,7 +484,7 @@ export function callMethod(subj, meth, argOrGetter) {
  *
  */
 export function callMethod2(subj, meth, argOrGetter1, argOrGetter2) {
-  return function _callMethod2(smth) {
+  return (smth) => {
     const object = subj(smth);
     const method = isFunction(meth) ? meth(smth) : meth;
     const arg1 = isFunction(argOrGetter1) ? argOrGetter1(smth) : argOrGetter1;

@@ -228,7 +228,5 @@ export function isFalse(smth) {
  *
  */
 export function equals(left) {
-  return function _equals(right) {
-    return left === right;
-  };
+  return (right) => left === right;
 }

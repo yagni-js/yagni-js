@@ -20,9 +20,7 @@
  *
  */
 export function suffix(suff) {
-  return function _suffix(str) {
-    return str + suff;
-  };
+  return (str) => str + suff;
 }
 
 
@@ -47,9 +45,7 @@ export function suffix(suff) {
  *
  */
 export function prefix(pref) {
-  return function _prefix(str) {
-    return pref + str;
-  };
+  return (str) => pref + str;
 }
 
 
@@ -78,9 +74,7 @@ export function prefix(pref) {
  *
  */
 export function split(separator) {
-  return function _split(str) {
-    return str.split(separator);
-  };
+  return (str) => str.split(separator);
 }
 
 
@@ -103,7 +97,7 @@ export function split(separator) {
  *
  */
 export function camelize(str) {
-  return str.replace(/-([a-z])/g, function (m, x) { return x.toUpperCase(); });
+  return str.replace(/-([a-z])/g, (m, x) => x.toUpperCase());
 }
 
 
@@ -133,9 +127,7 @@ export function camelize(str) {
  *
  */
 export function test(regexp) {
-  return function _test(str) {
-    return regexp.test(str);
-  };
+  return (str) => regexp.test(str);
 }
 
 
@@ -165,9 +157,7 @@ export function test(regexp) {
  *
  */
 export function match(regexp) {
-  return function _match(str) {
-    return str.match(regexp);
-  };
+  return (str) => str.match(regexp);
 }
 
 
@@ -197,9 +187,7 @@ export function match(regexp) {
  *
  */
 export function replace(from, to) {
-  return function _replace(str) {
-    return str.replace(from, to);
-  };
+  return (str) => str.replace(from, to);
 }
 
 
@@ -228,9 +216,7 @@ export function replace(from, to) {
  *
  */
 export function slice(pos) {
-  return function _slice(str) {
-    return str.slice(pos);
-  };
+  return (str) => str.slice(pos);
 }
 
 
@@ -263,9 +249,7 @@ export function slice(pos) {
  *
  */
 export function slice2(start, end) {
-  return function _slice2(str) {
-    return str.slice(start, end);
-  };
+  return (str) => str.slice(start, end);
 }
 
 
@@ -291,6 +275,7 @@ export function slice2(start, end) {
  *
  */
 export function repeat(str) {
+  // eslint-disable-next-line better/no-function-expressions
   return function _repeat(count) {
     return count === 0 ? '' : (count > 1 ? (str + _repeat(count - 1)) : str);
   };

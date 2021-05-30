@@ -5,15 +5,17 @@ module.exports = {
     browser: true
   },
   plugins: [
-    "fp",
+    "functional",
     "better",
     "import"
   ],
   extends: [
     "eslint:recommended",
-    "plugin:fp/recommended",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "plugin:functional/external-recommended",
+    "plugin:functional/recommended",
+    "plugin:functional/stylitic"
   ],
   rules: {
     // eslint:recommended
@@ -23,28 +25,27 @@ module.exports = {
     "indent": ["error", 2, {SwitchCase: 1}],
     "key-spacing": ["error", {beforeColon: false, afterColon: true}],
     "keyword-spacing": ["error", {before: true, after: true}],
-    "no-unused-vars": "off",  // handled by eslint-plugin-fp
+    "no-unused-vars": "error",
     // eslint-plugin-better
     "better/no-ifs": "error",
     "better/no-new": "error",
     "better/no-instanceofs": "error",
     "better/explicit-return": "error",
-    // following rules are handled by eslint-plugin-fp
-    "better/no-deletes": "off",
-    "better/no-exceptions": "off",
-    "better/no-classes": "off",
+    "better/no-deletes": "error",
+    "better/no-exceptions": "error",
+    "better/no-classes": "error",
     "better/no-exports": "off",
-    "better/no-fors": "off",
-    "better/no-function-expressions": "off",
+    "better/no-fors": "error",
+    "better/no-function-expressions": "error",
     "better/no-imports": "off",
-    "better/no-nulls": "off",
-    "better/no-reassigns": "off",
-    "better/no-switches": "off",
-    "better/no-this": "off",
-    "better/no-typeof": "off",
-    "better/no-undefined": "off",
-    "better/no-variable-declaration": "off",
-    "better/no-whiles": "off",
+    "better/no-nulls": "error",
+    "better/no-reassigns": "error",
+    "better/no-switches": "error",
+    "better/no-this": "error",
+    "better/no-typeofs": "error",
+    "better/no-undefined": "error",
+    "better/no-variable-declaration": "error",
+    "better/no-whiles": "error",
     // eslint-plugin-import
     "import/no-extraneous-dependencies": "error",
     "import/no-absolute-path": "error",

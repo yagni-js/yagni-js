@@ -21,9 +21,9 @@
  *
  */
 export function tap(sideEffect) {
-  return function (smth) {
+  return (smth) => {
     // NB. side effect
-    // eslint-disable-next-line fp/no-unused-expression
+    // eslint-disable-next-line no-unused-vars
     const r = sideEffect(smth);
     return smth;
   };
@@ -52,7 +52,6 @@ export function tap(sideEffect) {
  *
  */
 export function mutate(subj, attr, value) {
-  // eslint-disable-next-line fp/no-mutation
-  subj[attr] = value;
-  return subj;
+  // eslint-disable-next-line functional/immutable-data
+  return Object.defineProperty(subj, attr, {value: value, writable: true, enumerable: true, configurable: true});
 }

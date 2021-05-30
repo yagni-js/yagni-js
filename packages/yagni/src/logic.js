@@ -40,9 +40,7 @@
  *
  */
 export function ifElse(predicate, fnIf, fnElse) {
-  return function _ifElse(smth) {
-    return predicate(smth) ? fnIf(smth) : fnElse(smth);
-  };
+  return (smth) => predicate(smth) ? fnIf(smth) : fnElse(smth);
 }
 
 
@@ -75,9 +73,7 @@ export function ifElse(predicate, fnIf, fnElse) {
  *
  */
 export function and(left, right) {
-  return function _and(smth) {
-    return left(smth) && right(smth);
-  };
+  return (smth) => left(smth) && right(smth);
 }
 
 
@@ -110,9 +106,7 @@ export function and(left, right) {
  *
  */
 export function or(left, right) {
-  return function _or(smth) {
-    return left(smth) || right(smth);
-  };
+  return (smth) => left(smth) || right(smth);
 }
 
 
@@ -141,7 +135,5 @@ export function or(left, right) {
  *
  */
 export function not(test) {
-  return function _not(smth) {
-    return !test(smth);
-  };
+  return (smth) => !test(smth);
 }

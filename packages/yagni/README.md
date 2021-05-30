@@ -3,12 +3,15 @@
 Yet another **pure functional** frontend library.
 
 **Pure functional** in this context means functional code style - library code is
-linted using [eslint-plugin-fp][eslint-plugin-fp] and
+linted using [eslint-plugin-functional][eslint-plugin-functional] and
 [eslint-plugin-better][eslint-plugin-better]. Javascript code is purely
-functional with just two exceptions:
+functional with some exceptions:
 
 - `tap()` function, used for controllable side effects,
-- `mutate()` function, used for controllable mutations.
+- `mutate()` function, used for controllable mutations,
+- `always()` function, used to always return the same value,
+- `lazy()` function, used for lazy calculations,
+- `promise()` function, used to create new Promise instance.
 
 
 ## Installation
@@ -116,7 +119,7 @@ const query = toQuery(params);
 [Unlicense][unlicense]
 
 
-[eslint-plugin-fp]: https://github.com/jfmengels/eslint-plugin-fp
+[eslint-plugin-functional]: https://github.com/jonaskello/eslint-plugin-functional
 [eslint-plugin-better]: https://github.com/idmitriev/eslint-plugin-better
 [es6-modules]: https://hacks.mozilla.org/2015/08/es6-in-depth-modules/
 [rollup]: https://rollupjs.org/

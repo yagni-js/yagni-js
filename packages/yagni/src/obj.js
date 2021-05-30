@@ -53,9 +53,7 @@ export function obj(key, value) {
  *
  */
 export function objOf(key) {
-  return function (value) {
-    return obj(key, value);
-  };
+  return (value) => obj(key, value);
 }
 
 
@@ -85,9 +83,7 @@ export function objOf(key) {
  *
  */
 export function merge(a) {
-  return function (b) {
-    return Object.assign({}, a, b);
-  };
+  return (b) => Object.assign({}, a, b);
 }
 
 
@@ -120,9 +116,7 @@ export function merge(a) {
  *
  */
 export function pick(key) {
-  return function (smth) {
-    return smth[key];
-  };
+  return (smth) => smth[key];
 }
 
 
@@ -153,9 +147,7 @@ export function pick(key) {
  *
  */
 export function pickFrom(smth) {
-  return function (key) {
-    return smth[key];
-  };
+  return (key) => smth[key];
 }
 
 
@@ -196,9 +188,7 @@ export function pickFrom(smth) {
  *     const res2 = getFooBazBar({});         // => undefined
  */
 export function pickPath(arr) {
-  return function (smth) {
-    return arr.reduce(function (acc, key) { return isNil(acc) ? acc : acc[key]; }, smth);
-  };
+  return (smth) => arr.reduce((acc, key) => isNil(acc) ? acc : acc[key], smth);
 }
 
 
@@ -228,9 +218,7 @@ export function pickPath(arr) {
  *
  */
 export function has(key) {
-  return function (smth) {
-    return isDefined(smth[key]);
-  };
+  return (smth) => isDefined(smth[key]);
 }
 
 
@@ -278,7 +266,7 @@ export function keys(smth) {
  *
  */
 export function values(smth) {
-  return keys(smth).map(function (key) { return smth[key]; });
+  return keys(smth).map((key) => smth[key]);
 }
 
 
@@ -309,7 +297,7 @@ export function values(smth) {
  *
  */
 export function items(smth) {
-  return keys(smth).map(function (key) { return {key: key, value: smth[key]}; });
+  return keys(smth).map((key) => { return {key: key, value: smth[key]}; });
 }
 
 
@@ -337,14 +325,10 @@ export function items(smth) {
  *
  */
 export function omit(arr) {
-  return function _omit(smth) {
-    return keys(smth).reduce(
-      function (acc, key) {
-        return arr.indexOf(key) === -1 ? Object.assign({}, acc, obj(key, smth[key])) : acc;
-      },
-      {}
-    );
-  };
+  return (smth) => keys(smth).reduce(
+    (acc, key) => arr.indexOf(key) === -1 ? Object.assign({}, acc, obj(key, smth[key])) : acc,
+    {}
+  )
 }
 
 
@@ -381,13 +365,7 @@ export function omit(arr) {
  *
  */
 export function mapObj(mapper) {
-  return function _mapObj(obj) {
-    return keys(obj).map(
-      function __mapObj(key, idx) {
-        return mapper(key, obj[key], idx);
-      }
-    );
-  };
+  return (obj) => keys(obj).map((key, idx) => mapper(key, obj[key], idx));
 }
 
 
@@ -437,14 +415,5 @@ export function mapObj(mapper) {
  *
  */
 export function reduceObj(reducer) {
-  return function _reduceObj(obj) {
-    return function __reduceObj(initial) {
-      return keys(obj).reduce(
-        function ___reduceObj(acc, key, idx) {
-          return reducer(acc, key, obj[key], idx);
-        },
-        initial
-      );
-    };
-  };
+  return (obj) => (initial) => keys(obj).reduce((acc, key, idx) => reducer(acc, key, obj[key], idx), initial);
 }

@@ -92,9 +92,7 @@ export const length = pick('length');
  *
  */
 export function map(mapper) {
-  return function _map(arr) {
-    return arr.map(mapper);
-  };
+  return (arr) => arr.map(mapper);
 }
 
 
@@ -139,11 +137,7 @@ export function map(mapper) {
  *
  */
 export function reduce(reducer) {
-  return function _reduce(arr) {
-    return function __reduce(initial) {
-      return arr.reduce(reducer, initial);
-    };
-  };
+  return (arr) => (initial) => arr.reduce(reducer, initial);
 }
 
 
@@ -184,9 +178,7 @@ export function reduce(reducer) {
  *
  */
 export function reduceToArr(reducer) {
-  return function _reduceToArr(arr) {
-    return arr.reduce(reducer, []);
-  };
+  return (arr) => arr.reduce(reducer, []);
 }
 
 
@@ -236,9 +228,7 @@ export function reduceToArr(reducer) {
  *
  */
 export const pipe = reduce(
-  function _pipe(acc, piper) {
-    return piper(acc);
-  }
+  (acc, piper) => piper(acc)
 );
 
 
@@ -290,9 +280,7 @@ export const pipe = reduce(
  *
  */
 export function pipeP(arr) {
-  return function _pipeP(initial) {
-    return arr.reduce(function (acc, piper) { return acc.then(piper); }, Promise.resolve(initial));
-  };
+  return (initial) => arr.reduce((acc, piper) => acc.then(piper), Promise.resolve(initial));
 }
 
 
@@ -320,9 +308,7 @@ export function pipeP(arr) {
  *
  */
 export function filter(predicate) {
-  return function _filter(arr) {
-    return arr.filter(predicate);
-  };
+  return (arr) => arr.filter(predicate);
 }
 
 
@@ -357,9 +343,7 @@ export function filter(predicate) {
  */
 export function filterMap(predicate, mapper) {
   return reduceToArr(
-    function _filterMap(acc, smth) {
-      return predicate(smth) ? acc.concat(mapper(smth)) : acc;
-    }
+    (acc, smth) => predicate(smth) ? acc.concat(mapper(smth)) : acc
   );
 }
 
@@ -389,9 +373,7 @@ export function filterMap(predicate, mapper) {
  *
  */
 export function concat(arr) {
-  return function _concat(smth) {
-    return arr.concat(smth);
-  };
+  return (smth) => arr.concat(smth);
 }
 
 
@@ -426,9 +408,7 @@ export function concat(arr) {
  *
  */
 export function join(separator) {
-  return function _join(arr) {
-    return isDefined(separator) ? arr.join(separator) : arr.join();
-  };
+  return (arr) => isDefined(separator) ? arr.join(separator) : arr.join();
 }
 
 
@@ -453,9 +433,7 @@ export function join(separator) {
  *
  */
 export const flatten = reduceToArr(
-  function _flatten(acc, item) {
-    return acc.concat(isArray(item) ? flatten(item) : item);
-  }
+  (acc, item) => acc.concat(isArray(item) ? flatten(item) : item)
 );
 
 
@@ -489,11 +467,10 @@ export const flatten = reduceToArr(
  *
  */
 export function flattenMap(mapper) {
+  // eslint-disable-next-line better/no-function-expressions
   return function _flattenMap(arr) {
     return arr.reduce(
-      function __flattenMap(acc, item) {
-        return acc.concat(isArray(item) ? _flattenMap(item) : mapper(item));
-      },
+      (acc, item) => acc.concat(isArray(item) ? _flattenMap(item) : mapper(item)),
       []
     );
   };
@@ -525,9 +502,7 @@ export function flattenMap(mapper) {
  *
  */
 export function all(predicate) {
-  return function _all(arr) {
-    return arr.every(predicate);
-  };
+  return (arr) => arr.every(predicate);
 }
 
 
@@ -557,9 +532,7 @@ export function all(predicate) {
  *
  */
 export function any(predicate) {
-  return function _any(arr) {
-    return arr.some(predicate);
-  };
+  return (arr) => arr.some(predicate);
 }
 
 
@@ -591,9 +564,7 @@ export function any(predicate) {
  *
  */
 export function index(smth) {
-  return function _index(arr) {
-    return arr.indexOf(smth);
-  };
+  return (arr) => arr.indexOf(smth);
 }
 
 
@@ -623,9 +594,7 @@ export function index(smth) {
  *
  */
 export function indexIn(arr) {
-  return function _indexIn(smth) {
-    return arr.indexOf(smth);
-  };
+  return (smth) => arr.indexOf(smth);
 }
 
 
@@ -711,7 +680,5 @@ export function existsIn(arr) {
  *
  */
 export const unique = reduceToArr(
-  function _unique(acc, item) {
-    return acc.indexOf(item) === -1 ? acc.concat(item) : acc;
-  }
+  (acc, item) => acc.indexOf(item) === -1 ? acc.concat(item) : acc
 );
