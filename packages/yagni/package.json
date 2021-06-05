@@ -1,0 +1,44 @@
+{
+  "name": "@yagni-js/yagni",
+  "version": "0.7.1",
+  "description": "Yet another functional library",
+  "main": "dist/yagni.cjs.js",
+  "module": "dist/yagni.esm.js",
+  "files": [
+    "dist",
+    "UNLICENSE"
+  ],
+  "scripts": {
+    "test": "mocha",
+    "pretest": "yarn run build",
+    "build": "rollup -c",
+    "prebuild": "rm -rf dist/*",
+    "prepublishOnly": "yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yagni-js/yagni.git"
+  },
+  "keywords": [
+    "frontend",
+    "functional",
+    "yagni"
+  ],
+  "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/yagni-js/yagni/issues"
+  },
+  "homepage": "https://github.com/yagni-js/yagni#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-eslint": "^8.0.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.27.0",
+    "eslint-plugin-better": "^0.1.5",
+    "eslint-plugin-functional": "^3.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "mocha": "^8.4.0",
+    "rollup": "^2.50.4"
+  }
+}
