@@ -1,0 +1,58 @@
+{
+  "name": "@yagni-js/yagni-parser",
+  "version": "0.4.1",
+  "description": "Yet another functional HTML to Javascript compiler (compatible with @yagni-js/yagni-dom)",
+  "main": "dist/yagni-parser.cjs.js",
+  "module": "dist/yagni-parser.esm.js",
+  "files": [
+      "UNLICENSE",
+    "dist"
+  ],
+  "scripts": {
+    "test": "mocha",
+    "pretest": "yarn run build",
+    "build": "rollup -c",
+    "prebuild": "rm -rf dist/*",
+    "prepublishOnly": "yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yagni-js/yagni-parser.git"
+  },
+  "keywords": [
+    "frontend",
+    "functional",
+    "yagni-js",
+    "cleanjs",
+    "html",
+    "parser"
+  ],
+  "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/yagni-js/yagni-parser/issues"
+  },
+  "homepage": "https://github.com/yagni-js/yagni-parser#readme",
+  "dependencies": {
+    "parse5": "^5.1.0"
+  },
+  "devDependencies": {
+    "@yagni-js/yagni": "^0.7.1",
+    "@yagni-js/yagni-dom": "^2.2.0",
+    "chai": "^4.2.0",
+    "eslint": "6.1.0",
+    "eslint-plugin-better": "^0.1.5",
+    "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.0",
+    "reify": "^0.20.12",
+    "rollup": "^1.17.0",
+    "rollup-plugin-commonjs": "10.0.1",
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  },
+  "peerDependencies": {
+    "@yagni-js/yagni": "^0.7.1",
+    "@yagni-js/yagni-dom": "^2.2.0"
+  }
+}

@@ -1,0 +1,21 @@
+<div class="root">
+    <div class="header">
+        <h1 class="{{ ctx.headerClass }}">Welcome to {{ ctx.headerTitle }}</h1>
+        <partial src="./login-form.html" p-if-not="ctx.user.isLoggedIn"></partial>
+        <partial src="./logout-form.html" p-if="ctx.user.isLoggedIn"></partial>
+    </div>
+    <div class="main">
+        <div class="sidebar">
+            <nav class="mainmenu">
+                <partial src="./menu/item.html" p-map="ctx.mainmenu"></partial>
+            </nav>
+        </div>
+        <div class="content" id="content">
+            <div class="content-body" id="content-body">Content</div>
+            <nav class="relatedmenu">
+                <partial src="./menu/item.html" p-if="ctx.showRelatedMenu" p-map="ctx.relatedmenu" related="yes"></partial>
+            </nav>
+        </div>
+    </div>
+    <div class="footer">{{ ctx.copyright }}</div>
+</div>
