@@ -2,10 +2,20 @@
   "name": "@yagni-js/monorepo",
   "private": true,
   "version": "0.0.0",
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "devDependencies": {
+    "@rollup/plugin-eslint": "^8.0.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.27.0",
+    "eslint-plugin-better": "^0.1.5",
+    "eslint-plugin-functional": "^3.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "mocha": "^8.4.0",
+    "rollup": "^2.50.4"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"
