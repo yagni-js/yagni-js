@@ -40,3 +40,17 @@ describe('mutate()', function () {
   });
 
 });
+
+
+describe('mutateS()', function () {
+
+  const o = {foo: 'baz'};
+
+  it('returns passed in object mutating object property in place', function () {
+
+    expect(_.mutateS({obj: o, attr: 'foo', value: 42})).to.equal(o);
+    expect(o).to.have.property('foo', 42);
+
+  });
+
+});
