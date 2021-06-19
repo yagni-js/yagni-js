@@ -17,28 +17,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yagni-js/yagni.git"
+    "url": "https://github.com/yagni-js/yagni-js",
+    "directory": "packages/yagni"
   },
   "keywords": [
+    "yagni-js",
+    "yagni",
     "frontend",
-    "functional",
-    "yagni"
+    "functional"
   ],
-  "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/yagni-js/yagni/issues"
+    "url": "https://github.com/yagni-js/yagni-js/issues"
   },
-  "homepage": "https://github.com/yagni-js/yagni#readme",
-  "dependencies": {},
-  "devDependencies": {
-    "@rollup/plugin-eslint": "^8.0.0",
-    "chai": "^4.3.4",
-    "eslint": "^7.27.0",
-    "eslint-plugin-better": "^0.1.5",
-    "eslint-plugin-functional": "^3.2.1",
-    "eslint-plugin-import": "^2.23.4",
-    "mocha": "^8.4.0",
-    "rollup": "^2.50.4"
-  }
+  "homepage": "https://github.com/yagni-js/yagni-js/tree/main/packages/yagni"
 }
