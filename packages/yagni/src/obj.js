@@ -1,20 +1,17 @@
 
 import { isNil, isDefined } from './test.js';
-import { mutate } from './impure.js';
 
 
 /**
  * Takes `key` and `value` as arguments and returns **a new object**.
  *
- * Uses `mutate` to mutate newly created empty object.
+ * Uses "Computed property name" ES2015 feature under the hood.
  *
  * @category Object
  *
  * @param {String} key key name
  * @param {*} value key value
  * @returns {Object} a new object, which has only one key
- *
- * @see mutate
  *
  * @example
  *
@@ -25,7 +22,7 @@ import { mutate } from './impure.js';
  *
  */
 export function obj(key, value) {
-  return mutate({}, key, value);
+  return {[key]: value};
 }
 
 
