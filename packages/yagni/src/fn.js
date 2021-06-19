@@ -225,6 +225,9 @@ export function fn2(caller, arg1Getter, arg2Getter) {
  * the result of calling `methodName` method of `subj` using `smth` as an
  * argument
  *
+ * @see method2
+ * @see method3
+ *
  * @example
  *
  *     import {method} from '@yagni-js/yagni';
@@ -238,6 +241,75 @@ export function fn2(caller, arg1Getter, arg2Getter) {
  */
 export function method(subj, methodName) {
   return (smth) => subj[methodName](smth);
+}
+
+
+/**
+ * Takes some object `subj` as a first argument and `methodName` as a second
+ * argument and returns **a new function**, which then takes `arg1` and `arg2`
+ * as arguments and returns result of calling `methodName` method of `subj`
+ * using `arg1` and `arg2` as arguments.
+ *
+ * @category Function
+ *
+ * @param {Object} subj owner of a method to call
+ * @param {String} methodName method name
+ * @returns {Function} a new function to take `arg1` and `arg2` and return
+ * the result of calling `methodName` method of `subj` using `arg1` and `arg2`
+ * as an arguments
+ *
+ * @see method
+ * @see method3
+ *
+ * @example
+ *
+ *     import {method2} from '@yagni-js/yagni';
+ *
+ *     const merge2 = method2(Object, 'assign');
+ *
+ *     const target = {};
+ *     const src = {foo: 42, baz: true};
+ *
+ *     const res = merge2(target, src);  // => {foo: 42, baz: true}, res === target
+ *
+ */
+export function method2(subj, methodName) {
+  return (arg1, arg2) => subj[methodName](arg1, arg2);
+}
+
+
+/**
+ * Takes some object `subj` as a first argument and `methodName` as a second
+ * argument and returns **a new function**, which then takes `arg1`, `arg2`
+ * and `arg3` as arguments and returns result of calling `methodName` method
+ * of `subj` using `arg1`, `arg2` and `arg3` as arguments.
+ *
+ * @category Function
+ *
+ * @param {Object} subj owner of a method to call
+ * @param {String} methodName method name
+ * @returns {Function} a new function to take `arg1` and `arg2` and return
+ * the result of calling `methodName` method of `subj` using `arg1`, `arg2` and
+ * `arg3` as an arguments
+ *
+ * @see method
+ * @see method2
+ *
+ * @example
+ *
+ *     import {method3} from '@yagni-js/yagni';
+ *
+ *     const merge3 = method3(Object, 'assign');
+ *
+ *     const target = {};
+ *     const a = {foo: 42};
+ *     const b = {baz: true};
+ *
+ *     const res = merge3(target, a, b);  // => {foo: 42, baz: true}, res === target
+ *
+ */
+export function method3(subj, methodName) {
+  return (arg1, arg2, arg3) => subj[methodName](arg1, arg2, arg3);
 }
 
 

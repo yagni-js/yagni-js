@@ -172,6 +172,55 @@ describe('method()', function () {
 });
 
 
+describe('method2()', function () {
+
+  const merge2 = _.method2(Object, 'assign');
+
+  it('returns function to be called', function () {
+
+    expect(merge2).to.be.a('function');
+
+  });
+
+  it('returns method call result', function () {
+
+    const target = {foo: 42};
+    const src = {baz: true};
+
+    const res = merge2(target, src);
+    expect(res).to.equal(target);
+    expect(res).to.deep.equal({foo: 42, baz: true});
+
+  });
+
+});
+
+
+describe('method3()', function () {
+
+  const merge3 = _.method3(Object, 'assign');
+
+  it('returns function to be called', function () {
+
+    expect(merge3).to.be.a('function');
+
+  });
+
+  it('returns method call result', function () {
+
+    const target = {};
+    const a = {foo: 42};
+    const b = {baz: true};
+
+    const res = merge3(target, a, b);
+    expect(res).to.equal(target);
+    expect(res).to.deep.equal({foo: 42, baz: true});
+
+  });
+
+});
+
+
 describe('call()', function () {
 
   const o = {
