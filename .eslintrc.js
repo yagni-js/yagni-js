@@ -52,7 +52,19 @@ module.exports = {
     "import/no-mutable-exports": "error",
     "import/no-commonjs": "error",
     "import/no-amd": "error",
-    "import/no-nodejs-modules": "error"
+    "import/no-nodejs-modules": "error",
+    // eslint-plugin-functional
+    "functional/functional-parameters": ["error", {
+      allowRestParameter: false,
+      allowArgumentsKeyword: false,
+      enforceParameterCount: {
+        count: "atLeastOne",
+        ignoreIIFE: true
+      }
+    }]
+  },
+  settings: {
+    "import/internal-regex": new RegExp('^@yagni-js/')
   },
   parserOptions: {
     ecmaVersion: 6,
