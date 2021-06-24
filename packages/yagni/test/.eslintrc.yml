@@ -1,0 +1,13 @@
+---
+
+root: true
+env:
+  es6: true
+  node: true
+
+globals:
+  describe: readonly
+  it: readonly
+
+extends:
+  - "eslint:recommended"
