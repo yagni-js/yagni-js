@@ -202,7 +202,7 @@ describe('repeat()', function () {
 
   it('should return a new string, containing specified number of copies of initial string', function () {
 
-    const repeatFoo = _.repeat('foo');;
+    const repeatFoo = _.repeat('foo');
     const repeatSpace = _.repeat(' ');
 
     expect(repeatFoo(0)).to.equal('');

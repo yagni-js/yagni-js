@@ -103,7 +103,7 @@ describe('then()', function () {
 
     let cnt = 0;
 
-    function onSuccess(msg) {
+    function onSuccess() {
 
       throw new Error('bar');
 
