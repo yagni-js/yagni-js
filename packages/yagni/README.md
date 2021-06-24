@@ -8,7 +8,7 @@ linted using [eslint-plugin-functional][eslint-plugin-functional] and
 functional with some exceptions:
 
 - `tap()` function, used for controllable side effects,
-- `mutate()` function, used for controllable mutations,
+- `mutate()` and `mutateS()` functions, used for controllable mutations,
 - `always()` function, used to always return the same value,
 - `lazy()` function, used for lazy calculations,
 - `promise()` function, used to create new Promise instance.
