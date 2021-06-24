@@ -43,7 +43,7 @@ const valueDescriptor = transform({
   value: identity,
   writable: true,
   enumerable: true,
-  cnfigurabke: true
+  configurable: true
 });
 const specValueDescriptor = pipe([
   pickValue,
