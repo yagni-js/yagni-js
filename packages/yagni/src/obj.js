@@ -22,7 +22,7 @@ import { isNil, isDefined } from './test.js';
  *
  */
 export function obj(key, value) {
-  return {[key]: value};
+  return isDefined(key) ? {[key]: value} : {};
 }
 
 

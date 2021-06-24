@@ -5,12 +5,21 @@ const _ = require('..');
 
 describe('obj()', function () {
 
-  const o = _.obj('foo', 'bar');
-
   it('returns proper object', function () {
+
+    const o = _.obj('foo', 'bar');
 
     expect(o).to.be.an('object');
     expect(o).to.deep.equal({foo: 'bar'});
+
+  });
+
+  it('returns empty object', function () {
+
+    const o = _.obj();
+
+    expect(o).to.be.an('object');
+    expect(o).to.deep.equal({});
 
   });
 
