@@ -1,8 +1,5 @@
 
-import { pipe } from './arr.js';
-import { identity, method3 } from './fn.js';
 import { pick } from './obj.js';
-import { transform } from './transform';
 
 /**
  * Takes a function `sideEffect` as an argument and returns **a new function**,
@@ -35,22 +32,6 @@ export function tap(sideEffect) {
 }
 
 
-const defineProperty = method3(Object, 'defineProperty');
-const pickObj = pick('obj');
-const pickAttr = pick('attr');
-const pickValue = pick('value');
-const valueDescriptor = transform({
-  value: identity,
-  writable: true,
-  enumerable: true,
-  configurable: true
-});
-const specValueDescriptor = pipe([
-  pickValue,
-  valueDescriptor
-]);
-
-
 /**
  * Takes object, attribute name and new value for the attribute as arguments,
  * performs mutation and returns same object.
@@ -73,9 +54,15 @@ const specValueDescriptor = pipe([
  *
  */
 export function mutate(obj, attr, value) {
-  return defineProperty(obj, attr, valueDescriptor(value));
+  // eslint-disable-next-line functional/immutable-data,functional/no-expression-statement,better/no-reassigns
+  obj[attr] = value;
+  return obj;
 }
 
+
+const pickObj = pick('obj');
+const pickAttr = pick('attr');
+const pickValue = pick('value');
 
 /**
  * Takes an object `spec` as an argument, performs mutation of `spec.obj` object
@@ -104,5 +91,5 @@ export function mutate(obj, attr, value) {
  *
  */
 export function mutateS(spec) {
-  return defineProperty(pickObj(spec), pickAttr(spec), specValueDescriptor(spec));
+  return mutate(pickObj(spec), pickAttr(spec), pickValue(spec));
 }
