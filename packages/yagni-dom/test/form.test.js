@@ -118,6 +118,20 @@ describe('serializeInput()', function () {
 
   });
 
+  it('should return serialized value for select element', function () {
+
+    const factory = dom.h('select', {name: 'lll'}, {}, [
+      dom.h('option', {value: 'foo'}, {}, [dom.hText('foo')]),
+      dom.h('option', {value: 'baz'}, {}, [dom.hText('baz')]),
+      dom.h('option', {value: 'lll'}, {selected: true}, [dom.hText('lll')]),
+      dom.h('option', {value: 'bar'}, {}, [dom.hText('bar')])
+    ]);
+    const el = factory();
+
+    expect(dom.serializeInput(el)).to.deep.equal({lll: 'lll'});
+
+  });
+
 });
 
 
