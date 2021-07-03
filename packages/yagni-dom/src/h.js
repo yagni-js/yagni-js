@@ -1,10 +1,11 @@
 
-import { always, equals, ifElse, isArray, lazy, pipe, reduce } from '@yagni-js/yagni';
+import { always, callMethod2, equals, fn, isArray, lazy, pipe, result, tap } from '@yagni-js/yagni';
 
 import { setAttrs } from './attrs.js';
 import { createElement, createSVGElement, createText } from './create.js';
 import { setProps } from './props.js';
-import { appendAfter, removeChildren, replace } from './mutate.js';
+import { removeChildren, replace } from './mutate.js';
+import { parent } from './tree.js';
 
 
 /**
@@ -69,10 +70,7 @@ export const hSkip = always(skipMarker);
  *
  */
 function createChild(target, factory) {
-  const el = factory();
-  // NB. side effect - unused assignment
-  const child = target.appendChild(el);
-  return target
+  return parent(target.appendChild(factory()));
 }
 
 
@@ -92,15 +90,11 @@ function createChild(target, factory) {
  *
  */
 function createChildren(children) {
-  return function _createChildren(target) {
-    return children.reduce(
-      function __createChildren(el, item) {
-        return isArray(item) ? item.reduce(__createChildren, el) : (
-          isSkipMarker(item) ? el : createChild(el, item));
-      },
-      target
-    );
-  };
+  function __createChild(el, item) {
+    return isArray(item) ? item.reduce(__createChild, el) : (
+      isSkipMarker(item) ? el : createChild(el, item));
+  }
+  return (target) => children.reduce(__createChild, target);
 }
 
 
@@ -273,12 +267,11 @@ export function hText(text) {
  *
  */
 export function render(target) {
-  return function (factory) {
-    const el = factory();
-    // NB. unused assignment
-    const res = target.insertAdjacentElement('beforeend', el);
-    return target;
-  };
+  const alwaysTarget = always(target);
+  return pipe([
+    callMethod2(alwaysTarget, 'insertAdjacentElement', 'beforeend', result),
+    alwaysTarget
+  ]);
 }
 
 
@@ -335,10 +328,7 @@ export function render(target) {
  *
  */
 export function renderAfter(target) {
-  return function (factory) {
-    const el = factory();
-    return target.insertAdjacentElement('afterend', el);
-  };
+  return callMethod2(always(target), 'insertAdjacentElement', 'afterend', result);
 }
 
 
@@ -392,14 +382,12 @@ export function renderAfter(target) {
  *
  */
 export function renderC(target) {
-  return function (factory) {
-    const el = factory();
-    // NB. unused assignment
-    const cleaned = removeChildren(target);
-    // NB. unused assignment
-    const res = target.insertAdjacentElement('beforeend', el);
-    return target;
-  };
+  const alwaysTarget = always(target);
+  return pipe([
+    tap(fn(removeChildren, alwaysTarget)),
+    callMethod2(alwaysTarget, 'insertAdjacentElement', 'beforeend', result),
+    alwaysTarget
+  ]);
 }
 
 
@@ -453,9 +441,8 @@ export function renderC(target) {
  *
  */
 export function renderR(target) {
-  const replacer = replace(target);
-  return function _renderR(factory) {
-    const el = factory();
-    return replacer(el);
-  };
+  return pipe([
+    result,
+    replace(target)
+  ]);
 }

@@ -63,9 +63,7 @@ export function createElement(tagName) {
  *
  */
 export function createElementNS(namespace) {
-  return function (tagName) {
-    return doc.createElementNS(namespace, tagName);
-  };
+  return (tagName) => doc.createElementNS(namespace, tagName);
 }
 
 

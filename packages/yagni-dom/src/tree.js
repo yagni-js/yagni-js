@@ -227,7 +227,7 @@ export const children = pipe([
  */
 export function siblings(selector) {
   const match = matches(selector);
-  return function _siblings(el) {
+  return (el) => {
     function matched(x) { return x !== el && match(x); }
     return pipe([
       parent,

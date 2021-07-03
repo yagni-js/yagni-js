@@ -1,5 +1,5 @@
 
-import { fn2, identity, ifElse, isNil, pick, pipe, transform } from '@yagni-js/yagni';
+import { always, fn2, identity, ifElse, isNil, method, pick, pipe, tap, transform } from '@yagni-js/yagni';
 
 import { children, firstChild, parent, next } from './tree.js';
 
@@ -37,11 +37,7 @@ import { children, firstChild, parent, next } from './tree.js';
  *
  */
 export function append(el) {
-  return function _append(target) {
-    // NB. unused assignment
-    const child = target.appendChild(el);
-    return target;
-  };
+  return tap((target) => target.appendChild(el));
 }
 
 
@@ -78,11 +74,10 @@ export function append(el) {
  *
  */
 export function appendTo(target) {
-  return function _appendTo(el) {
-    // NB. unused assignment
-    const child = target.appendChild(el);
-    return target;
-  };
+  return pipe([
+    method(target, 'appendChild'),
+    always(target)
+  ]);
 }
 
 
@@ -125,11 +120,7 @@ export function appendTo(target) {
  *
  */
 export function appendAfter(target) {
-  return function _appendAfter(el) {
-    // NB. unused assignment
-    const child = parent(target).insertBefore(el, next(target));
-    return el;
-  };
+  return tap((el) => parent(target).insertBefore(el, next(target)));
 }
 
 
@@ -172,11 +163,7 @@ export function appendAfter(target) {
  *
  */
 export function prepend(el) {
-  return function _prepend(target) {
-    // NB. unused assignment
-    const child = target.insertBefore(el, firstChild(target));
-    return target;
-  };
+  return tap((target) => target.insertBefore(el, firstChild(target)));
 }
 
 
@@ -218,11 +205,10 @@ export function prepend(el) {
  *
  */
 export function prependTo(target) {
-  return function _prependTo(el) {
-    // NB. unused assignment
-    const child = target.insertBefore(el, firstChild(target));
-    return target;
-  };
+  return pipe([
+    (el) => target.insertBefore(el, firstChild(target)),
+    always(target)
+  ]);
 }
 
 
@@ -261,7 +247,7 @@ export function prependTo(target) {
  *
  */
 export function removeChild(el, child) {
-  // NB. unused assignment
+  // eslint-disable-next-line no-unused-vars
   const res = el.removeChild(child);
   return el;
 }
@@ -392,9 +378,5 @@ export function removeChildren(el) {
  *
  */
 export function replace(oldEl) {
-  return function _replace(newEl) {
-    // NB. unused assignment
-    const res = parent(oldEl).replaceChild(newEl, oldEl);
-    return newEl;
-  };
+  return tap((newEl) => parent(oldEl).replaceChild(newEl, oldEl));
 }

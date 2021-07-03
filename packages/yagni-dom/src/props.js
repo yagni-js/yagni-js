@@ -1,5 +1,5 @@
 
-import { mutate, pick, reduceObj } from '@yagni-js/yagni';
+import { keys, mutateS, pick } from '@yagni-js/yagni';
 
 
 /**
@@ -49,7 +49,7 @@ export const getProp = pick;
  * @private
  *
  */
-const setProperty = mutate;
+const setProperty = mutateS;
 
 
 /**
@@ -85,9 +85,7 @@ const setProperty = mutate;
  *
  */
 export function setProp(name, value) {
-  return function _setProp(el) {
-    return setProperty(el, name, value);
-  };
+  return (el) => setProperty({obj: el, attr: name, value: value});
 }
 
 
@@ -123,9 +121,7 @@ export function setProp(name, value) {
  *
  */
 export function setPropTo(el) {
-  return function _setPropTo(name, value) {
-    return setProperty(el, name, value);
-  };
+  return (name, value) => setProperty({obj: el, attr: name, value: value});
 }
 
 
@@ -169,7 +165,9 @@ export function setPropTo(el) {
  *     const baz2 = getBaz(el);         // => 42
  *
  */
-export const setProps = reduceObj(setProperty);
+export function setProps(props) {
+  return (el) => keys(props).reduce((acc, key, idx) => setProperty({obj: acc, attr: key, value: props[key], idx: idx}), el);
+}
 
 
 /**

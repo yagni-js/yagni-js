@@ -1,5 +1,5 @@
 
-import { camelize, mutate, pickPath, reduceObj } from '@yagni-js/yagni';
+import { camelize, keys, mutateS, pick, pickPath, pipe, tap, transform } from '@yagni-js/yagni';
 
 
 /**
@@ -43,19 +43,25 @@ export function getData(name) {
  *
  * @category Element
  *
- * @param {Element} el target element
- * @param {String} name dataset property name
- * @param {*} value dataset property value
+ * @param {Object}  spec       specification to set dataset value
+ * @param {Element} spec.el    target element
+ * @param {String}  spec.name  dataset property name
+ * @param {*}       spec.value dataset property value
  * @returns {Element} el
  *
  * @private
  *
  */
-function setDataset(el, name, value) {
-  // NB. side effect
-  const res = mutate(el.dataset, camelize(name), value);
-  return el;
-}
+const setDataset = pipe([
+  transform({
+    el: pick('el'),
+    obj: pickPath(['el', 'dataset']),
+    attr: pipe([pick('name'), camelize]),
+    value: pick('value')
+  }),
+  tap(mutateS),
+  pick('el')
+]);
 
 
 /**
@@ -94,9 +100,7 @@ function setDataset(el, name, value) {
  *
  */
 export function setData(name, value) {
-  return function _setData(el) {
-    return setDataset(el, name, value);
-  };
+  return (el) => setDataset({el: el, name: name, value: value});
 }
 
 
@@ -135,26 +139,24 @@ export function setData(name, value) {
  *
  */
 export function setDataTo(el) {
-  return function _setDataTo(name, value) {
-    return setDataset(el, name, value);
-  };
+  return (name, value) => setDataset({el: el, name: name, value: value});
 }
 
 
 /**
- * Takes an object `obj` of `(name, value)` pairs as an argument and
+ * Takes an object `datas` of `(name, value)` pairs as an argument and
  * returns **a new function**, which then takes an Element `el` as an argument
  * and iteratively sets the value of a dataset property on the element for
- * each `(name, value)` pair from `obj`. Returns `el`.
+ * each `(name, value)` pair from `datas`. Returns `el`.
  *
- * Object `obj` structure:
+ * Object `datas` structure:
  *
  *     {name1: 'value1', name2: 'value2', ...}
  *
  * @function
  * @category Element
  *
- * @param {Object} obj source object of `(name, value)` pairs
+ * @param {Object} datas source object of `(name, value)` pairs
  * @returns {Function} to take an Element `el` as an argument, iteratively
  * set dataset properties values on the `el` and return `el`
  *
@@ -181,4 +183,6 @@ export function setDataTo(el) {
  *     const baz2 = getBaz(el);         // => '42'
  *
  */
-export const setDatas = reduceObj(setDataset);
+export function setDatas(datas) {
+  return (el) =>  keys(datas).reduce((acc, key, idx) => setDataset({el: acc, name: key, value: datas[key], idx: idx}), el);
+}

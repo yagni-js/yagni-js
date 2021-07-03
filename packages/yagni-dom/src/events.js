@@ -43,11 +43,7 @@ import { matches, closest } from './query.js';
  *
  */
 export function addListener(spec) {
-  return function (el) {
-    // NB. unused assignment
-    const res = el.addEventListener(spec.event, spec.handler, false);
-    return el;
-  };
+  return tap((el) => el.addEventListener(spec.event, spec.handler, false));
 }
 
 
@@ -100,11 +96,7 @@ export function addListener(spec) {
  *
  */
 export function removeListener(spec) {
-  return function (el) {
-    // NB. unused assignment
-    const res = el.removeEventListener(spec.event, spec.handler, false);
-    return el;
-  };
+  return tap((el) => el.removeEventListener(spec.event, spec.handler, false));
 }
 
 

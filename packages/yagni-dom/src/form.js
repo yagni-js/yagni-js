@@ -162,6 +162,7 @@ const isRadio = pipe([
  * @private
  *
  */
+// eslint-disable-next-line functional/functional-parameters
 function makeNewObj() {
   return {};
 }
@@ -220,6 +221,7 @@ function serializeCheckbox(el) {
  * @private
  *
  */
+// eslint-disable-next-line no-unused-vars
 function serializeFile(el) {
   return {};
 }

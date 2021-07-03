@@ -17,14 +17,12 @@ import { pipe, pick, callMethod, tap, identity } from '@yagni-js/yagni';
  *
  */
 function classListOp(method) {
-  return function (classname) {
-    return tap(
-      pipe([
-        pick('classList'),
-        callMethod(identity, method, classname)
-      ])
-    );
-  };
+  return (classname) => tap(
+    pipe([
+      pick('classList'),
+      callMethod(identity, method, classname)
+    ])
+  );
 }
 
 

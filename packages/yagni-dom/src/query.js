@@ -35,9 +35,7 @@ import { doc } from './globals.js';
  *
  */
 export function matches(selector) {
-  return function _matches(el) {
-    return el.matches(selector);
-  };
+  return (el) => el.matches(selector);
 }
 
 
@@ -85,9 +83,7 @@ export function matches(selector) {
  *
  */
 export function closest(selector) {
-  return function _closest(el) {
-    return el.closest(selector);
-  };
+  return (el) => el.closest(selector);
 }
 
 
@@ -155,10 +151,8 @@ export function query(selector) {
   const byId = byIdRe.test(selector);
   const byClass = byClassRe.test(selector);
 
-  return function _query(el) {
-    return byId ? doc.getElementById(selector.substr(1)) : toArray(
-      byClass ? el.getElementsByClassName(selector.replace(/\./g, ' ').trim()) : el.querySelectorAll(selector));
-  };
+  return (el) => byId ? doc.getElementById(selector.substr(1)) : toArray(
+    byClass ? el.getElementsByClassName(selector.replace(/\./g, ' ').trim()) : el.querySelectorAll(selector));
 }
 
 

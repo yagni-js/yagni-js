@@ -1,5 +1,5 @@
 
-import { isDefined, reduceObj, tap } from '@yagni-js/yagni';
+import { callMethod2, ifElse, isDefined, keys, pick, pipe, tap } from '@yagni-js/yagni';
 
 
 /**
@@ -34,9 +34,7 @@ import { isDefined, reduceObj, tap } from '@yagni-js/yagni';
  *
  */
 export function getAttr(name) {
-  return function _getAttr(el) {
-    return el.getAttribute(name);
-  };
+  return (el) => el.getAttribute(name);
 }
 
 
@@ -56,11 +54,14 @@ export function getAttr(name) {
  * @private
  *
  */
-function setAttribute(el, name, value) {
-  // NB. side effect
-  const res = isDefined(value) ? el.setAttribute(name, value) : el;
-  return el;
-}
+const setAttribute = ifElse(
+  pipe([pick('value'), isDefined]),
+  pipe([
+    tap(callMethod2(pick('el'), 'setAttribute', pick('name'), pick('value'))),
+    pick('el')
+  ]),
+  pick('el')
+);
 
 
 /**
@@ -99,9 +100,7 @@ function setAttribute(el, name, value) {
  *
  */
 export function setAttr(name, value) {
-  return function _setAttr(el) {
-    return setAttribute(el, name, value);
-  };
+  return (el) => setAttribute({el: el, name: name, value: value});
 }
 
 
@@ -140,9 +139,7 @@ export function setAttr(name, value) {
  *
  */
 export function setAttrTo(el) {
-  return function _setAttrTo(name, value) {
-    return setAttribute(el, name, value);
-  };
+  return (name, value) => setAttribute({el: el, name: name, value: value});
 }
 
 
@@ -190,7 +187,9 @@ export function setAttrTo(el) {
  *     const href2 = getHref(el);       // => '#top'
  *
  */
-export const setAttrs = reduceObj(setAttribute);
+export function setAttrs(attrs) {
+  return (el) => keys(attrs).reduce((acc, key, idx) => setAttribute({el: acc, name: key, value: attrs[key], idx: idx}), el);
+}
 
 
 /**
@@ -223,9 +222,5 @@ export const setAttrs = reduceObj(setAttribute);
  *
  */
 export function removeAttr(name) {
-  return tap(
-    function _removeAttr(el) {
-      return el.removeAttribute(name);
-    }
-  );
+  return tap((el) => el.removeAttribute(name));
 }
