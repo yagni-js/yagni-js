@@ -270,7 +270,6 @@ describe('delegate()', function () {
     ]);
     const el = factory();
     const a1 = dom.firstChild(el);
-    const a2 = dom.lastChild(el);
 
     let cnt = 0;
     const adder = dom.eventHandler('click', '.add', function () { cnt = cnt + 1; });
@@ -309,7 +308,6 @@ describe('undelegate()', function () {
     ]);
     const el = factory();
     const a1 = dom.firstChild(el);
-    const a2 = dom.lastChild(el);
 
     let cnt = 0;
     const adder = dom.eventHandler('click', '.add', function () { cnt = cnt + 1; });

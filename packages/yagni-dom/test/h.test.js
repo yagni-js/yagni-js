@@ -394,6 +394,7 @@ describe('renderR()', function () {
     }
 
     const res = replaceSpan(foo);
+    expect(res.textContent).to.equal('Foo');
     expect(dom.textContent(el)).to.equal('Foo');
   });
 

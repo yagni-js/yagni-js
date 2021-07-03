@@ -120,7 +120,7 @@ describe('query()', function () {
       ])
     ]);
 
-    const body = render(tree);
+    return render(tree);
 
   });
 
@@ -218,7 +218,7 @@ describe('queryFirst()', function () {
       ])
     ]);
 
-    const body = render(tree);
+    return render(tree);
 
   });
 
