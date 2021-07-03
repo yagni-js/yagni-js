@@ -5,11 +5,11 @@
   "main": "dist/yagni-dom.cjs.js",
   "module": "dist/yagni-dom.esm.js",
   "files": [
-    "UNLICENSE",
-    "dist"
+    "dist",
+    "UNLICENSE"
   ],
   "scripts": {
-    "test": "mocha",
+    "test": "mocha -r jsdom-global/register",
     "pretest": "yarn run build",
     "build": "rollup -c",
     "prebuild": "rm -rf dist/*",
@@ -17,34 +17,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yagni-js/yagni-dom.git"
+    "url": "https://github.com/yagni-js/yagni-js",
+    "directory": "packages/yagni-dom"
   },
   "keywords": [
+    "yagni-js",
+    "yagni",
     "frontend",
     "functional",
-    "yagni",
     "DOM"
   ],
-  "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/yagni-js/yagni-dom/issues"
+    "url": "https://github.com/yagni-js/yagni-js/issues"
   },
-  "homepage": "https://github.com/yagni-js/yagni-dom#readme",
-  "devDependencies": {
-    "@yagni-js/yagni": "^0.7.1",
-    "chai": "^4.2.0",
-    "eslint": "^6.0.1",
-    "eslint-plugin-better": "^0.1.5",
-    "eslint-plugin-fp": "^2.3.0",
-    "eslint-plugin-import": "^2.18.1",
-    "jsdom": "^15.1.1",
-    "jsdom-global": "^3.0.2",
-    "mocha": "^6.2.0",
-    "rollup": "^1.17.0",
-    "rollup-plugin-eslint": "^7.0.0"
-  },
-  "peerDependencies": {
+  "homepage": "https://github.com/yagni-js/yagni-js/tree/main/packages/yagni-dom",
+  "dependencies": {
     "@yagni-js/yagni": "^0.7.1"
+  },
+  "devDependencies": {
+    "jsdom": "^15.1.1",
+    "jsdom-global": "^3.0.2"
   }
 }
