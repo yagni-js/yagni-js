@@ -1,6 +1,6 @@
 
-const expect = require('chai').expect;
-const _ = require('..');
+import { expect } from 'chai';
+import * as _ from '../dist/yagni.esm.js';
 
 
 describe('obj()', function () {
