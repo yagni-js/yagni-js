@@ -36,7 +36,7 @@
     "@yagni-js/yagni": "^0.7.1"
   },
   "devDependencies": {
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.6.0",
     "jsdom-global": "^3.0.2"
   }
 }
