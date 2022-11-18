@@ -1,6 +1,6 @@
 
-const expect = require('chai').expect;
-const dom = require('..');
+import { expect } from 'chai';
+import * as dom from '../dist/yagni-dom.mjs';
 
 
 describe('getAttr()', function () {

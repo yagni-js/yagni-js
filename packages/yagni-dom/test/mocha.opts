@@ -1,3 +1,0 @@
---ui bdd
---require jsdom-global/register
---reporter spec

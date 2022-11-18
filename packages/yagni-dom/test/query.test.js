@@ -1,7 +1,7 @@
 
-const expect = require('chai').expect;
-const _ = require('@yagni-js/yagni');
-const dom = require('..');
+import { expect } from 'chai';
+import * as _ from '@yagni-js/yagni';
+import * as dom from '../dist/yagni-dom.mjs';
 
 
 describe('matches()', function () {
