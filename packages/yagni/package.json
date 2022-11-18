@@ -2,8 +2,8 @@
   "name": "@yagni-js/yagni",
   "version": "0.7.1",
   "description": "Yet another functional library",
-  "main": "dist/yagni.cjs.js",
-  "module": "dist/yagni.esm.js",
+  "main": "dist/yagni.cjs",
+  "module": "dist/yagni.mjs",
   "type": "module",
   "files": [
     "dist",

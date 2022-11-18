@@ -1,6 +1,6 @@
 
 import { expect } from 'chai';
-import * as _ from '../dist/yagni.esm.js';
+import * as _ from '../dist/yagni.mjs';
 
 
 describe('first()', function () {
