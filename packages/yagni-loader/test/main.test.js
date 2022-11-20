@@ -1,16 +1,20 @@
 
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
+import { fileURLToPath } from 'url'
 
-const webpack = require('webpack');
+import { expect } from 'chai';
 
-const expect = require('chai').expect;
-const yagniLoader = require('..');
+import webpack from 'webpack';
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 
 process.chdir(__dirname);
 
 
+// eslint-disable-next-line no-unused-vars
 function loadFile(name) {
   return fs.readFileSync(
     path.resolve(__dirname, name),
@@ -20,11 +24,14 @@ function loadFile(name) {
 
 function getCompiler() {
   const config = {
+    mode: 'development',
     entry: './samples/main.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'bundle.js',
-      libraryTarget: 'commonjs'
+      filename: 'bundle.cjs',
+      library: {
+        type: 'commonjs'
+      }
     },
     module: {
       rules: [
@@ -34,7 +41,8 @@ function getCompiler() {
         }
       ]
     },
-    target: 'node'
+    target: 'node',
+    devtool: false
   };
   return webpack(config);
 }
@@ -57,20 +65,30 @@ describe('yagni-loader', function () {
     const compiler = getCompiler();
 
     compiler.run(function (err, stats) {
+      if (err) {
+        done(err);
+      } else if (stats.hasErrors()) {
+        const info = stats.toJson();
+        const error = info.errors.length ? new Error('[webpack] ' + info.errors[0].message) : new Error('[webpack] unknown error');
+        done(error);
+      } else {
+        (async () => {
+          const bundle = await import('./dist/bundle.cjs');
+          // FIXME not clear why tree is nested within default object
+          const tree = bundle.default.tree();
+          const expected = [
+            '<div class="body"><div class="sidebar">Sidebar</div>',
+            '<div class="content foo baz bar">Hello, John Smith!</div></div>'
+          ].join('');
 
-      const factory = require('./dist/bundle.js').tree;
-      const tree = factory();
+          expect(tree).to.be.an('HTMLDivElement');
+          expect(tree.outerHTML).to.deep.equal(expected);
 
-      const expected = [
-        '<div class="body"><div class="sidebar">Sidebar</div>',
-        '<div class="content foo baz bar">Hello, John Smith!</div></div>'
-      ].join('');
-
-
-      expect(tree).to.be.an('HTMLDivElement');
-      expect(tree.outerHTML).to.deep.equal(expected);
-
-      done();
+          compiler.close(function (err) {
+            done(err);
+          });
+        })().catch(err => done(err));
+      }
 
     });
 
