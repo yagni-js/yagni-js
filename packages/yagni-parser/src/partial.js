@@ -1,8 +1,7 @@
 
-import { always, and, camelize, equals, isNil, join, ifElse, isEmpty, omit, or, pick, pipe, suffix, transform, transformArr } from '@yagni-js/yagni';
+import { always, and, camelize, isNil, join, ifElse, isEmpty, omit, pick, pipe, suffix, transform, transformArr } from '@yagni-js/yagni';
 
 import { attrsToObj, stringifyObj } from './attr.js';
-import { quotedText } from './text.js';
 
 // FIXME do not use nodejs path module
 // eslint-disable-next-line import/no-nodejs-modules

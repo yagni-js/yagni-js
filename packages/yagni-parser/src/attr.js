@@ -74,9 +74,7 @@ export const stringifyProps = pipe([
 ]);
 
 export function attrsToObj(attrs) {
-  return attrs.reduce(function (acc, attr) {
-    return Object.assign({}, acc, obj(attr.name, attr.value));
-  }, {});
+  return attrs.reduce((acc, attr) => Object.assign({}, acc, obj(attr.name, attr.value)), {});
 }
 
 export const stringifyObj = pipe([

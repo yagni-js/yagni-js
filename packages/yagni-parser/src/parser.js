@@ -1,11 +1,11 @@
 
-import { always, concat, equals, isEmpty, isNil, ifElse, obj, pick, pipe, prefix, repeat, suffix, test, transform, unique } from '@yagni-js/yagni';
+import { always, concat, equals, isEmpty, isNil, ifElse, obj, pick, pipe, prefix, repeat, unique } from '@yagni-js/yagni';
 
-import Tokenizer from 'parse5/lib/tokenizer';
+import Tokenizer from 'parse5/lib/tokenizer/index.js';
 
 import { transformPartial } from './partial.js';
 import { isEmptyElement, transformStartTag, transformEndTag } from './tag.js';
-import { smartText, transformText } from './text.js';
+import { transformText } from './text.js';
 
 
 // const isWhitespace = test(/^\s+$/);
@@ -23,6 +23,7 @@ const isSVG = pipe([
 
 function plus2(x) { return x + 2; }
 function minus2(x) { return x - 2; }
+// eslint-disable-next-line functional/functional-parameters
 function emptyObj() { return {}; }
 function last(arr) { return arr[arr.length - 1]; }
 
@@ -82,9 +83,9 @@ function process(acc, token) {
   const emptyElement = isEmptyElement(token);
   const transformer = tokenTransformers[token.type];
 
-  // eslint-disable-next-line better/no-ifs
+  // eslint-disable-next-line functional/no-conditional-statement,better/no-ifs
   if (isEndTag && (tagName !== meta.stack[meta.stack.length - 1])) {
-    // eslint-disable-next-line fp/no-throw,better/no-new
+    // eslint-disable-next-line functional/no-throw-statement,better/no-exceptions,better/no-new
     throw new Error('Html markup error (opening/closing tags differ)');
   }
 
@@ -103,24 +104,19 @@ function process(acc, token) {
     isSvg: isStartTag && isSvg ? true : (isEndTag && isSvg ? false : meta.isSvg)
   };
 
-  // eslint-disable-next-line better/no-ifs
+  // eslint-disable-next-line functional/no-conditional-statement,better/no-ifs
   if (nextMeta.rootCounter > 1) {
-    // eslint-disable-next-line fp/no-throw,better/no-new
+    // eslint-disable-next-line functional/no-throw-statement,better/no-exceptions,better/no-new
     throw new Error('Multiple root elements error');
   }
 
-  // eslint-disable-next-line better/no-ifs
+  // eslint-disable-next-line functional/no-conditional-statement,better/no-ifs
   if (isEof && meta.stack.length > 0) {
-    // eslint-disable-next-line fp/no-throw,better/no-new
+    // eslint-disable-next-line functional/no-throw-statement,better/no-exceptions,better/no-new
     throw new Error('Html markup error');
   }
 
   return isEof ? {state: state} : {state: nextState, meta: nextMeta};
-}
-
-function createTokenizer() {
-  // eslint-disable-next-line better/no-new
-  return new Tokenizer();
 }
 
 function tokenize(tokenizer, tokens) {
@@ -139,7 +135,8 @@ function tokenize(tokenizer, tokens) {
 }
 
 export function htmlToSpec(source) {
-  const tokenizer = createTokenizer();
+  // eslint-disable-next-line better/no-new
+  const tokenizer = new Tokenizer();
   const isLastChunk = true;
   const state = {
     partials: [],
@@ -154,7 +151,7 @@ export function htmlToSpec(source) {
     isSvg: false
   };
 
-  // NB. unused assignment with no value
+  // eslint-disable-next-line no-unused-vars
   const res = tokenizer.write(source, isLastChunk);
 
   const tokens = tokenize(tokenizer, []);
