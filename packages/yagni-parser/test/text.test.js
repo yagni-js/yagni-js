@@ -1,6 +1,6 @@
 
-const expect = require('chai').expect;
-const yp = require('../src/text.js');
+import { expect } from 'chai';
+import * as yp from '../src/text.js';
 
 
 describe('hasVars()', function () {

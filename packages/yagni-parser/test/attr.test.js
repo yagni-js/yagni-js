@@ -1,6 +1,6 @@
 
-const expect = require('chai').expect;
-const yp = require('../src/attr.js');
+import { expect } from 'chai';
+import * as yp from '../src/attr.js';
 
 
 describe('stringifyAttr()', function () {

@@ -1,6 +1,6 @@
 
-const expect = require('chai').expect;
-const yp = require('../src/partial.js');
+import { expect } from 'chai';
+import * as yp from '../src/partial.js';
 
 
 describe('partialName()', function () {

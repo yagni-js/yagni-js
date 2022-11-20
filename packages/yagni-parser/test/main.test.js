@@ -1,9 +1,13 @@
 
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
+import { fileURLToPath } from 'url'
 
-const expect = require('chai').expect;
-const parser = require('..');
+import { expect } from 'chai';
+import * as parser from '../dist/yagni-parser.mjs';
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 
 function loadSample(name) {
