@@ -52,7 +52,7 @@ describe('yagni-loader', function () {
 
   beforeEach(function () {
 
-    const bundle = path.resolve(__dirname, 'dist', 'bundle.js');
+    const bundle = path.resolve(__dirname, 'dist', 'bundle.cjs');
 
     if (fs.existsSync(bundle)) {
       fs.unlinkSync(bundle);
