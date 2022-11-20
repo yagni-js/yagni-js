@@ -1,8 +1,8 @@
 
 import pkg from './package.json';
-import { eslint } from 'rollup-plugin-eslint';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
+import eslint from '@rollup/plugin-eslint';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 
 export default [
   {
@@ -19,7 +19,7 @@ export default [
     ],
     plugins: [
       eslint({throwOnError: true}),
-      resolve(),
+      nodeResolve(),
       commonjs()
     ]
   }
