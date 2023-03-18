@@ -5,9 +5,9 @@ import { always, call, first, identity, ifElse, isEmpty, isNil, or, pipe, pick, 
 const getHash = pickPath(['target', 'location', 'hash']);
 
 function matcher(routes) {
-  return function (hash) {
+  return (hash) => {
     return routes.reduce(
-      function (acc, route) {
+      (acc, route) => {
         const match = route.match(hash);
         return match ? acc.concat({match: match, handler: route.handler}) : acc;
       },

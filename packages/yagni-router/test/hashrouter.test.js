@@ -1,7 +1,9 @@
 
-const expect = require('chai').expect;
-const url = require('..').url;
-const hashRouter = require('..').hashRouter;
+import { expect } from 'chai';
+import * as router from '../dist/yagni-router.mjs';
+
+const url = router.url;
+const hashRouter = router.hashRouter;
 
 
 function event(hash) {

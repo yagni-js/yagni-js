@@ -1,6 +1,8 @@
 
-const expect = require('chai').expect;
-const url = require('..').url;
+import { expect } from 'chai';
+import * as router from '../dist/yagni-router.mjs';
+
+const url = router.url;
 
 
 describe('url()', function () {
