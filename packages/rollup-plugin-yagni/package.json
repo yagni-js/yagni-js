@@ -2,14 +2,15 @@
   "name": "@yagni-js/rollup-plugin-yagni",
   "version": "0.4.1",
   "description": "Rollup plugin for html template to yagni-dom compatible js module compilation ",
-  "main": "dist/rollup-plugin-yagni.cjs.js",
-  "module": "dist/rollup-plugin-yagni.esm.js",
+  "main": "dist/rollup-plugin-yagni.cjs",
+  "module": "dist/rollup-plugin-yagni.mjs",
+  "type": "module",
   "files": [
-    "UNLICENSE",
-    "dist"
+    "dist",
+    "UNLICENSE"
   ],
   "scripts": {
-    "test": "mocha",
+    "test": "mocha -r jsdom-global/register",
     "pretest": "yarn run build",
     "build": "rollup -c",
     "prebuild": "rm -rf dist/*",
@@ -17,41 +18,30 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yagni-js/rollup-plugin-yagni.git"
+    "url": "https://github.com/yagni-js/yagni-js",
+    "directory": "packages/rollup-plugin-yagni"
   },
   "keywords": [
+    "yagni-js",
+    "yagni",
     "frontend",
     "functional",
-    "yagni-js",
+    "rollup",
     "rollup-plugin"
   ],
-  "author": "Yuri Egorov <ysegorov@gmail.com> (https://ysegorov.github.io/)",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/yagni-js/rollup-plugin-yagni/issues"
+    "url": "https://github.com/yagni-js/yagni-js/issues"
   },
-  "homepage": "https://github.com/yagni-js/rollup-plugin-yagni#readme",
-  "devDependencies": {
+  "homepage": "https://github.com/yagni-js/yagni-js/tree/main/packages/rollup-plugin-yagni",
+  "dependencies": {
     "@yagni-js/yagni": "^0.7.1",
     "@yagni-js/yagni-dom": "^2.2.0",
     "@yagni-js/yagni-parser": "^0.4.1",
-    "chai": "^4.2.0",
-    "eslint": "^6.1.0",
-    "eslint-plugin-better": "^0.1.5",
-    "eslint-plugin-fp": "^2.3.0",
-    "eslint-plugin-import": "^2.18.2",
-    "jsdom": "^15.1.1",
-    "jsdom-global": "^3.0.2",
-    "mocha": "^6.2.0",
-    "rollup": "^1.17.0",
-    "rollup-plugin-eslint": "^7.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^5.1.1",
     "rollup-pluginutils": "^2.8.1"
   },
-  "peerDependencies": {
-    "@yagni-js/yagni": "^0.7.1",
-    "@yagni-js/yagni-dom": "^2.2.0",
-    "@yagni-js/yagni-parser": "^0.4.1"
+  "devDependencies": {
+    "jsdom": "^16.6.0",
+    "jsdom-global": "^3.0.2"
   }
 }
