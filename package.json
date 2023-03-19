@@ -11,6 +11,7 @@
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-eslint": "^8.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-terser": "^0.4.0",
     "chai": "^4.3.4",
     "eslint": "^7.30.0",
     "eslint-plugin-better": "^0.1.5",
