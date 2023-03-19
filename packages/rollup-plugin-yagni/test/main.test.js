@@ -1,9 +1,18 @@
 
-const expect = require('chai').expect;
-const rpYagni = require('..');
-const rollup = require('rollup');
-const npm = require('rollup-plugin-node-resolve');
-const terser = require('rollup-plugin-terser').terser;
+import * as path from 'path';
+import { fileURLToPath } from 'url'
+
+import { expect } from 'chai';
+
+import { rollup } from 'rollup';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
+
+import { yagni } from '../dist/rollup-plugin-yagni.mjs';
+
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 
 process.chdir(__dirname);
@@ -13,11 +22,11 @@ describe('rollup-plugin-yagni', function () {
 
   it('converts imported html template to js module', function () {
 
-    return rollup.rollup({
+    return rollup({
       input: './samples/main.js',
       plugins: [
-        npm(),
-        rpYagni({}),
+        nodeResolve(),
+        yagni(),
         terser()
       ],
       external: [
