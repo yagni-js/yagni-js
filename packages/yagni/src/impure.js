@@ -54,7 +54,7 @@ export function tap(sideEffect) {
  *
  */
 export function mutate(obj, attr, value) {
-  // eslint-disable-next-line functional/immutable-data,functional/no-expression-statement,better/no-reassigns
+  // eslint-disable-next-line functional/immutable-data,functional/no-expression-statements,better/no-reassigns
   obj[attr] = value;
   return obj;
 }

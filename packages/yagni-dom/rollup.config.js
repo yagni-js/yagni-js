@@ -1,6 +1,8 @@
 
-import pkg from './package.json';
+import fs from 'fs';
 import eslint from '@rollup/plugin-eslint';
+
+const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
 const banner = ([
   '/**',

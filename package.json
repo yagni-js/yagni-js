@@ -8,18 +8,18 @@
     ]
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^19.0.0",
-    "@rollup/plugin-eslint": "^8.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-eslint": "^9.0.3",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
     "chai": "^4.3.4",
-    "eslint": "^7.30.0",
+    "eslint": "^8.36.0",
     "eslint-plugin-better": "^0.1.5",
-    "eslint-plugin-functional": "^3.2.1",
+    "eslint-plugin-functional": "^5.0.7",
     "eslint-plugin-import": "^2.23.4",
-    "mocha": "^9.0.2",
-    "rollup": "^2.52.7",
-    "typescript": "^4.0"
+    "mocha": "^10.2.0",
+    "rollup": "^3.20.2",
+    "typescript": "^5.0.2"
   },
   "engines": {
     "node": "^14.21.0 || ^16.19.0 || >=18.12.0"

@@ -13,9 +13,9 @@ module.exports = {
     "eslint:recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:functional/external-recommended",
+    "plugin:functional/external-vanilla-recommended",
     "plugin:functional/recommended",
-    "plugin:functional/stylitic"
+    "plugin:functional/stylistic"
   ],
   rules: {
     // eslint:recommended
@@ -61,7 +61,9 @@ module.exports = {
         count: "atLeastOne",
         ignoreIIFE: true
       }
-    }]
+    }],
+    // FIXME (?)
+    "functional/prefer-tacit": "off"
   },
   settings: {
     "import/internal-regex": new RegExp('^@yagni-js/')

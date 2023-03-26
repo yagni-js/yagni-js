@@ -83,9 +83,9 @@ function process(acc, token) {
   const emptyElement = isEmptyElement(token);
   const transformer = tokenTransformers[token.type];
 
-  // eslint-disable-next-line functional/no-conditional-statement,better/no-ifs
+  // eslint-disable-next-line functional/no-conditional-statements,better/no-ifs
   if (isEndTag && (tagName !== meta.stack[meta.stack.length - 1])) {
-    // eslint-disable-next-line functional/no-throw-statement,better/no-exceptions,better/no-new
+    // eslint-disable-next-line functional/no-throw-statements,better/no-exceptions,better/no-new
     throw new Error('Html markup error (opening/closing tags differ)');
   }
 
@@ -104,15 +104,15 @@ function process(acc, token) {
     isSvg: isStartTag && isSvg ? true : (isEndTag && isSvg ? false : meta.isSvg)
   };
 
-  // eslint-disable-next-line functional/no-conditional-statement,better/no-ifs
+  // eslint-disable-next-line functional/no-conditional-statements,better/no-ifs
   if (nextMeta.rootCounter > 1) {
-    // eslint-disable-next-line functional/no-throw-statement,better/no-exceptions,better/no-new
+    // eslint-disable-next-line functional/no-throw-statements,better/no-exceptions,better/no-new
     throw new Error('Multiple root elements error');
   }
 
-  // eslint-disable-next-line functional/no-conditional-statement,better/no-ifs
+  // eslint-disable-next-line functional/no-conditional-statements,better/no-ifs
   if (isEof && meta.stack.length > 0) {
-    // eslint-disable-next-line functional/no-throw-statement,better/no-exceptions,better/no-new
+    // eslint-disable-next-line functional/no-throw-statements,better/no-exceptions,better/no-new
     throw new Error('Html markup error');
   }
 

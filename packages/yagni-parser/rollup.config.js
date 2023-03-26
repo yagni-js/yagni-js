@@ -1,8 +1,10 @@
 
-import pkg from './package.json';
+import fs from 'fs';
 import eslint from '@rollup/plugin-eslint';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+
+const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
 export default [
   {
