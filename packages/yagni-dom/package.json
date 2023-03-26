@@ -10,11 +10,10 @@
     "UNLICENSE"
   ],
   "scripts": {
-    "test": "mocha -r jsdom-global/register",
-    "pretest": "yarn run build",
-    "build": "rollup -c",
-    "prebuild": "rm -rf dist/*",
-    "prepublishOnly": "yarn test"
+    "test": "pnpm run build && mocha -r jsdom-global/register",
+    "build": "pnpm run cleandist && rollup -c",
+    "cleandist": "rm -rf dist/*",
+    "prepublishOnly": "pnpm test"
   },
   "repository": {
     "type": "git",
@@ -34,7 +33,7 @@
   },
   "homepage": "https://github.com/yagni-js/yagni-js/tree/main/packages/yagni-dom",
   "dependencies": {
-    "@yagni-js/yagni": "^0.7.1"
+    "@yagni-js/yagni": "workspace:*"
   },
   "devDependencies": {
     "jsdom": "^16.6.0",

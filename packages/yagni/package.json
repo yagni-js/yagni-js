@@ -10,11 +10,10 @@
     "UNLICENSE"
   ],
   "scripts": {
-    "test": "mocha",
-    "pretest": "yarn run build",
-    "build": "rollup -c",
-    "prebuild": "rm -rf dist/*",
-    "prepublishOnly": "yarn test"
+    "test": "pnpm run build && mocha",
+    "build": "pnpm run cleandist && rollup -c",
+    "cleandist": "rm -rf dist/*",
+    "prepublishOnly": "pnpm test"
   },
   "repository": {
     "type": "git",

@@ -10,11 +10,10 @@
     "UNLICENSE"
   ],
   "scripts": {
-    "test": "mocha",
-    "pretest": "yarn run build",
-    "build": "rollup -c",
-    "prebuild": "rm -rf dist/*",
-    "prepublishOnly": "yarn test"
+    "test": "pnpm run build && mocha",
+    "build": "pnpm run cleandist && rollup -c",
+    "cleandist": "rm -rf dist/*",
+    "prepublishOnly": "pnpm test"
   },
   "repository": {
     "type": "git",
@@ -35,7 +34,7 @@
   },
   "homepage": "https://github.com/yagni-js/yagni-js/tree/main/packages/yagni-router",
   "dependencies": {
-    "@yagni-js/yagni": "^0.7.1"
+    "@yagni-js/yagni": "workspace:*"
   },
   "devDependencies": {}
 }
