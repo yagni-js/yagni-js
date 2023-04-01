@@ -34,8 +34,8 @@
   },
   "homepage": "https://github.com/yagni-js/yagni-js/tree/main/packages/yagni-parser",
   "dependencies": {
-    "parse5": "^5.1.0",
     "@yagni-js/yagni": "workspace:*",
-    "@yagni-js/yagni-dom": "workspace:*"
+    "@yagni-js/yagni-dom": "workspace:*",
+    "parse5": "^7.1.2"
   }
 }
