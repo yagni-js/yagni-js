@@ -37,7 +37,7 @@
     "@yagni-js/yagni": "workspace:*",
     "@yagni-js/yagni-dom": "workspace:*",
     "@yagni-js/yagni-parser": "workspace:*",
-    "webpack": "^5.75.0"
+    "webpack": "^5.77.0"
   },
   "devDependencies": {
     "jsdom": "^21.1.1",
